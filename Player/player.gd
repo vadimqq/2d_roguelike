@@ -14,8 +14,8 @@ onready var state_machine = $StateMachine
 onready var item_inventory = $ItemInventory
 onready var effects_manager = $EffectsManager
 
-var module_inventory_dict := {}
-var weapon_inventory_dict := {}
+var module_inventory_arr := []
+var weapon_inventory_arr := []
 
 var attack_collision_mask = 64
 var look_direction = Vector2.RIGHT setget set_look_direction
@@ -26,9 +26,7 @@ func _ready():
 	Events.connect("damaged", self, "_on_self_damaged")
 	Events.connect("damaged_by_DOT", self, "_on_self_damaged")
 	Events.connect("boss_death", self, '_test_restore')
-	for i in range(inventory_size):
-		module_inventory_dict[i] = null
-		weapon_inventory_dict[i] = null
+
 
 func set_look_direction(value):
 	look_direction = value
@@ -54,15 +52,11 @@ func take_item(item):
 	item.collision.disabled = true
 	ObjectRegistry.unregister_item(item)
 	if item is Module:
-		for key in module_inventory_dict.keys():
-			if module_inventory_dict.get(key) == null:
-				module_inventory_dict[key] = item
-				return
+		module_inventory_arr.push_back(item)
+		return
 	elif item is Weapon:
-		for key in weapon_inventory_dict.keys():
-			if weapon_inventory_dict.get(key) == null:
-				weapon_inventory_dict[key] = item
-				return
+		weapon_inventory_arr.push_back(item)
+		return
 	elif item is Item:
 		item_inventory.add_child(item)
 		item.add_effect(self)

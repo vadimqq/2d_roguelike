@@ -54,6 +54,7 @@ tracks/1/keys = {
 script = ExtResource( 2 )
 Projectile = ExtResource( 3 )
 icon = ExtResource( 5 )
+title = "Mana staff"
 mana_cost = 4
 
 [node name="Sprite" parent="." index="0"]

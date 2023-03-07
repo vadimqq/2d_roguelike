@@ -22,6 +22,8 @@ export (int) var price = 2
 var module_dict: Dictionary = {}
 var cooldown_temp = 0
 
+
+
 func _ready():
 	name = name + String(rand_range(1, 100))
 	cooldown_temp = cooldown

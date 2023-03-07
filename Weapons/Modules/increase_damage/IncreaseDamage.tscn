@@ -7,6 +7,7 @@
 [node name="IncreaseDamage" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 icon = ExtResource( 2 )
+title = "IncreaseDamage"
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 0.5, 0.5 )

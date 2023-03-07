@@ -7,6 +7,7 @@
 [node name="ScytheOfDeath" instance=ExtResource( 1 )]
 Projectile = ExtResource( 2 )
 icon = ExtResource( 3 )
+title = "Scythe of death"
 
 [node name="Sprite" parent="." index="0"]
 position = Vector2( 8, -8.34465e-07 )

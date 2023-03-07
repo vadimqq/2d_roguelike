@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/weapon_slot.png-eb4c766f55f16c680fd7845160fc68a4.stex"
+path="res://.import/item_slot.png-63bccdcb143ac29fd3b78de326271c5e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/inventory/slot/weapon_slot.png"
-dest_files=[ "res://.import/weapon_slot.png-eb4c766f55f16c680fd7845160fc68a4.stex" ]
+source_file="res://UI/inventory/setup_slot/item_slot.png"
+dest_files=[ "res://.import/item_slot.png-63bccdcb143ac29fd3b78de326271c5e.stex" ]
 
 [params]
 

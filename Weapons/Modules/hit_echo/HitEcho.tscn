@@ -8,6 +8,7 @@
 script = ExtResource( 2 )
 icon = ExtResource( 3 )
 mana_multiplier = 1.3
+title = "HitEcho"
 
 [node name="Sprite" parent="." index="0"]
 position = Vector2( 0, -3 )
