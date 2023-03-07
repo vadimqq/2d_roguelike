@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Weapons/Projectile/projectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Weapons/Modules/fire_arrow/homming_arrow/HommingArrow.gd" type="Script" id=2]
+[ext_resource path="res://Weapons/Modules/fire_arrow/homming_arrow/icon.png" type="Texture" id=3]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 0.999989
+height = 6.0
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 55.0
+height = 126.0
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[node name="FireArrow" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+speed = 200.0
+damage = 3
+type = 1
+max_trail_length = 15
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2( 4, 1 )
+rotation = 0.0
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2( 4, 0 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="EnemyDetector" type="Area2D" parent="." index="3"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetector" index="0"]
+position = Vector2( 55, 1 )
+shape = SubResource( 3 )
+
+[node name="Trail" type="Line2D" parent="." index="4"]
+position = Vector2( 4, 0 )
+points = PoolVector2Array( -4, 0 )
+width = 2.0
+width_curve = SubResource( 4 )
+default_color = Color( 0.666667, 0.105882, 0.105882, 0.745098 )
+
+[node name="Tween" type="Tween" parent="." index="5"]
+
+[connection signal="body_entered" from="EnemyDetector" to="." method="_on_EnemyDetector_body_entered"]
+[connection signal="body_exited" from="EnemyDetector" to="." method="_on_EnemyDetector_body_exited"]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Items/Item.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Items/mana_regen_potion/ManaRegenPotion.gd" type="Script" id=2]
+[ext_resource path="res://Items/mana_regen_potion/icon.png" type="Texture" id=3]
+
+[node name="ManaRegenPotion" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+icon = ExtResource( 3 )
+title = "Mana restoration"
+description = "Increases mana regeneration by 2% when killing an enemy"
+
+[node name="Sprite" parent="." index="0"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )

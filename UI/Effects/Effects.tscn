@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://UI/Effects/Effects.gd" type="Script" id=1]
+
+[node name="EffectsUI" type="GridContainer"]
+grow_vertical = 0
+rect_pivot_offset = Vector2( 0, 20 )
+custom_constants/vseparation = 1
+custom_constants/hseparation = 1
+columns = 5
+script = ExtResource( 1 )

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Items/Item.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Items/hardy_legs/HardyLags.gd" type="Script" id=2]
+[ext_resource path="res://Items/hardy_legs/icon.png" type="Texture" id=3]
+
+[node name="HardyLags" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+icon = ExtResource( 3 )
+title = "Hardy Lags"
+description = "Adds 1 dash point"
+
+[node name="Sprite" parent="." index="0"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )

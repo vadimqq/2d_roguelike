@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Weapons/Modules/module.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Weapons/Modules/circular_direction/CircularDirection.gd" type="Script" id=2]
+[ext_resource path="res://Weapons/Modules/circular_direction/icon.png" type="Texture" id=3]
+
+[node name="CircularDirection" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+icon = ExtResource( 3 )
+title = "Trajectory control \"Circular\""
+description = "Your spell begins to revolve around you"
+
+[node name="Sprite" parent="." index="0"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )

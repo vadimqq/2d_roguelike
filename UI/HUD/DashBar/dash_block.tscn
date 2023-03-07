@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://UI/HUD/DashBar/DashBar_over.png" type="Texture" id=1]
+[ext_resource path="res://UI/HUD/DashBar/dash_block.gd" type="Script" id=2]
+[ext_resource path="res://UI/HUD/DashBar/DashBar_progress.png" type="Texture" id=3]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 64, 62 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 64, 62 )
+
+[node name="DashBlock" type="Panel"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 80, 80 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Progress" type="Panel" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 80, 80 )
+custom_styles/panel = SubResource( 2 )

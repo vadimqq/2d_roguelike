@@ -1,0 +1,426 @@
+[gd_scene load_steps=50 format=2]
+
+[ext_resource path="res://Enemies/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemies/EvilEye/EyeBall Monster-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://Enemies/EvilEye/EvilEye.gd" type="Script" id=3]
+[ext_resource path="res://Enemies/EvilEye/state_machine.gd" type="Script" id=4]
+[ext_resource path="res://Enemies/EvilEye/states/motion/idle.gd" type="Script" id=5]
+[ext_resource path="res://Enemies/EvilEye/states/motion/move.gd" type="Script" id=6]
+[ext_resource path="res://Enemies/EvilEye/states/Death.gd" type="Script" id=7]
+[ext_resource path="res://Enemies/EvilEye/states/combat/attack.gd" type="Script" id=8]
+[ext_resource path="res://Enemies/EvilEye/states/combat/preparation.gd" type="Script" id=9]
+[ext_resource path="res://VFX/shaders/outline.shader" type="Shader" id=10]
+
+[sub_resource type="CircleShape2D" id=5]
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 119.0
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 7 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "dash_attack"
+length = 0.9
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.5, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 27, 28, 29, 30, 31 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0 ],
+"method": "change_state"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "start_cooldown_dash"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeaponRaycast/ColorRect:rect_size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 4 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 39, 40, 41, 42, 43, 44, 45, 46, 47, 48 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "emit_death"
+} ]
+}
+
+[sub_resource type="Animation" id=34]
+resource_name = "preparation"
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeaponRaycast/ColorRect:rect_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 4 ), Vector2( 400, 4 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 11, 12, 13, 26 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "take_damage"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=69]
+resource_name = "walk_left"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 8, 9, 10, 11, 12, 13 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "walk_right"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 8, 9, 10, 11, 12, 13 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 7.0
+
+[sub_resource type="ShaderMaterial" id=40]
+shader = ExtResource( 10 )
+shader_param/outline_width = 0.5
+shader_param/outline_color = null
+
+[sub_resource type="AnimationNodeAnimation" id=46]
+animation = "dash_attack"
+
+[sub_resource type="AnimationNodeAnimation" id=47]
+animation = "dash_attack"
+
+[sub_resource type="AnimationNodeAnimation" id=48]
+animation = "dash_attack"
+
+[sub_resource type="AnimationNodeAnimation" id=49]
+animation = "dash_attack"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=11]
+blend_point_0/node = SubResource( 46 )
+blend_point_0/pos = Vector2( 0, 0.7 )
+blend_point_1/node = SubResource( 47 )
+blend_point_1/pos = Vector2( -0.4, 0 )
+blend_point_2/node = SubResource( 48 )
+blend_point_2/pos = Vector2( 0.4, 0 )
+blend_point_3/node = SubResource( 49 )
+blend_point_3/pos = Vector2( 0, -0.7 )
+
+[sub_resource type="AnimationNodeAnimation" id=26]
+animation = "death"
+
+[sub_resource type="AnimationNodeAnimation" id=65]
+animation = "walk_right"
+
+[sub_resource type="AnimationNodeAnimation" id=66]
+animation = "walk_right"
+
+[sub_resource type="AnimationNodeAnimation" id=67]
+animation = "walk_left"
+
+[sub_resource type="AnimationNodeAnimation" id=68]
+animation = "walk_left"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=12]
+blend_point_0/node = SubResource( 65 )
+blend_point_0/pos = Vector2( 0.3, 0.8 )
+blend_point_1/node = SubResource( 66 )
+blend_point_1/pos = Vector2( 0.3, -0.6 )
+blend_point_2/node = SubResource( 67 )
+blend_point_2/pos = Vector2( -0.3, -0.6 )
+blend_point_3/node = SubResource( 68 )
+blend_point_3/pos = Vector2( -0.3, 0.8 )
+
+[sub_resource type="AnimationNodeAnimation" id=35]
+animation = "preparation"
+
+[sub_resource type="AnimationNodeAnimation" id=54]
+animation = "walk_right"
+
+[sub_resource type="AnimationNodeAnimation" id=55]
+animation = "walk_right"
+
+[sub_resource type="AnimationNodeAnimation" id=56]
+animation = "walk_left"
+
+[sub_resource type="AnimationNodeAnimation" id=57]
+animation = "walk_left"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=13]
+blend_point_0/node = SubResource( 54 )
+blend_point_0/pos = Vector2( 0.2, 0.7 )
+blend_point_1/node = SubResource( 55 )
+blend_point_1/pos = Vector2( 0.2, -0.6 )
+blend_point_2/node = SubResource( 56 )
+blend_point_2/pos = Vector2( -0.2, -0.6 )
+blend_point_3/node = SubResource( 57 )
+blend_point_3/pos = Vector2( -0.2, 0.7 )
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=38]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+
+[sub_resource type="AnimationNodeStateMachine" id=9]
+states/Attack/node = SubResource( 11 )
+states/Attack/position = Vector2( 613, 202 )
+states/Death/node = SubResource( 26 )
+states/Death/position = Vector2( 349, 130 )
+states/Idle/node = SubResource( 12 )
+states/Idle/position = Vector2( 349, 41 )
+states/Preparation/node = SubResource( 35 )
+states/Preparation/position = Vector2( 781, 130 )
+states/Walk/node = SubResource( 13 )
+states/Walk/position = Vector2( 613, 41 )
+transitions = [ "Idle", "Walk", SubResource( 14 ), "Walk", "Idle", SubResource( 15 ), "Attack", "Death", SubResource( 31 ), "Walk", "Death", SubResource( 32 ), "Idle", "Death", SubResource( 33 ), "Walk", "Preparation", SubResource( 36 ), "Preparation", "Attack", SubResource( 37 ), "Attack", "Walk", SubResource( 38 ), "Preparation", "Death", SubResource( 39 ) ]
+start_node = "Idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=10]
+
+[node name="EvilEye" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+radius_attack = 200
+radius_chasing = 200
+dash_damage = 10
+
+[node name="Stats" parent="." index="0"]
+hit_point = 10
+max_move_speed = 35
+
+[node name="StateMachine" type="Node" parent="." index="1"]
+script = ExtResource( 4 )
+
+[node name="Idle" type="Node" parent="StateMachine" index="0"]
+script = ExtResource( 5 )
+
+[node name="Move" type="Node" parent="StateMachine" index="1"]
+script = ExtResource( 6 )
+
+[node name="Death" type="Node" parent="StateMachine" index="2"]
+script = ExtResource( 7 )
+
+[node name="Attack" type="Node" parent="StateMachine" index="3"]
+script = ExtResource( 8 )
+
+[node name="Preparation" type="Node" parent="StateMachine" index="4"]
+script = ExtResource( 9 )
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource( 5 )
+
+[node name="ColorRect" type="ColorRect" parent="WeaponRaycast" index="0"]
+margin_top = -2.0
+margin_bottom = 2.0
+color = Color( 0.682353, 0.0313726, 0.0313726, 0.203922 )
+
+[node name="CollisionShape2D" parent="DetectionZone" index="0"]
+shape = SubResource( 7 )
+
+[node name="Animation" type="AnimationPlayer" parent="." index="5"]
+anims/RESET = SubResource( 1 )
+anims/dash_attack = SubResource( 2 )
+anims/death = SubResource( 3 )
+anims/preparation = SubResource( 34 )
+anims/take_damage = SubResource( 8 )
+anims/walk_left = SubResource( 69 )
+anims/walk_right = SubResource( 4 )
+
+[node name="Hitbox" type="Area2D" parent="." index="6"]
+visible = false
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 6 )
+disabled = true
+
+[node name="Sprite" parent="." index="7"]
+material = SubResource( 40 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 2 )
+flip_h = true
+hframes = 4
+vframes = 13
+frame = 7
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="8"]
+tree_root = SubResource( 9 )
+anim_player = NodePath("../Animation")
+active = true
+parameters/playback = SubResource( 10 )
+parameters/Attack/blend_position = Vector2( 0, 0 )
+parameters/Idle/blend_position = Vector2( -0.00427717, 0.793103 )
+parameters/Walk/blend_position = Vector2( 0.201027, 0.741379 )
+
+[node name="DashAttackCooldown" type="Timer" parent="." index="9"]
+wait_time = 4.0
+one_shot = true
+
+[node name="DashAttackDuration" type="Timer" parent="." index="10"]
+wait_time = 1.5
+one_shot = true
+
+[node name="PreparationDuration" type="Timer" parent="." index="11"]
+one_shot = true
+
+[node name="EffectsManager" parent="." index="12"]
+position = Vector2( -15, -14 )
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
+[connection signal="timeout" from="DashAttackDuration" to="StateMachine/Attack" method="_on_DashAttackDuration_timeout"]
+[connection signal="timeout" from="PreparationDuration" to="StateMachine/Preparation" method="_on_PreparationDuration_timeout"]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Items/Item.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Items/fire_wave/icon.png" type="Texture" id=2]
+[ext_resource path="res://Items/fire_wave/FireWave.gd" type="Script" id=3]
+
+[node name="FireWave" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+icon = ExtResource( 2 )
+title = "Fiery step"
+description = "When dashing, a fiery explosion occurs at the final point, dealing 5 damage"
+damage = 5
+
+[node name="Sprite" parent="." index="0"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )

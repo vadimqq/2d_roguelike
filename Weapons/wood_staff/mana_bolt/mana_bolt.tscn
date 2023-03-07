@@ -1,0 +1,34 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Weapons/Projectile/projectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Weapons/wood_staff/mana_bolt/mana_bolt.gd" type="Script" id=2]
+[ext_resource path="res://Weapons/wood_staff/mana_bolt/trailEffect/trailEffect.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Weapons/wood_staff/mana_bolt/skin.png" type="Texture" id=4]
+[ext_resource path="res://Weapons/wood_staff/mana_bolt/castEffect/castEffect.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Weapons/wood_staff/mana_bolt/hitEffect/hitEffect.tscn" type="PackedScene" id=6]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 5.0
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[node name="ManaBolt" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+trail_effect = ExtResource( 3 )
+cast_effect = ExtResource( 5 )
+hit_effect = ExtResource( 6 )
+speed = 150.0
+damage = 5
+trail_length = 15
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Line2D" type="Line2D" parent="." index="3"]
+width_curve = SubResource( 2 )
+default_color = Color( 0.0509804, 0.615686, 0.752941, 0.560784 )

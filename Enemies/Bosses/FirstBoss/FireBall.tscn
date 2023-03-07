@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Weapons/Projectile/projectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemies/Bosses/FirstBoss/projectile_icon.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 6.0
+height = 4.0
+
+[node name="FireBall" instance=ExtResource( 1 )]
+speed = 100.0
+lifetime = 2.0
+damage = 10
+
+[node name="Sprite" parent="." index="0"]
+rotation = -1.5708
+texture = ExtResource( 2 )
+
+[node name="HitBox" parent="." index="1"]
+collision_mask = 32
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+shape = SubResource( 1 )

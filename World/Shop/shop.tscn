@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://World/Shop/post.tscn" type="PackedScene" id=1]
+[ext_resource path="res://World/Shop/shop.gd" type="Script" id=2]
+[ext_resource path="res://World/tileMap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Items/coin/icon.png" type="Texture" id=4]
+[ext_resource path="res://Fonts/unlearn2.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 5 )
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 24.0
+
+[node name="Shop" type="Node2D"]
+z_index = -1
+script = ExtResource( 2 )
+
+[node name="PostList" type="Node2D" parent="."]
+
+[node name="Post" parent="PostList" instance=ExtResource( 1 )]
+position = Vector2( -52, -5 )
+
+[node name="Post2" parent="PostList" instance=ExtResource( 1 )]
+position = Vector2( 0, -5 )
+
+[node name="Post3" parent="PostList" instance=ExtResource( 1 )]
+position = Vector2( 53, -5 )
+
+[node name="Post4" parent="PostList" instance=ExtResource( 1 )]
+position = Vector2( -52, -55 )
+
+[node name="Post5" parent="PostList" instance=ExtResource( 1 )]
+position = Vector2( 0, -55 )
+
+[node name="Post6" parent="PostList" instance=ExtResource( 1 )]
+position = Vector2( 53, -55 )
+
+[node name="Shrine" type="Node2D" parent="."]
+position = Vector2( -112, -40 )
+
+[node name="Label" type="Label" parent="Shrine"]
+margin_left = 3.0
+margin_top = -80.0
+margin_right = 43.0
+margin_bottom = -63.0
+custom_fonts/font = SubResource( 2 )
+text = "5"
+valign = 1
+
+[node name="Area2D" type="Area2D" parent="Shrine"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shrine/Area2D"]
+position = Vector2( 0, 8 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Shrine"]
+position = Vector2( -7, -70 )
+texture = ExtResource( 4 )
+hframes = 14
+
+[node name="TileMap" parent="Shrine" instance=ExtResource( 3 )]
+cell_size = Vector2( 16, 16 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+tile_data = PoolIntArray( -262147, 23, 0 )
+
+[connection signal="body_entered" from="Shrine/Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Shrine/Area2D" to="." method="_on_Area2D_body_exited"]
