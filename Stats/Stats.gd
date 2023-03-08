@@ -14,6 +14,8 @@ export (int) var mana_point_regen = 10
 export(int) var max_move_speed = 100
 export(int) var min_move_speed = 50
 
+export (int) var increase_hit_point = 0
+export (int) var increase_hit_point_regen = 0
 export (int) var increase_mana_point = 0
 export (int) var increase_mana_point_regen = 0
 export (int, 90) var increase_attack_speed = 0
@@ -27,6 +29,11 @@ var current_dash_count = max_dash_count
 export (int) var increase_mana_damage = 0
 export (int) var increase_fire_damage = 0
 export (int) var increase_poision_damage = 0
+export (int) var increase_holy_damage = 0
+export (int) var increase_shadow_damage = 0
+export (int) var increase_ligthning_damage = 0
+export (int) var increase_physic_damage = 0
+
 
 
 var current_hit_point = 0
@@ -36,7 +43,10 @@ func _ready():
 	restore_all_stats()
 
 func get_max_hit_point():
-	return hit_point
+	return MathUtils.get_incremented_value(hit_point, increase_hit_point, 0)
+
+func get_hit_point_regen():
+	return MathUtils.get_incremented_value(hit_point_regen, increase_hit_point_regen, 0)
 
 func get_max_mana_point():
 	return MathUtils.get_incremented_value(mana_point, increase_mana_point, 0)
@@ -58,6 +68,14 @@ func get_modified_damage(damage, type):
 			return MathUtils.get_incremented_value(damage, increase_fire_damage, 0)
 		Const.DamageType.POISION:
 			return MathUtils.get_incremented_value(damage, increase_poision_damage, 0)
+		Const.DamageType.PHYSIC:
+			return MathUtils.get_incremented_value(damage, increase_physic_damage, 0)
+		Const.DamageType.LIGTHNING:
+			return MathUtils.get_incremented_value(damage, increase_ligthning_damage, 0)
+		Const.DamageType.SHADOW:
+			return MathUtils.get_incremented_value(damage, increase_shadow_damage, 0)
+		Const.DamageType.HOLY:
+			return MathUtils.get_incremented_value(damage, increase_holy_damage, 0)
 	return damage
 
 func get_cooldown_by_modifire(cooldown):
@@ -86,6 +104,7 @@ func modify_current_mana_point(amount):
 
 func _on_RegenTimer_timeout():
 	modify_current_mana_point(get_mana_point_regen())
+	modify_current_hit_point(get_hit_point_regen())
 
 func modyfy_stats(dict: Dictionary):
 	for i in dict:

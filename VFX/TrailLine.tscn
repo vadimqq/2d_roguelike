@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://VFX/TrailLine.gd" type="Script" id=1]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[node name="Line2D" type="Line2D"]
+modulate = Color( 1.5, 1.5, 1.5, 1 )
+material = SubResource( 2 )
+position = Vector2( 1, -5 )
+width = 2.0
+width_curve = SubResource( 3 )
+script = ExtResource( 1 )

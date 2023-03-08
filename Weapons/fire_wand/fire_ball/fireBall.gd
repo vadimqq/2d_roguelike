@@ -5,6 +5,9 @@ onready var trail = $Line2D
 var point = Vector2.ZERO
 export (int) var trail_length = 10
 
+func _ready():
+	trail.width *= scale_modifier
+
 func _process(delta):
 	trail.global_position = Vector2.ZERO
 	trail.global_rotation = 0

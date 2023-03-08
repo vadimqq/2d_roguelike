@@ -8,7 +8,9 @@
 script = ExtResource( 2 )
 icon = ExtResource( 3 )
 mana_multiplier = 1.3
-title = "HitEcho"
+title = "Explosion"
+description = "On hit, the spell creates an explosion that deals 100% spell damage but reduces spell damage by 20%."
+tags = [ 1, 4 ]
 
 [node name="Sprite" parent="." index="0"]
 position = Vector2( 0, -3 )

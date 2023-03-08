@@ -21,6 +21,7 @@ func _input(event):
 		sprite.visible = false
 		collider.disabled = true
 		player = null
+		item = null
 		particles.emitting = true
 
 func initialize(new_item):

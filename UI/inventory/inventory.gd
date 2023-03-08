@@ -11,7 +11,7 @@ onready var weapon_slots = $ScrollContainer2/Weapons
 onready var current_setup = $Current_setup/GridContainer
 onready var current_weapon_slot = $Current_setup/CurrentWeaponSlot
 onready var item_list = $Item_list
-
+onready var description_panel = $DescriptionPanel
 
 var holding_item: ITEM_CLASS = null
 var holding_node = null
@@ -20,10 +20,16 @@ var player: Player = null
 
 func initialize(player_node: Player):
 	player = player_node
-#	current_weapon_slot.connect('gui_input', self, 'weapon_slot_gui_input_setup', [current_weapon_slot])
 	for slot in module_slots.get_children():
 		slot.connect('gui_input', self, 'module_slot_gui_input_setup', [slot])
+		slot.connect('focus_entered', self, '_on_focus_slot', [slot])
 
+func _on_focus_slot(slot):
+	description_panel.visible = true
+	description_panel.initialize(slot.module)
+
+func _on_unfocus_slot():
+	description_panel.visible = false
 
 func update_inventory():
 	for slot in module_slots.get_children():
@@ -84,6 +90,7 @@ func update_itemlist():
 func _input(event):
 	if event.is_action_pressed("inventory"):
 		visible = !visible
+		_on_unfocus_slot()
 		get_tree().paused = visible
 		update_inventory()
 		update_setup()
@@ -93,7 +100,7 @@ func _input(event):
 		holding_item.global_position = get_global_mouse_position()
 #
 func module_slot_gui_input_setup(event: InputEvent, slot):
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton && !holding_item:
 		if event.button_index == BUTTON_LEFT && event.pressed and slot.module_count > 0:
 			var player_weapon: Weapon = player.get_current_weapon()
 			var is_have_null_slot = player_weapon.module_dict.values().has(null)
@@ -117,7 +124,7 @@ func module_slot_gui_input_setup(event: InputEvent, slot):
 
 
 func weapon_slot_gui_input_setup(event: InputEvent, slot):
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton && !holding_item:
 		if event.button_index == BUTTON_LEFT && event.pressed:
 			if slot.weapon == null:
 				return
@@ -146,7 +153,7 @@ func weapon_slot_gui_input_setup(event: InputEvent, slot):
 
 func slot_gui_input_setup(event: InputEvent, slot: SETUP_SLOT_CLASS):
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_RIGHT && event.pressed:
+		if event.button_index == BUTTON_RIGHT && event.pressed && !holding_node && slot.item:
 			var temp_module = player.get_current_weapon().module_dict.get(slot.key)
 			player.get_current_weapon().module_dict[slot.key] = null
 			player.module_inventory_arr.append(temp_module)

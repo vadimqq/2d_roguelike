@@ -8,6 +8,8 @@
 script = ExtResource( 2 )
 icon = ExtResource( 3 )
 title = "Gigantic"
+description = "Increases spell size by 10% but reduces haste by 5%."
+tags = [ 0 ]
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 0.5, 0.5 )

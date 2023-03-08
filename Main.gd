@@ -22,6 +22,9 @@ func load_new_location():
 	if current_location is Shop_room and new_location is Shop_room:
 		return load_new_location()
 	
+	if !(current_location is Shop_room) and stage != 0 and stage%2 == 0:
+		load_shop_location()
+		return
 	add_child(new_location)
 	remove_child(current_location)
 	current_location = new_location

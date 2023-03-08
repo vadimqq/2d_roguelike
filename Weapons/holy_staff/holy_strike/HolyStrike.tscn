@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Weapons/Projectile/projectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Weapons/holy_staff/holy_strike/HolyStrike.gd" type="Script" id=2]
+[ext_resource path="res://Weapons/holy_staff/holy_strike/icon.png" type="Texture" id=3]
+[ext_resource path="res://VFX/TrailLine.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 6.0
+
+[sub_resource type="Animation" id=4]
+resource_name = "cast"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("MasterPivot:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 720.0 ]
+}
+
+[node name="HolyStrike" instance=ExtResource( 1 )]
+rotation = 12.5664
+script = ExtResource( 2 )
+speed = 200.0
+lifetime = 2.0
+damage = 10
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 3 )
+
+[node name="HitBox" parent="." index="1"]
+visible = false
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+shape = SubResource( 1 )
+
+[node name="Animation" type="AnimationPlayer" parent="." index="4"]
+anims/cast = SubResource( 4 )
+
+[node name="MasterPivot" type="Node2D" parent="." index="5"]
+
+[node name="TrailPivot_1" type="Node2D" parent="MasterPivot" index="0"]
+position = Vector2( 8.74228e-07, 5 )
+
+[node name="Line2D" parent="MasterPivot/TrailPivot_1" index="0" instance=ExtResource( 4 )]
+position = Vector2( 0, 0 )
+default_color = Color( 0.898039, 0.87451, 0.196078, 1 )
+
+[node name="TrailPivot_2" type="Node2D" parent="MasterPivot" index="1"]
+position = Vector2( -8.74228e-07, -5 )
+
+[node name="Line2D" parent="MasterPivot/TrailPivot_2" index="0" instance=ExtResource( 4 )]
+position = Vector2( 0.999999, -5 )
+default_color = Color( 0.898039, 0.87451, 0.196078, 1 )
+
+[node name="TrailPivot_3" type="Node2D" parent="MasterPivot" index="2"]
+position = Vector2( 5, -9.53674e-07 )
+
+[node name="Line2D" parent="MasterPivot/TrailPivot_3" index="0" instance=ExtResource( 4 )]
+position = Vector2( 0.999999, -5 )
+default_color = Color( 0.898039, 0.87451, 0.196078, 1 )
+
+[node name="TrailPivot_4" type="Node2D" parent="MasterPivot" index="3"]
+position = Vector2( -5, 9.53674e-07 )
+
+[node name="Line2D" parent="MasterPivot/TrailPivot_4" index="0" instance=ExtResource( 4 )]
+position = Vector2( 0.999999, -5 )
+default_color = Color( 0.898039, 0.87451, 0.196078, 1 )

@@ -36,3 +36,6 @@ static func get_triangle_circumcircle_radius(vertices: PoolVector2Array) -> floa
 static func get_incremented_value(value, increase, multiply) -> int:
 	var increased_value = value + float(value) / 100 * (increase)
 	return int(increased_value +  increased_value / 100 * multiply)
+
+static func angle_to_vector2(angle: float) -> Vector2:
+	return Vector2(sin(-angle), cos(angle))

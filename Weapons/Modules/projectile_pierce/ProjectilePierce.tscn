@@ -7,7 +7,9 @@
 [node name="ProjectilePierce" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 icon = ExtResource( 3 )
-title = "ProjectilePierce"
+title = "Pierce"
+description = "Spells pierces 1 enemy"
+tags = [ 0 ]
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 0.5, 0.5 )

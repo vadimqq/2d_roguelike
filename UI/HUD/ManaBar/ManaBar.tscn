@@ -4,7 +4,7 @@
 [ext_resource path="res://UI/HUD/HealthBar/shield_bar_under.svg" type="Texture" id=2]
 [ext_resource path="res://UI/HUD/HealthBar/shield_bar_progress.svg" type="Texture" id=3]
 [ext_resource path="res://UI/HUD/HealthBar/shield_bar_over.svg" type="Texture" id=4]
-[ext_resource path="res://Fonts/unlearn2.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Fonts/dpcomic.ttf" type="DynamicFontData" id=5]
 
 [sub_resource type="Gradient" id=4]
 colors = PoolColorArray( 0.360784, 0.52549, 0.968627, 0.937255, 0.152941, 0.372549, 0.964706, 0.937255 )

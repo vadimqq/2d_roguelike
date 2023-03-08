@@ -16,7 +16,10 @@ var item_list = [
 	LootManager.projectile_pierce,
 	LootManager.circular_direction,
 	LootManager.projectile_life_time,
-	LootManager.damage_by_speed
+	LootManager.damage_by_speed,
+	LootManager.projectile_rebound,
+	LootManager.zigzag_direction,
+	LootManager.holy_beam,
 ]
 
 var reroll_price = 5
@@ -36,6 +39,7 @@ func roll_items():
 	for post in post_list.get_children():
 		randomize()
 		var item  = item_list[randi()%item_list.size()].instance()
+#		var item  = LootManager.get_random_reward_by_context(LootManager.module_rarity_weights).instance()
 		post.initialize(item)
 	
 #	100% дроп одного оружия в магазине

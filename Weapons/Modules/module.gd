@@ -1,6 +1,10 @@
 extends Node2D
 class_name Module
 
+onready var animation = $Animation
+onready var collision = $PickupZone/CollisionShape2D
+
+
 export (StreamTexture) var icon
 export (float) var mana_multiplier = 1.1
 export (int) var price = 2
@@ -8,8 +12,7 @@ export (int) var price = 2
 export (String) var title = ''
 export (String) var description = ''
 
-onready var animation = $Animation
-onready var collision = $PickupZone/CollisionShape2D
+export (Array, Const.ModuleTags) var tags = []
 
 func _ready():
 	animation.play("idle")

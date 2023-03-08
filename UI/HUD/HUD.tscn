@@ -4,7 +4,7 @@
 [ext_resource path="res://UI/HUD/HUD.gd" type="Script" id=2]
 [ext_resource path="res://UI/HUD/ManaBar/ManaBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Items/coin/icon.png" type="Texture" id=4]
-[ext_resource path="res://Fonts/unlearn2.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Fonts/dpcomic.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://UI/HUD/DashBar/DashBar.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]

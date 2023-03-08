@@ -4,10 +4,15 @@ var whip_node = preload("res://Weapons/Modules/ball_lightning/whip_lightning/whi
 
 func execute(projectile_pool: Array, stats) -> Array:
 	
-	var last_projectile = projectile_pool[projectile_pool.size() - 1]
-	last_projectile.connect('cast', self, '_on_cast', [last_projectile.collision_mask, last_projectile.damage])
+	var last_projectile: Projectile = projectile_pool[projectile_pool.size() - 1]
+	
+	if !last_projectile.unic_modules.has(title):
+		last_projectile.connect('cast', self, '_on_cast', [last_projectile.collision_mask, stats.get_modified_damage(last_projectile.damage, Const.DamageType.LIGTHNING)])
+		last_projectile.unic_modules.append(title)
+	else:
+		last_projectile.damage *= 1.1
 	for projectile in projectile_pool:
-		projectile.speed *= 0.7
+		projectile.speed *= 0.8
 
 	return projectile_pool
 

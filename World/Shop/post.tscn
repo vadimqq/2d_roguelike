@@ -3,9 +3,10 @@
 [ext_resource path="res://World/Shop/post.gd" type="Script" id=1]
 [ext_resource path="res://World/tileMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Items/coin/icon.png" type="Texture" id=3]
-[ext_resource path="res://Fonts/unlearn2.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Fonts/dpcomic.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="DynamicFont" id=1]
+size = 18
 font_data = ExtResource( 4 )
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -47,9 +48,9 @@ position = Vector2( 0, -48 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = 2.0
-margin_top = -90.0
+margin_top = -88.0
 margin_right = 42.0
-margin_bottom = -73.0
+margin_bottom = -71.0
 custom_fonts/font = SubResource( 1 )
 text = "35"
 valign = 1

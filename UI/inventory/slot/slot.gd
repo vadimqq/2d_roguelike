@@ -32,3 +32,4 @@ func enabled():
 	modulate = Color(1, 1, 1, 1)
 	count_label.visible = true
 	count_label.text = str(module_count)
+

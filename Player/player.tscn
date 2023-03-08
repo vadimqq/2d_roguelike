@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Player/player_state_machine.gd" type="Script" id=1]
 [ext_resource path="res://Player/Girl-Sheet (5).png" type="Texture" id=2]
@@ -283,6 +283,9 @@ graph_offset = Vector2( -731.852, -246.825 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=20]
 
+[sub_resource type="CanvasItemMaterial" id=55]
+blend_mode = 1
+
 [sub_resource type="CapsuleShape2D" id=50]
 radius = 12.0
 height = 16.0
@@ -353,6 +356,7 @@ autostart = true
 script = ExtResource( 6 )
 
 [node name="WeaponRaycast" type="RayCast2D" parent="."]
+material = SubResource( 55 )
 position = Vector2( 0, -2 )
 cast_to = Vector2( 50, 0 )
 
