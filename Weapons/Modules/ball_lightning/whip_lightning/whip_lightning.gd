@@ -45,7 +45,7 @@ func _process(delta):
 		raycast.look_at(current_target_position)
 
 	if raycast.is_colliding():
-		Events.emit_signal("damaged",raycast.get_collider(), damage, Const.DamageType.MANA)
+		Events.emit_signal("damaged",raycast.get_collider(), damage, Const.DamageType.LIGTHNING)
 		cast_down()
 
 
@@ -59,7 +59,7 @@ func _on_DetectionZone_body_exited(body):
 		hited_target_list.erase(body)
 
 
-func _on_spectate(projectile):
+func _on_spectate(projectile, traveled_distance):
 	global_position = projectile.global_position
 
 func _on_hit(projectile):

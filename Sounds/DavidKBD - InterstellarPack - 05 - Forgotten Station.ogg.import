@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/DavidKBD - InterstellarPack - 05 - Forgotten Station.ogg-60b18a54aae610544392683240e43bdf.oggstr"
+
+[deps]
+
+source_file="res://Sounds/DavidKBD - InterstellarPack - 05 - Forgotten Station.ogg"
+dest_files=[ "res://.import/DavidKBD - InterstellarPack - 05 - Forgotten Station.ogg-60b18a54aae610544392683240e43bdf.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

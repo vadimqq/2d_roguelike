@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/DavidKBD - InterstellarPack - 01 - Interstellar.ogg-de9013927d75bf3ef9a0f432a62c5119.oggstr"
+
+[deps]
+
+source_file="res://Sounds/DavidKBD - InterstellarPack - 01 - Interstellar.ogg"
+dest_files=[ "res://.import/DavidKBD - InterstellarPack - 01 - Interstellar.ogg-de9013927d75bf3ef9a0f432a62c5119.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

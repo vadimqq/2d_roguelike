@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Fonts/dpcomic.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://UI/MainScreen/MenuButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/EndGameScreen/EndGameScreen.gd" type="Script" id=3]
+[ext_resource path="res://UI/cursor/cursor.tscn" type="PackedScene" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 140
+font_data = ExtResource( 1 )
+
+[node name="EndGameScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0941176, 0.282353, 0.360784, 1 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 800.0
+margin_top = 468.0
+margin_right = 1100.0
+margin_bottom = 612.0
+
+[node name="Restart" parent="CenterContainer/VBoxContainer" instance=ExtResource( 2 )]
+
+[node name="Label" parent="CenterContainer/VBoxContainer/Restart" index="0"]
+text = "Restart"
+align = 1
+
+[node name="Menu" parent="CenterContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 74.0
+margin_bottom = 144.0
+
+[node name="Label" parent="CenterContainer/VBoxContainer/Menu" index="0"]
+text = "Menu"
+align = 1
+
+[node name="Label" type="Label" parent="."]
+margin_left = 618.0
+margin_top = 158.0
+margin_right = 1267.0
+margin_bottom = 286.0
+custom_fonts/font = SubResource( 1 )
+text = "Game over"
+align = 1
+
+[node name="Cursor" parent="." instance=ExtResource( 4 )]
+
+[connection signal="button_up" from="CenterContainer/VBoxContainer/Restart" to="." method="_on_Restart_button_up"]
+[connection signal="button_up" from="CenterContainer/VBoxContainer/Menu" to="." method="_on_Menu_button_up"]
+
+[editable path="CenterContainer/VBoxContainer/Restart"]
+[editable path="CenterContainer/VBoxContainer/Menu"]

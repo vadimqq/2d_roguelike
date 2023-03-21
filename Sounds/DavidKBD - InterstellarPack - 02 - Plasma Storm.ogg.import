@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/DavidKBD - InterstellarPack - 02 - Plasma Storm.ogg-22ed3f22b3c37ce5274115f913424e99.oggstr"
+
+[deps]
+
+source_file="res://Sounds/DavidKBD - InterstellarPack - 02 - Plasma Storm.ogg"
+dest_files=[ "res://.import/DavidKBD - InterstellarPack - 02 - Plasma Storm.ogg-22ed3f22b3c37ce5274115f913424e99.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

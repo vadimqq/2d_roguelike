@@ -279,21 +279,28 @@ _global_script_class_icons={
 [application]
 
 config/name="2D_rouglike"
-run/main_scene="res://Game.tscn"
+run/main_scene="res://UI/MainScreen/MainScreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Events="*res://Autoload/Events.gd"
-ObjectRegistry="*res://Autoload/ObjectRegistry.tscn"
+ObjectRegistry="*res://Autoload/ObjectRegistry/ObjectRegistry.tscn"
 Const="*res://Autoload/Const.gd"
 LootManager="*res://Autoload/LootManager.gd"
 LocationManager="*res://Autoload/LocationManager.gd"
+AudioBus="*res://Autoload/AudioBus/AudioBus.tscn"
+SceneTranzition="*res://Autoload/SceneTranzition/SceneTranzition.tscn"
 
 [debug]
 
 gdscript/warnings/unused_signal=false
 gdscript/warnings/return_value_discarded=false
+
+[display]
+
+window/size/width=1900
+window/size/height=1080
 
 [gui]
 
@@ -368,6 +375,11 @@ action={
 inventory={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777218,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+shift={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

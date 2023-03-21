@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Weapons/weapon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Weapons/holy_staff/holy_strike/HolyStrike.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Weapons/holy_staff/holy staff.png" type="Texture" id=4]
+
+[node name="holy_staff" instance=ExtResource( 1 )]
+Projectile = ExtResource( 2 )
+icon = ExtResource( 4 )
+title = "Holy staff"
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2( 8, 0 )
+rotation = 0.785398
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 4 )
+
+[node name="SpawnPosition" parent="." index="1"]
+position = Vector2( 22, 0 )

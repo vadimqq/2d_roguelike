@@ -1,18 +1,38 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://UI/inventory/slot/slot.gd" type="Script" id=1]
 [ext_resource path="res://UI/inventory/slot/module_cell.png" type="Texture" id=2]
+[ext_resource path="res://Fonts/dpcomic.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 2 )
 region_rect = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 36
+font_data = ExtResource( 3 )
 
 [node name="ModuleSlot" type="Panel"]
 pause_mode = 2
 margin_right = 100.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 100, 100 )
+focus_mode = 2
 mouse_default_cursor_shape = 2
 custom_styles/panel = SubResource( 2 )
 script = ExtResource( 1 )
-type = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 19.0
+margin_top = 21.0
+margin_right = 81.0
+margin_bottom = 79.0
+rect_min_size = Vector2( 62, 58 )
+expand = true
+
+[node name="Label" type="Label" parent="."]
+margin_left = 3.0
+margin_right = 60.0
+margin_bottom = 33.0
+custom_fonts/font = SubResource( 3 )
+text = "1"

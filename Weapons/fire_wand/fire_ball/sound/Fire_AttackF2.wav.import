@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Fire_AttackF2.wav-2e4a8ab5fe0dfb5ca2284e315c74fcdb.sample"
+
+[deps]
+
+source_file="res://Weapons/fire_wand/fire_ball/sound/Fire_AttackF2.wav"
+dest_files=[ "res://.import/Fire_AttackF2.wav-2e4a8ab5fe0dfb5ca2284e315c74fcdb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -8,6 +8,9 @@
 script = ExtResource( 2 )
 icon = ExtResource( 3 )
 mana_multiplier = 1.5
+title = "Duplicate"
+description = "Duplicates the weapon's base spell, but no runes"
+tags = [ 1 ]
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 0.5, 0.5 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Player/player_state_machine.gd" type="Script" id=1]
 [ext_resource path="res://Player/Girl-Sheet (5).png" type="Texture" id=2]
@@ -39,7 +39,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=1]
 resource_name = "death"
-length = 0.4
+length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -51,6 +51,44 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 40, 41, 42, 43 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Camera2D:zoom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.3, 0.3 ), Vector2( 0.1, 0.1 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "end_game"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -283,6 +321,9 @@ graph_offset = Vector2( -731.852, -246.825 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=20]
 
+[sub_resource type="CanvasItemMaterial" id=55]
+blend_mode = 1
+
 [sub_resource type="CapsuleShape2D" id=50]
 radius = 12.0
 height = 16.0
@@ -293,7 +334,6 @@ collision_mask = 8
 script = ExtResource( 3 )
 
 [node name="Stats" parent="." instance=ExtResource( 10 )]
-hit_point = 1000
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 54 )
@@ -342,7 +382,7 @@ script = ExtResource( 8 )
 script = ExtResource( 4 )
 
 [node name="Timer" type="Timer" parent="StateMachine/Dash"]
-wait_time = 0.2
+wait_time = 0.1
 one_shot = true
 
 [node name="GhostTimer" type="Timer" parent="StateMachine/Dash"]
@@ -353,6 +393,7 @@ autostart = true
 script = ExtResource( 6 )
 
 [node name="WeaponRaycast" type="RayCast2D" parent="."]
+material = SubResource( 55 )
 position = Vector2( 0, -2 )
 cast_to = Vector2( 50, 0 )
 

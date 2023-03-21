@@ -3,14 +3,15 @@
 [ext_resource path="res://World/Shop/post.gd" type="Script" id=1]
 [ext_resource path="res://World/tileMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Items/coin/icon.png" type="Texture" id=3]
-[ext_resource path="res://Fonts/unlearn2.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Fonts/dpcomic.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="DynamicFont" id=1]
+size = 18
 font_data = ExtResource( 4 )
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 18.0
-height = 36.0
+height = 24.0
 
 [sub_resource type="ParticlesMaterial" id=3]
 lifetime_randomness = 1.0
@@ -47,9 +48,9 @@ position = Vector2( 0, -48 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = 2.0
-margin_top = -90.0
+margin_top = -88.0
 margin_right = 42.0
-margin_bottom = -73.0
+margin_bottom = -71.0
 custom_fonts/font = SubResource( 1 )
 text = "35"
 valign = 1
@@ -60,12 +61,11 @@ texture = ExtResource( 3 )
 hframes = 14
 
 [node name="DetectionZone" type="Area2D" parent="."]
-visible = false
 collision_layer = 8
 collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
-position = Vector2( 0, -24 )
+position = Vector2( 0, -20 )
 shape = SubResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="."]

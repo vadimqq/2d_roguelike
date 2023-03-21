@@ -8,7 +8,8 @@
 script = ExtResource( 2 )
 icon = ExtResource( 3 )
 title = "Trajectory control \"Circular\""
-description = "Your spell begins to revolve around you"
+description = "Spell begins to revolve around you"
+tags = [ 1 ]
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 0.5, 0.5 )

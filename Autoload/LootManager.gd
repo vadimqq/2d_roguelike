@@ -8,10 +8,10 @@ const coin = preload("res://Items/coin/coin.tscn")
 const wood_staff = preload("res://Weapons/wood_staff/wood_staff.tscn")
 const fire_wand = preload("res://Weapons/fire_wand/fire_wand.tscn")
 const scythe_of_death = preload("res://Weapons/scythe_of_death/ScytheOfDeath.tscn")
-
+const holy_staff = preload("res://Weapons/holy_staff/holy_staff.tscn")
 
 var NORAMAL_WEAPONS_POOL = [wood_staff]
-var MAGIC_WEAPONS_POOL = [fire_wand]
+var MAGIC_WEAPONS_POOL = [fire_wand, holy_staff]
 var LEGENDARY_WEAPONS_POOL = [scythe_of_death]
 
 var weapon_rarity_weights := {
@@ -34,28 +34,29 @@ const projectile_pierce = preload("res://Weapons/Modules/projectile_pierce/Proje
 const circular_direction = preload("res://Weapons/Modules/circular_direction/CircularDirection.tscn")
 const projectile_life_time = preload("res://Weapons/Modules/projectile_life_time/ProjectileLifeTime.tscn")
 const damage_by_speed = preload("res://Weapons/Modules/damage_by_speed/DamageBySpeed.tscn")
+const projectile_rebound = preload("res://Weapons/Modules/projectile_rebound/ProjectileRebound.tscn")
+const zigzag_direction = preload("res://Weapons/Modules/zigzag_direction/ZigzagDirection.tscn")
+const holy_beam = preload("res://Weapons/Modules/holy_beam/holy_beam.tscn")
 
-var NORAMAL_MODULES_POOL = [coin]
-var MAGIC_MODULES_POOL = [coin]
-var RARE_MODULES_POOL = [coin]
+var NORAMAL_MODULES_POOL = [gigantic]
+var MAGIC_MODULES_POOL = [projectile_speed, attack_speed]
+var RARE_MODULES_POOL = [increase_damage, projectile_pierce]
 var LEGENDARY_MODULES_POOL = [
-	gigantic,
-	projectile_speed,
-	attack_speed,
-	increase_damage,
-	projectile_pierce,
-	circular_direction,
-	projectile_life_time
+	projectile_life_time,
+	projectile_rebound
 ]
 var UNIC_MODULES_POOL = [
 	dublicate,
 	hit_echo,
 	ball_lightning,
 	fire_arrow,
-	damage_by_speed
+	damage_by_speed,
+	zigzag_direction,
+	circular_direction,
+	holy_beam
 ]
 
-var reward_rarity_weights := {
+var module_rarity_weights := {
 	"NORAMAL_MODULES_POOL": 62,
 	"MAGIC_MODULES_POOL": 29,
 	"RARE_MODULES_POOL": 5,
@@ -71,10 +72,11 @@ const mana_regen_potion = preload("res://Items/mana_regen_potion/ManaRegenPotion
 const hardy_legs = preload("res://Items/hardy_legs/HardyLags.tscn")
 const fiery_touch = preload("res://Items/fiery_touch/FieryTouch.tscn")
 const divine_knowledge = preload("res://Items/divine_knowledge/DivineKnowledge.tscn")
+const magic_heart = preload("res://Items/magician\'s_heart/MagicianHeart.tscn")
 
 var NORAMAL_ITEMS_POOL = [mana_potion, mana_regen_potion]
 var MAGIC_ITEMS_POOL = [fire_wave]
-var RARE_ITEMS_POOL = [hardy_legs]
+var RARE_ITEMS_POOL = [hardy_legs, magic_heart]
 var LEGENDARY_ITEMS_POOL = [fiery_touch, divine_knowledge]
 
 var items_rarity_weights := {
@@ -99,7 +101,10 @@ func modify_coins(amount):
 	emit_signal("coins_amount_change", coins_amount)
 
 func get_random_reward():
-	return get_random_reward_by_context(reward_rarity_weights)
+	if rand_range(0, 100) < 10:
+		return  get_random_reward_by_context(module_rarity_weights)
+	else:
+		return coin
 
 func get_items_on_boss_kill():
 	var arr = []
