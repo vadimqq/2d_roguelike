@@ -7,6 +7,13 @@ onready var inventory = $UI/Inventory
 onready var reward_menu = $UI/RewardMenu
 onready var _enemies = $Enemies
 
+const _GAME_SAMPLES = [
+	preload("res://Sounds/DavidKBD - InterstellarPack - 01 - Interstellar.ogg"),
+	preload("res://Sounds/DavidKBD - InterstellarPack - 02 - Plasma Storm.ogg"),
+	preload("res://Sounds/DavidKBD - InterstellarPack - 03 - Temple of Madness.ogg"),
+]
+
+
 var stage = 0
 var current_location = null
 
@@ -15,7 +22,10 @@ func _ready():
 	inventory.initialize(player)
 	reward_menu.initialize(player)
 	load_shop_location()
+	remove_child(player)
+	current_location.add_child(player)
 	Events.connect("enemy_death", self, "_on_enemy_death")
+	AudioBus.play_music_sound(_GAME_SAMPLES[randi() % _GAME_SAMPLES.size()])
 
 func load_new_location():
 	var new_location = LocationManager.get_random_location_instance()
@@ -26,6 +36,8 @@ func load_new_location():
 		load_shop_location()
 		return
 	add_child(new_location)
+	current_location.remove_child(player)
+	new_location.add_child(player)
 	remove_child(current_location)
 	current_location = new_location
 	
@@ -47,3 +59,6 @@ func load_shop_location():
 
 func _on_enemy_death(enemy):
 	enemy.call_deferred('queue_free')
+
+func _exit_tree():
+	AudioBus.stop_music_sound()

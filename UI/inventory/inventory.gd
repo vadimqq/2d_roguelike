@@ -22,7 +22,8 @@ func initialize(player_node: Player):
 	player = player_node
 	for slot in module_slots.get_children():
 		slot.connect('gui_input', self, 'module_slot_gui_input_setup', [slot])
-		slot.connect('focus_entered', self, '_on_focus_slot', [slot])
+		slot.connect('mouse_entered', self, '_on_focus_slot', [slot])
+		slot.connect('mouse_exited', self, '_on_unfocus_slot')
 
 func _on_focus_slot(slot):
 	description_panel.visible = true

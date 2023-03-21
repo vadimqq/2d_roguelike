@@ -33,8 +33,10 @@ var d := 0.0
 var for_zigzag_swap = true
 var is_first_direction_swap = true
 var movement_type = Const.MovementType.LINE
-var unic_modules = []
+var unic_modules = {}
 var traveled_distance = 0
+
+
 
 func _ready():
 	set_as_toplevel(true)
@@ -51,7 +53,6 @@ func _ready():
 		zigzag_timer.wait_time = 0.2
 		zigzag_timer.start()
 	
-	traveled_distance += 1
 	emit_signal('cast', self)
 	Events.emit_signal("projectile_cast", self)
 
@@ -71,7 +72,7 @@ func _physics_process(delta: float) -> void:
 		Const.MovementType.ZIGZAG:
 			position += direction * speed * delta
 	
-	traveled_distance += 1
+	traveled_distance += speed * delta
 	
 	emit_signal('process', self, traveled_distance)
 	Events.emit_signal("projectile_process", self, traveled_distance)

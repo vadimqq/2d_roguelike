@@ -22,7 +22,7 @@ func handle_input(event):
 
 
 func update(_delta):
-	move(400, owner.look_direction)
+	move(600, owner.look_direction)
 	if Input.is_action_pressed("attack") && owner.get_current_weapon():
 		owner.get_current_weapon().fire(owner.weapon_raycast.global_rotation ,1)
 

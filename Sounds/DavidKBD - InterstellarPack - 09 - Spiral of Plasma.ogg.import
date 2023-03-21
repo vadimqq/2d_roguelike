@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/DavidKBD - InterstellarPack - 09 - Spiral of Plasma.ogg-66af9dae6dee4aa26311e05c9df8c0b9.oggstr"
+
+[deps]
+
+source_file="res://Sounds/DavidKBD - InterstellarPack - 09 - Spiral of Plasma.ogg"
+dest_files=[ "res://.import/DavidKBD - InterstellarPack - 09 - Spiral of Plasma.ogg-66af9dae6dee4aa26311e05c9df8c0b9.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

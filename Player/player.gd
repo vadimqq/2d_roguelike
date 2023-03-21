@@ -1,7 +1,16 @@
 extends KinematicBody2D
 class_name Player
 
-var floating_indicator = preload("res://VFX/floating_text/floating_indicator.tscn")
+const floating_indicator = preload("res://VFX/floating_text/floating_indicator.tscn")
+
+
+const _AUDIO_HIT_SAMPLES = [
+	preload("res://Sounds/hit_sound/Hit_Hurt.wav"),
+	preload("res://Sounds/hit_sound/Hit_Hurt2.wav"),
+	preload("res://Sounds/hit_sound/Hit_Hurt3.wav"),
+	preload("res://Sounds/hit_sound/Hit_Hurt4.wav"),
+]
+
 
 onready var sprite = $Sprite
 onready var weapon_raycast = $WeaponRaycast
@@ -13,6 +22,7 @@ onready var pickup_zone = $PickupZone
 onready var state_machine = $StateMachine
 onready var item_inventory = $ItemInventory
 onready var effects_manager = $EffectsManager
+onready var collider = $CollisionShape2D
 
 var module_inventory_arr := []
 var weapon_inventory_arr := []
@@ -74,6 +84,7 @@ func _on_self_damaged(target, damage, type):
 	damage_popup.execute(self, damage)
 	animation.play("take_damage")
 	frameFreeze(0.05, 0.7)
+	AudioBus.play_game_sound(_AUDIO_HIT_SAMPLES[randi() % _AUDIO_HIT_SAMPLES.size()])
 	if stats.current_hit_point <= 0:
 		state_machine._change_state('death')
 
@@ -98,3 +109,6 @@ func frameFreeze(time_scale, duration):
 
 func _test_restore():
 	stats.modify_current_hit_point(20)
+
+func end_game():
+	Events.go_to_end_game_screen()

@@ -6,6 +6,8 @@ onready var sprite = $Sprite
 onready var collider = $DetectionZone/CollisionShape2D
 onready var particles = $Particles2D 
 
+const _BAY_SOUND = preload("res://World/Shop/bay_sound.wav")
+
 var player = null
 var item = null
 
@@ -23,6 +25,7 @@ func _input(event):
 		player = null
 		item = null
 		particles.emitting = true
+		AudioBus.play_game_sound(_BAY_SOUND)
 
 func initialize(new_item):
 	if item != null:

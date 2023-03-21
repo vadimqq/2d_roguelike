@@ -3,6 +3,13 @@ class_name Enemy
 
 const floating_indicator = preload("res://VFX/floating_text/floating_indicator.tscn")
 
+const _AUDIO_HIT_SAMPLES = [
+	preload("res://Sounds/hit_sound/Hit_Hurt.wav"),
+	preload("res://Sounds/hit_sound/Hit_Hurt2.wav"),
+	preload("res://Sounds/hit_sound/Hit_Hurt3.wav"),
+	preload("res://Sounds/hit_sound/Hit_Hurt4.wav"),
+]
+
 onready var stats: Stats = $Stats
 onready var weapon_raycast: RayCast2D = $WeaponRaycast
 onready var state_machine = $StateMachine
@@ -41,9 +48,10 @@ func _on_self_damaged(target, damage, type):
 	var damage_popup = floating_indicator.instance()
 	ObjectRegistry.register_effect(damage_popup)
 	damage_popup.execute(self, damage)
+	AudioBus.play_game_sound(_AUDIO_HIT_SAMPLES[randi() % _AUDIO_HIT_SAMPLES.size()])
 	if has_node('Animation'):
 		get_node('Animation').play("take_damage")
-
+		
 	if stats.current_hit_point <= 0:
 		state_machine._change_state('death')
 

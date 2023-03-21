@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/DavidKBD - InterstellarPack - 06 - Hope on the Horizon.ogg-6cdc2cb4664945d375368c6312f2fb70.oggstr"
+
+[deps]
+
+source_file="res://UI/MainScreen/DavidKBD - InterstellarPack - 06 - Hope on the Horizon.ogg"
+dest_files=[ "res://.import/DavidKBD - InterstellarPack - 06 - Hope on the Horizon.ogg-6cdc2cb4664945d375368c6312f2fb70.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

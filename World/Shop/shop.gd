@@ -1,7 +1,9 @@
-extends Node2D
+extends YSort
 
 onready var post_list = $PostList
 onready var reroll_price_label = $Shrine/Label
+
+const _BAY_SOUND = preload("res://World/Shop/bay_sound.wav")
 
 var player = null
 var item_list = [
@@ -33,6 +35,7 @@ func _input(event):
 		LootManager.modify_coins(-reroll_price)
 		reroll_price =  ceil(reroll_price * 1.5)
 		reroll_price_label.text = str(reroll_price)
+		AudioBus.play_game_sound(_BAY_SOUND)
 
 
 func roll_items():

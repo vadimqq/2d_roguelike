@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Autoload/AudioBus/AudioBus.gd" type="Script" id=1]
+
+[node name="AudioStream" type="Node"]
+script = ExtResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+mix_target = 2
+
+[node name="GameSound" type="Node" parent="."]
+
+[node name="MenuSound" type="Node" parent="."]
+
+[node name="MusicSound" type="Node" parent="."]

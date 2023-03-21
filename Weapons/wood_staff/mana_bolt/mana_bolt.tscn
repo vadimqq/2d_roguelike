@@ -30,3 +30,5 @@ texture = ExtResource( 4 )
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 visible = false
 shape = SubResource( 1 )
+
+[connection signal="hit" from="." to="." method="_on_ManaBolt_hit"]

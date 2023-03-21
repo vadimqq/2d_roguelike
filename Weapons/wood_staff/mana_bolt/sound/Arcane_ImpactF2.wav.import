@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Arcane_ImpactF2.wav-fd1424b3271c16802a8ecc516d7a118f.sample"
+
+[deps]
+
+source_file="res://Weapons/wood_staff/mana_bolt/sound/Arcane_ImpactF2.wav"
+dest_files=[ "res://.import/Arcane_ImpactF2.wav-fd1424b3271c16802a8ecc516d7a118f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/levels/procedure_gen_level/Main.gd" type="Script" id=1]
+[ext_resource path="res://src/levels/procedure_gen_level/assets/wall-tile.tres" type="TileSet" id=2]
+[ext_resource path="res://src/tile_map/tile_set.tres" type="TileSet" id=3]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Rooms" type="Node" parent="."]
+
+[node name="Undermap" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="Floor" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="Corridors" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+
+[node name="YSort" type="YSort" parent="."]
