@@ -25,9 +25,8 @@ func update(_delta):
 	if Input.is_action_pressed("dash") and owner.stats.current_dash_count > 0:
 		emit_signal("finished", "dash")
 	is_run = false
-	
-	if Input.is_action_pressed("attack") && owner.get_current_weapon():
-		owner.get_current_weapon().fire(owner.weapon_raycast.global_rotation ,1)
+	if Input.is_action_pressed("attack") and owner.get_current_weapon():
+		owner.get_current_weapon().execute(owner.weapon_raycast.global_rotation ,1)
 		speed = owner.stats.get_min_move_speed()
 	else:
 		speed = owner.stats.get_max_move_speed()

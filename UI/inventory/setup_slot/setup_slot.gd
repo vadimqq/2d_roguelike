@@ -1,7 +1,7 @@
 extends Panel
 
-const WEAPON_CLASS = preload("res://Weapons/weapon.gd")
-const MODULE_CLASS = preload("res://Weapons/Modules/module.gd")
+const WEAPON_CLASS = preload("res://Weapon/Weapon.gd")
+const MODULE_CLASS = preload("res://Ability/Modules/Module.gd")
 const ITEM_CLASS = preload("res://Items/Item.gd")
 
 

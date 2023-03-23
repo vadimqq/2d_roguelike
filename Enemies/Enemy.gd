@@ -44,10 +44,10 @@ func _on_self_damaged(target, damage, type):
 	if not target == self:
 		return
 	set_deferred('player', get_tree().get_nodes_in_group('Player')[0])
-	stats.modify_current_hit_point(-damage)
+	stats.modify_current_hit_point(-ceil(damage))
 	var damage_popup = floating_indicator.instance()
 	ObjectRegistry.register_effect(damage_popup)
-	damage_popup.execute(self, damage)
+	damage_popup.execute(self, ceil(damage))
 	AudioBus.play_game_sound(_AUDIO_HIT_SAMPLES[randi() % _AUDIO_HIT_SAMPLES.size()])
 	if has_node('Animation'):
 		get_node('Animation').play("take_damage")

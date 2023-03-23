@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Ability/Projectile/Projectile.gd" type="Script" id=1]
+[ext_resource path="res://Ability/Ability.tscn" type="PackedScene" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+
+[node name="Projectile" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+execute_effect = null
+hit_effect = null
+speed = 100.0
+pierce_count = 0
+rebound_count = 0
+movement_type = 0
+radius = 40.0
+zigzag_swap_time = 0.2
+
+[node name="HitBox" type="Area2D" parent="." index="1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" index="0"]
+
+[node name="Sprite" type="Sprite" parent="." index="2"]
+rotation = 1.5708
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 3 )
+
+[connection signal="body_entered" from="HitBox" to="." method="_on_HitBox_body_entered"]

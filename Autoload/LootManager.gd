@@ -4,57 +4,33 @@ signal coins_amount_change
 
 const coin = preload("res://Items/coin/coin.tscn")
 
-#--------------------------------WEAPONS----------------------------------------------------
-const wood_staff = preload("res://Weapons/wood_staff/wood_staff.tscn")
-const fire_wand = preload("res://Weapons/fire_wand/fire_wand.tscn")
-const scythe_of_death = preload("res://Weapons/scythe_of_death/ScytheOfDeath.tscn")
-const holy_staff = preload("res://Weapons/holy_staff/holy_staff.tscn")
 
-var NORAMAL_WEAPONS_POOL = [wood_staff]
-var MAGIC_WEAPONS_POOL = [fire_wand, holy_staff]
-var LEGENDARY_WEAPONS_POOL = [scythe_of_death]
+#----------GLOBAL------------
+const attack_speed = preload("res://Ability/Modules/AttackSpeed/AttackSpeed.tscn")
+#----------------------------
 
-var weapon_rarity_weights := {
-	"NORAMAL_WEAPONS_POOL": 62,
-	"MAGIC_WEAPONS_POOL": 30,
-	"LEGENDARY_WEAPONS_POOL": 8,
-}
-#-------------------------------------------------------------------------------------------
+#----------PROJECTILE--------
 
-#--------------------------------MODULES----------------------------------------------------
-const dublicate = preload("res://Weapons/Modules/dublicate/dublicate.tscn")
-const gigantic = preload("res://Weapons/Modules/gigantic/gigantic.tscn")
-const hit_echo = preload("res://Weapons/Modules/hit_echo/HitEcho.tscn")
-const projectile_speed = preload("res://Weapons/Modules/increase_speed/increase_speed.tscn")
-const attack_speed = preload("res://Weapons/Modules/attack_speed/attack_speed.tscn")
-const ball_lightning = preload("res://Weapons/Modules/ball_lightning/ball_lightning.tscn")
-const increase_damage = preload("res://Weapons/Modules/increase_damage/IncreaseDamage.tscn")
-const fire_arrow = preload("res://Weapons/Modules/fire_arrow/FireArrow.tscn")
-const projectile_pierce = preload("res://Weapons/Modules/projectile_pierce/ProjectilePierce.tscn")
-const circular_direction = preload("res://Weapons/Modules/circular_direction/CircularDirection.tscn")
-const projectile_life_time = preload("res://Weapons/Modules/projectile_life_time/ProjectileLifeTime.tscn")
-const damage_by_speed = preload("res://Weapons/Modules/damage_by_speed/DamageBySpeed.tscn")
-const projectile_rebound = preload("res://Weapons/Modules/projectile_rebound/ProjectileRebound.tscn")
-const zigzag_direction = preload("res://Weapons/Modules/zigzag_direction/ZigzagDirection.tscn")
-const holy_beam = preload("res://Weapons/Modules/holy_beam/holy_beam.tscn")
+#----------------------------
 
-var NORAMAL_MODULES_POOL = [gigantic]
-var MAGIC_MODULES_POOL = [projectile_speed, attack_speed]
-var RARE_MODULES_POOL = [increase_damage, projectile_pierce]
-var LEGENDARY_MODULES_POOL = [
-	projectile_life_time,
-	projectile_rebound
-]
-var UNIC_MODULES_POOL = [
-	dublicate,
-	hit_echo,
-	ball_lightning,
-	fire_arrow,
-	damage_by_speed,
-	zigzag_direction,
-	circular_direction,
-	holy_beam
-]
+#----------AREA--------------
+
+#----------------------------
+
+#----------CHARGE------------
+
+#----------------------------
+
+#----------CHANNEL-----------
+
+#----------------------------
+
+
+var NORAMAL_MODULES_POOL = [attack_speed]
+var MAGIC_MODULES_POOL = [attack_speed]
+var RARE_MODULES_POOL = [attack_speed]
+var LEGENDARY_MODULES_POOL = [attack_speed]
+var UNIC_MODULES_POOL = [attack_speed]
 
 var module_rarity_weights := {
 	"NORAMAL_MODULES_POOL": 62,

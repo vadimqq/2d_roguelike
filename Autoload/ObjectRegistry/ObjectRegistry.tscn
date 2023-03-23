@@ -6,8 +6,9 @@
 script = ExtResource( 1 )
 
 [node name="Effects" type="YSort" parent="."]
+z_index = 1
 
-[node name="Projectiles" type="YSort" parent="."]
+[node name="Abilities" type="YSort" parent="."]
 z_index = 1
 
 [node name="items" type="YSort" parent="."]

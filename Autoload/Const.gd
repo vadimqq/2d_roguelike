@@ -11,14 +11,6 @@ enum InventoryType {
 	SETUP
 }
 
-enum PortalDirection {
-	RIGHT,
-	LEFT,
-	TOP,
-	BOTTOM
-}
-
-
 enum DamageType {
 	MANA,
 	FIRE,
@@ -62,3 +54,45 @@ var ModuleTitles = {
 
 func get_tag_title_by_enum(tag):
 	return ModuleTitles[tag]
+#======================================
+
+enum ABILITY_TYPE {
+	PROJECTILE,
+	CHANNEL,
+	CHARGE,
+}
+
+enum DAMAGE_TAG {
+	MANA,
+	FIRE,
+	POISION,
+	PHYSIC,
+	SHADOW,
+	LIGTHNING,
+	HOLY,
+}
+
+enum PROJECTILE_TRAVEL_TYPE {
+	LINE,
+	CIRCULAR,
+	ZIGZAG
+}
+
+enum MODULE_TYPE {
+	GLOBAL,
+	SECOND_ABILITY,
+}
+
+enum MODULE_TAG {
+	BUFF,
+	DIRECTION,
+	CREATOR
+}
+
+enum RARITY {
+	COMMON,
+	MAGIC,
+	RARE,
+	UNIC,
+	LEGENDARY
+}

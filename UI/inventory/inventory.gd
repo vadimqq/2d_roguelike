@@ -22,12 +22,12 @@ func initialize(player_node: Player):
 	player = player_node
 	for slot in module_slots.get_children():
 		slot.connect('gui_input', self, 'module_slot_gui_input_setup', [slot])
-		slot.connect('mouse_entered', self, '_on_focus_slot', [slot])
+		slot.connect('mouse_entered', self, '_on_focus_slot', [slot.module])
 		slot.connect('mouse_exited', self, '_on_unfocus_slot')
 
-func _on_focus_slot(slot):
+func _on_focus_slot(item):
 	description_panel.visible = true
-	description_panel.initialize(slot.module)
+	description_panel.initialize(item)
 
 func _on_unfocus_slot():
 	description_panel.visible = false
@@ -51,6 +51,8 @@ func update_inventory():
 		slot.connect('gui_input', self, 'weapon_slot_gui_input_setup', [slot])
 		slot.weapon = weapon
 		weapon_slots.add_child(slot)
+		slot.connect('mouse_entered', self, '_on_focus_slot', [slot.weapon])
+		slot.connect('mouse_exited', self, '_on_unfocus_slot')
 
 
 func update_setup():
@@ -145,7 +147,7 @@ func weapon_slot_gui_input_setup(event: InputEvent, slot):
 			
 			player.weapon_inventory_arr.erase(temp_weapon)
 			player.weapon_raycast.add_child(slot.weapon)
-			slot.weapon.initialize_owner(player)
+			slot.weapon.initialize(player)
 			update_inventory()
 		
 			update_weapon()

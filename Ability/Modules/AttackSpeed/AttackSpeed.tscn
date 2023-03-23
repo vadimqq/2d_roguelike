@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Ability/Modules/AttackSpeed/AttackSpeed.gd" type="Script" id=2]
+[ext_resource path="res://Ability/Modules/AttackSpeed/icon.png" type="Texture" id=3]
+
+[node name="AttackSpeed" type="Node2D"]
+script = ExtResource( 2 )
+icon = ExtResource( 3 )
+ability_tags = [ 0 ]

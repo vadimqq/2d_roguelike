@@ -7,21 +7,7 @@ const _BAY_SOUND = preload("res://World/Shop/bay_sound.wav")
 
 var player = null
 var item_list = [
-	LootManager.dublicate,
-	LootManager.gigantic,
-	LootManager.hit_echo,
-	LootManager.projectile_speed,
 	LootManager.attack_speed,
-	LootManager.ball_lightning,
-	LootManager.increase_damage,
-	LootManager.fire_arrow,
-	LootManager.projectile_pierce,
-	LootManager.circular_direction,
-	LootManager.projectile_life_time,
-	LootManager.damage_by_speed,
-	LootManager.projectile_rebound,
-	LootManager.zigzag_direction,
-	LootManager.holy_beam,
 ]
 
 var reroll_price = 5
@@ -46,7 +32,7 @@ func roll_items():
 		post.initialize(item)
 	
 #	100% дроп одного оружия в магазине
-	var weapon = LootManager.get_random_reward_by_context(LootManager.weapon_rarity_weights).instance()
+	var weapon = WeaponManager.get_random_weapon()
 	weapon.global_rotation = -45
 	if get_tree().current_scene.stage < 3:
 		weapon.module_count = 5

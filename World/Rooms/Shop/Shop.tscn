@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://World/tileMap.tscn" type="PackedScene" id=1]
-[ext_resource path="res://World/Shop/shop.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Enemies/Dummy/Dummy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://World/Portal/portal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://World/Rooms/Shop/Shop.gd" type="Script" id=4]
+[ext_resource path="res://World/Shop/shop.tscn" type="PackedScene" id=5]
 
 [node name="Shop" type="YSort"]
 script = ExtResource( 4 )
@@ -19,9 +20,11 @@ position = Vector2( 0, -131 )
 cell_size = Vector2( 32, 32 )
 tile_data = PoolIntArray( -262150, 5, 0, -262149, 2, 0, -262148, 2, 0, -262147, 2, 0, -262146, 2, 0, -262145, 2, 0, -327680, 2, 0, -327679, 2, 0, -327678, 2, 0, -327677, 2, 0, -327676, 2, 0, -327675, 6, 0, -196614, 7, 0, -262139, 8, 0, -131078, 7, 0, -196603, 8, 0, -65542, 7, 0, -131067, 8, 0, -6, 7, 0, -65531, 8, 0, 65530, 7, 0, 5, 8, 0, 131066, 7, 0, 65541, 8, 0, 196602, 7, 0, 131077, 8, 0, 262138, 7, 0, 196613, 8, 0, 327674, 7, 0, 262149, 8, 0, 393210, 4, 0, 393211, 2, 0, 393212, 2, 0, 393213, 2, 0, 393214, 2, 0, 393215, 2, 0, 327680, 2, 0, 327681, 2, 0, 327682, 2, 0, 327683, 2, 0, 327684, 2, 0, 327685, 3, 0 )
 
-[node name="Shop" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0, -128 )
-z_index = 0
-
 [node name="Portal" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, -242 )
+
+[node name="Dummy" parent="." instance=ExtResource( 2 )]
+position = Vector2( -81, -206 )
+
+[node name="Shop" parent="." instance=ExtResource( 5 )]
+position = Vector2( 83, -137 )

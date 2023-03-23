@@ -59,8 +59,6 @@ func _physics_process(delta):
 			
 
 func take_item(item):
-	item.collision.disabled = true
-	ObjectRegistry.unregister_item(item)
 	if item is Module:
 		module_inventory_arr.push_back(item)
 		return
@@ -78,10 +76,10 @@ func take_item(item):
 func _on_self_damaged(target, damage, type):
 	if not target == self:
 		return
-	stats.modify_current_hit_point(-damage)
+	stats.modify_current_hit_point(-ceil(damage))
 	var damage_popup = floating_indicator.instance()
 	ObjectRegistry.register_effect(damage_popup)
-	damage_popup.execute(self, damage)
+	damage_popup.execute(self, ceil(damage))
 	animation.play("take_damage")
 	frameFreeze(0.05, 0.7)
 	AudioBus.play_game_sound(_AUDIO_HIT_SAMPLES[randi() % _AUDIO_HIT_SAMPLES.size()])

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://World/Shop/post.gd" type="Script" id=1]
 [ext_resource path="res://World/tileMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Items/coin/icon.png" type="Texture" id=3]
 [ext_resource path="res://Fonts/dpcomic.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://UI/inventory/description_panel/DescriptionPanel.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 18
@@ -78,6 +79,14 @@ one_shot = true
 speed_scale = 1.2
 explosiveness = 1.0
 process_material = SubResource( 3 )
+
+[node name="DescriptionPanel" parent="." instance=ExtResource( 5 )]
+visible = false
+margin_left = -74.0
+margin_top = -290.0
+margin_right = 226.0
+margin_bottom = 110.0
+rect_scale = Vector2( 0.5, 0.5 )
 
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_DetectionZone_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="." method="_on_DetectionZone_body_exited"]

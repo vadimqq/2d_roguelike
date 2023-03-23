@@ -27,44 +27,35 @@ position = Vector2( 0, -5 )
 [node name="Post3" parent="PostList" instance=ExtResource( 1 )]
 position = Vector2( 53, -5 )
 
-[node name="Post4" parent="PostList" instance=ExtResource( 1 )]
-position = Vector2( -52, -55 )
-
-[node name="Post5" parent="PostList" instance=ExtResource( 1 )]
-position = Vector2( 0, -55 )
-
-[node name="Post6" parent="PostList" instance=ExtResource( 1 )]
-position = Vector2( 53, -55 )
-
 [node name="Shrine" type="Node2D" parent="."]
 position = Vector2( -112, -40 )
 
 [node name="Label" type="Label" parent="Shrine"]
-margin_left = 3.0
-margin_top = -78.0
-margin_right = 43.0
-margin_bottom = -61.0
+margin_left = 2.0
+margin_top = -50.0
+margin_right = 42.0
+margin_bottom = -33.0
 custom_fonts/font = SubResource( 2 )
 text = "5"
 valign = 1
 
 [node name="Area2D" type="Area2D" parent="Shrine"]
+position = Vector2( 0, 34 )
 collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shrine/Area2D"]
-position = Vector2( 0, 8 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="Shrine"]
-position = Vector2( -7, -70 )
+position = Vector2( -6, -42 )
 texture = ExtResource( 4 )
 hframes = 14
 
 [node name="TileMap" parent="Shrine" instance=ExtResource( 3 )]
 cell_size = Vector2( 16, 16 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
-tile_data = PoolIntArray( -262147, 23, 0 )
+tile_data = PoolIntArray( -131075, 23, 0 )
 
 [connection signal="body_entered" from="Shrine/Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Shrine/Area2D" to="." method="_on_Area2D_body_exited"]
