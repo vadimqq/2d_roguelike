@@ -14,8 +14,6 @@ func initialize(player) -> void:
 	label.text = str(player.stats.current_mana_point) + '/' + str(player.stats.get_max_mana_point())
 
 func _on_Stats_stat_changed(stats: Stats) -> void:
-	if stats.current_mana_point == value:
-		return
 	if tween.is_active():
 		tween.stop_all()
 	max_value = stats.get_max_mana_point()

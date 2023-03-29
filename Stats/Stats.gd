@@ -7,7 +7,7 @@ onready var regen_timer = $RegenTimer
 onready var dash_cooldown_timer = $DashTimer
 
 export (int) var hit_point = 100
-export (int) var hit_point_regen = 0
+export (int) var hit_point_regen = 1
 export (int) var mana_point = 100
 export (int) var mana_point_regen = 10
 

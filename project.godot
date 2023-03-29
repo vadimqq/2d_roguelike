@@ -194,7 +194,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Utils/MathUtils.gd"
 }, {
-"base": "Node",
+"base": "Node2D",
 "class": "Module",
 "language": "GDScript",
 "path": "res://Ability/Modules/Module.gd"
@@ -310,6 +310,7 @@ LocationManager="*res://Autoload/LocationManager.gd"
 AudioBus="*res://Autoload/AudioBus/AudioBus.tscn"
 SceneTranzition="*res://Autoload/SceneTranzition/SceneTranzition.tscn"
 WeaponManager="*res://Autoload/WeaponManager.gd"
+AffixManager="*res://Autoload/AffixManager/AffixManager.gd"
 
 [debug]
 
@@ -320,6 +321,7 @@ gdscript/warnings/return_value_discarded=false
 
 window/size/width=1900
 window/size/height=1080
+window/stretch/mode="viewport"
 
 [gui]
 

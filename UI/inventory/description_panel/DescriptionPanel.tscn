@@ -1,13 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://UI/inventory/description_panel/DescriptionPanel.gd" type="Script" id=2]
-[ext_resource path="res://UI/inventory/panel_2.png" type="Texture" id=3]
+[ext_resource path="res://UI/inventory/description_panel/bg.png" type="Texture" id=3]
 [ext_resource path="res://Fonts/dpcomic.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 3 )
-region_rect = Rect2( 0, 0, 525, 188 )
+region_rect = Rect2( 40.9056, 20, 174.622, 217 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 28
@@ -16,6 +16,9 @@ font_data = ExtResource( 4 )
 [sub_resource type="DynamicFont" id=4]
 size = 30
 use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=5]
 font_data = ExtResource( 4 )
 
 [node name="DescriptionPanel" type="Panel"]
@@ -87,97 +90,173 @@ autowrap = true
 [node name="WeaponContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 20.0
-margin_top = 10.0
-margin_right = -20.0
+margin_left = 25.0
+margin_top = 20.0
+margin_right = -25.0
 margin_bottom = -20.0
 
-[node name="CenterContainer" type="CenterContainer" parent="WeaponContainer"]
-margin_right = 272.0
-margin_bottom = 60.0
+[node name="CenterContainer" type="HBoxContainer" parent="WeaponContainer"]
+margin_right = 252.0
+margin_bottom = 80.0
 
 [node name="WeaponIcon" type="TextureRect" parent="WeaponContainer/CenterContainer"]
-margin_left = 106.0
-margin_right = 166.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 60, 60 )
+margin_right = 80.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
 texture = ExtResource( 1 )
 expand = true
 
-[node name="MarginContainer2" type="MarginContainer" parent="WeaponContainer"]
-margin_top = 64.0
-margin_right = 272.0
-margin_bottom = 69.0
-rect_min_size = Vector2( 0, 5 )
-
-[node name="Title" type="Label" parent="WeaponContainer"]
-margin_top = 73.0
-margin_right = 272.0
-margin_bottom = 99.0
+[node name="Title" type="Label" parent="WeaponContainer/CenterContainer"]
+margin_left = 84.0
+margin_top = 27.0
+margin_right = 252.0
+margin_bottom = 53.0
+rect_min_size = Vector2( 168, 0 )
 custom_fonts/font = SubResource( 3 )
 text = "Mana staff"
 align = 1
 autowrap = true
 uppercase = true
 
-[node name="MarginContainer" type="MarginContainer" parent="WeaponContainer"]
-margin_top = 103.0
-margin_right = 272.0
-margin_bottom = 108.0
+[node name="MarginContainer2" type="MarginContainer" parent="WeaponContainer"]
+margin_top = 84.0
+margin_right = 252.0
+margin_bottom = 89.0
 rect_min_size = Vector2( 0, 5 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="WeaponContainer"]
-margin_top = 112.0
-margin_right = 272.0
-margin_bottom = 337.0
-rect_min_size = Vector2( 270, 225 )
+margin_top = 93.0
+margin_right = 252.0
+margin_bottom = 360.0
+rect_min_size = Vector2( 250, 267 )
 scroll_horizontal_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="WeaponContainer/ScrollContainer"]
-margin_right = 260.0
-margin_bottom = 283.0
-rect_min_size = Vector2( 260, 0 )
+margin_right = 251.0
+margin_bottom = 129.0
+rect_min_size = Vector2( 250, 0 )
 
-[node name="CenterContainer" type="CenterContainer" parent="WeaponContainer/ScrollContainer/VBoxContainer"]
-margin_right = 260.0
-margin_bottom = 60.0
+[node name="AbilityContainer" type="HBoxContainer" parent="WeaponContainer/ScrollContainer/VBoxContainer"]
+margin_right = 251.0
+margin_bottom = 86.0
 
-[node name="AbilityIcon" type="TextureRect" parent="WeaponContainer/ScrollContainer/VBoxContainer/CenterContainer"]
-margin_left = 100.0
-margin_right = 160.0
-margin_bottom = 60.0
+[node name="CenterContainer" type="CenterContainer" parent="WeaponContainer/ScrollContainer/VBoxContainer/AbilityContainer"]
+margin_right = 60.0
+margin_bottom = 86.0
+
+[node name="AbilityIcon" type="TextureRect" parent="WeaponContainer/ScrollContainer/VBoxContainer/AbilityContainer/CenterContainer"]
+margin_top = 13.0
+margin_right = 60.0
+margin_bottom = 73.0
 rect_min_size = Vector2( 60, 60 )
 texture = ExtResource( 1 )
 expand = true
 
-[node name="MarginContainer2" type="MarginContainer" parent="WeaponContainer/ScrollContainer/VBoxContainer"]
-margin_top = 64.0
-margin_right = 260.0
-margin_bottom = 69.0
-rect_min_size = Vector2( 0, 5 )
+[node name="MarginContainer2" type="MarginContainer" parent="WeaponContainer/ScrollContainer/VBoxContainer/AbilityContainer"]
+margin_left = 64.0
+margin_right = 79.0
+margin_bottom = 86.0
+rect_min_size = Vector2( 15, 0 )
 
-[node name="AbilityTitle" type="Label" parent="WeaponContainer/ScrollContainer/VBoxContainer"]
-margin_top = 73.0
-margin_right = 260.0
-margin_bottom = 99.0
+[node name="AbilityData" type="VBoxContainer" parent="WeaponContainer/ScrollContainer/VBoxContainer/AbilityContainer"]
+margin_left = 83.0
+margin_right = 251.0
+margin_bottom = 86.0
+rect_min_size = Vector2( 168, 0 )
+
+[node name="AbilityTitle" type="Label" parent="WeaponContainer/ScrollContainer/VBoxContainer/AbilityContainer/AbilityData"]
+margin_right = 168.0
+margin_bottom = 26.0
 custom_fonts/font = SubResource( 3 )
 text = "Mana Bolt"
-align = 1
 autowrap = true
 uppercase = true
 
-[node name="MarginContainer3" type="MarginContainer" parent="WeaponContainer/ScrollContainer/VBoxContainer"]
-margin_top = 103.0
-margin_right = 260.0
-margin_bottom = 108.0
+[node name="DamageInfoWrapper" type="HBoxContainer" parent="WeaponContainer/ScrollContainer/VBoxContainer/AbilityContainer/AbilityData"]
+margin_top = 30.0
+margin_right = 168.0
+margin_bottom = 46.0
+
+[node name="title" type="Label" parent="WeaponContainer/ScrollContainer/VBoxContainer/AbilityContainer/AbilityData/DamageInfoWrapper"]
+margin_right = 49.0
+margin_bottom = 16.0
+custom_fonts/font = SubResource( 5 )
+text = "damage:"
+uppercase = true
+
+[node name="value" type="Label" parent="WeaponContainer/ScrollContainer/VBoxContainer/AbilityContainer/AbilityData/DamageInfoWrapper"]
+margin_left = 53.0
+margin_right = 60.0
+margin_bottom = 16.0
+custom_fonts/font = SubResource( 5 )
+text = "5"
+uppercase = true
+
+[node name="CooldownInfoWrapper2" type="HBoxContainer" parent="WeaponContainer/ScrollContainer/VBoxContainer/AbilityContainer/AbilityData"]
+margin_top = 50.0
+margin_right = 168.0
+margin_bottom = 66.0
+
+[node name="title" type="Label" parent="WeaponContainer/ScrollContainer/VBoxContainer/AbilityContainer/AbilityData/CooldownInfoWrapper2"]
+margin_right = 68.0
+margin_bottom = 16.0
+custom_fonts/font = SubResource( 5 )
+text = "cooldown:"
+uppercase = true
+
+[node name="value" type="Label" parent="WeaponContainer/ScrollContainer/VBoxContainer/AbilityContainer/AbilityData/CooldownInfoWrapper2"]
+margin_left = 72.0
+margin_right = 79.0
+margin_bottom = 16.0
+custom_fonts/font = SubResource( 5 )
+text = "5"
+uppercase = true
+
+[node name="desc" type="Label" parent="WeaponContainer/ScrollContainer/VBoxContainer/AbilityContainer/AbilityData/CooldownInfoWrapper2"]
+margin_left = 83.0
+margin_right = 102.0
+margin_bottom = 16.0
+custom_fonts/font = SubResource( 5 )
+text = "sec"
+
+[node name="ManaCostInfoWrapper3" type="HBoxContainer" parent="WeaponContainer/ScrollContainer/VBoxContainer/AbilityContainer/AbilityData"]
+margin_top = 70.0
+margin_right = 168.0
+margin_bottom = 86.0
+
+[node name="title" type="Label" parent="WeaponContainer/ScrollContainer/VBoxContainer/AbilityContainer/AbilityData/ManaCostInfoWrapper3"]
+margin_right = 71.0
+margin_bottom = 16.0
+custom_fonts/font = SubResource( 5 )
+text = "mana cost:"
+uppercase = true
+
+[node name="value" type="Label" parent="WeaponContainer/ScrollContainer/VBoxContainer/AbilityContainer/AbilityData/ManaCostInfoWrapper3"]
+margin_left = 75.0
+margin_right = 82.0
+margin_bottom = 16.0
+custom_fonts/font = SubResource( 5 )
+text = "2"
+uppercase = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="WeaponContainer/ScrollContainer/VBoxContainer"]
+margin_top = 90.0
+margin_right = 251.0
+margin_bottom = 95.0
 rect_min_size = Vector2( 0, 5 )
 
-[node name="AbilityDescription" type="Label" parent="WeaponContainer/ScrollContainer/VBoxContainer"]
-margin_top = 112.0
-margin_right = 260.0
-margin_bottom = 283.0
+[node name="Stats" type="Label" parent="WeaponContainer/ScrollContainer/VBoxContainer"]
+margin_top = 99.0
+margin_right = 251.0
+margin_bottom = 125.0
 custom_fonts/font = SubResource( 3 )
-text = "projectile weqqwe qweq weq qwe qweq qwe qweq q eqweqw qeq we qw qwe qwe q we q  qweq qwe q qwe "
+text = "Stats"
 align = 1
 autowrap = true
 uppercase = true
+
+[node name="WeaponAfix" type="VBoxContainer" parent="WeaponContainer/ScrollContainer/VBoxContainer"]
+margin_top = 129.0
+margin_right = 251.0
+margin_bottom = 129.0
+rect_min_size = Vector2( 168, 0 )

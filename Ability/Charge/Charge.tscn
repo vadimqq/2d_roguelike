@@ -9,6 +9,7 @@ cooldown = 5.0
 mana_cost = 1
 life_time = 5.0
 type = 2
+damage = 1
 max_charge_duration = 5.0
 charge_duration_tick = 0.1
 

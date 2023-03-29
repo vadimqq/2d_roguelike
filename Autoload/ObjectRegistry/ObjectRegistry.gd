@@ -1,6 +1,6 @@
 extends Node
 
-onready var _effects := $Effects
+onready var _effects := $EffectsLayer/Effects
 onready var _abilities := $Abilities
 onready var _items := $items
 

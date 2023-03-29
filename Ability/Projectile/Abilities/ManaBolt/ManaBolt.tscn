@@ -16,6 +16,7 @@ height = 4.0
 [node name="ManaBolt" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 title = "Mana bolt"
+damage = 10
 execute_effect = ExtResource( 5 )
 hit_effect = ExtResource( 4 )
 trail_length = 15

@@ -142,12 +142,7 @@ func weapon_slot_gui_input_setup(event: InputEvent, slot):
 				if slot.weapon.title == weapon.title:
 					temp_weapon = weapon
 					break
-			player.weapon_raycast.remove_child(player_weapon)
-			player.weapon_inventory_arr.append(player_weapon)
-			
-			player.weapon_inventory_arr.erase(temp_weapon)
-			player.weapon_raycast.add_child(slot.weapon)
-			slot.weapon.initialize(player)
+			player.set_new_weapon(temp_weapon)
 			update_inventory()
 		
 			update_weapon()

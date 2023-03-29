@@ -1,9 +1,12 @@
 extends Node2D
 class_name Weapon
 
+const AFFIX_LIST_CLASS = preload("res://Autoload/AffixManager/AffixList.gd")
+
 onready var spawn_position = $SpawnPosition
 onready var cooldown_timer = $CooldownTimer
 onready var sprite = $Sprite
+onready var affix_ist: AFFIX_LIST_CLASS = $AffixList
 
 export (StreamTexture) var icon
 export (String) var title = 'Test weapon'
@@ -11,8 +14,9 @@ export (String) var description = 'Test weapon description'
 
 export var ability_scene: PackedScene
 export (int) var module_count = 5
-
+export (Const.WEAPON_QUALITY) var quality
 var module_dict: Dictionary = {}
+
 
 var executor
 var ability_instance: Ability
@@ -24,7 +28,7 @@ enum COMBAT_STATE {
 
 var combat_state = COMBAT_STATE.IDLE
 
-var charging_ability:Charge = null
+var charging_ability_list: Array = []
 
 func initialize(player):
 	executor = player
@@ -42,9 +46,10 @@ func _process(delta):
 		global_position = executor.weapon_raycast.global_position
 		global_rotation = executor.weapon_raycast.global_rotation
 	
-	if charging_ability:
-		charging_ability.global_position = spawn_position.global_position
-		charging_ability.global_rotation = spawn_position.global_rotation
+	if charging_ability_list.size() > 0:
+		for charge in charging_ability_list:
+			charge.global_position = spawn_position.global_position
+			charge.global_rotation = spawn_position.global_rotation
 
 
 func execute(raycast_rotation, projectile_mask: int) -> void:
@@ -61,7 +66,7 @@ func execute(raycast_rotation, projectile_mask: int) -> void:
 		Const.ABILITY_TYPE.CHANNEL:
 			cast_channel_ability(ability_instance, current_mana_cost)
 		Const.ABILITY_TYPE.CHARGE:
-			if !get_is_cooldown() and !charging_ability:
+			if !get_is_cooldown() and !charging_ability_list.size() > 0:
 				cast_charge_ability(ability_instance, current_mana_cost)
 
 func cancel() -> void:
@@ -73,8 +78,9 @@ func cancel() -> void:
 			ability_instance.set_is_casting(false)
 			ability_instance.disappear()
 		Const.ABILITY_TYPE.CHARGE:
-			if charging_ability:
-				charging_ability.execute_charge()
+			if charging_ability_list.size() > 0:
+				for charge in charging_ability_list:
+					charge.execute_charge()
 
 func cast_projectile_ability(projectile_ability: Projectile, mana_cost):
 	var projectile: Projectile = projectile_ability.duplicate()
@@ -87,7 +93,7 @@ func cast_projectile_ability(projectile_ability: Projectile, mana_cost):
 	var counter = 1
 	for upgraded_projectile in projectile_pool:
 		upgraded_projectile.damage = executor.stats.get_modified_damage(upgraded_projectile.damage, upgraded_projectile.type)
-		upgraded_projectile.global_rotation = spawn_position.global_rotation  #+ 0.03 * counter if counter%2 else global_rotation  - 0.03 * counter
+		upgraded_projectile.global_rotation = spawn_position.global_rotation + 0.03 * counter if counter%2 else spawn_position.global_rotation  - 0.03 * counter
 		ObjectRegistry.register_ability(upgraded_projectile)
 		upgraded_projectile.execute()
 		counter += 1
@@ -100,11 +106,19 @@ func cast_channel_ability(channel_ability: Channel, mana_cost):
 	if not channel_ability.is_inside_tree():
 		ObjectRegistry.register_ability(channel_ability)
 	
+	var channel_pool := [channel_ability]
+
+	for i in module_dict.keys():
+		if module_dict.get(i) != null:
+			channel_pool = module_dict.get(i).execute(channel_pool, executor.stats)
+	
 	if combat_state == COMBAT_STATE.IDLE:
-		channel_ability.appear()
+		for channel in channel_pool:
+			channel.appear()
 	combat_state = COMBAT_STATE.ATTACK
-	channel_ability.global_position = spawn_position.global_position
-	channel_ability.global_rotation = spawn_position.global_rotation
+	for channel in channel_pool:
+		channel.global_position = spawn_position.global_position
+		channel.global_rotation = spawn_position.global_rotation
 	
 	if !get_is_cooldown():
 		channel_ability.set_is_casting(true)
@@ -117,7 +131,12 @@ func cast_charge_ability(charge_ability, mana_cost):
 	var charge: Charge = charge_ability.duplicate()
 	charge.connect("execute_charge", self, "_on_charge_execute")
 	charge.connect("charge_tick", self, "_on_charge_tick", [mana_cost])
-	charging_ability = charge
+	charging_ability_list = [charge]
+
+	for i in module_dict.keys():
+		if module_dict.get(i) != null:
+			charging_ability_list = module_dict.get(i).execute(charging_ability_list, executor.stats)
+	
 	ObjectRegistry.register_ability(charge)
 	charge.start_charge()
 	
@@ -145,7 +164,8 @@ func get_current_cooldown():
 
 
 func _on_charge_execute():
-	charging_ability = null
+	charging_ability_list = []
 
 func _on_charge_tick(power_percent, mana_cost):
 	executor.stats.modify_current_mana_point(-mana_cost)
+

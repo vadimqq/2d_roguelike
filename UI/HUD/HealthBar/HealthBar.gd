@@ -15,8 +15,6 @@ func initialize(player) -> void:
 	label.text = str(player.stats.current_hit_point) + '/' + str(player.stats.get_max_hit_point())
 
 func _on_Stats_stat_changed(stats: Stats) -> void:
-	if stats.current_hit_point == value:
-		return
 	if tween.is_active():
 		tween.stop_all()
 	max_value = stats.get_max_hit_point()

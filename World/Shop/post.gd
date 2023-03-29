@@ -1,19 +1,15 @@
 extends Node2D
 
-const item_scene = preload("res://World/Shop/item.tscn")
-const ITEM_CLASS = preload("res://World/Shop/item.gd")
-
 onready var item_position = $Position2D
 onready var label = $Label
 onready var coin_sprite = $Sprite
 onready var collider = $DetectionZone/CollisionShape2D
 onready var particles = $Particles2D 
-onready var description_panel = $DescriptionPanel
+onready var description_panel = $CanvasLayer/DescriptionPanel
 
 const _BAY_SOUND = preload("res://World/Shop/bay_sound.wav")
 
 var player = null
-var item_ui:ITEM_CLASS = null
 var item = null
 var price = 5
 
@@ -28,31 +24,28 @@ func _input(event):
 		item = null
 		particles.emitting = true
 		AudioBus.play_game_sound(_BAY_SOUND)
-		ObjectRegistry.unregister_item(item_ui)
 
 func initialize(new_item):
-	if item_ui != null:
-		ObjectRegistry.unregister_item(item_ui)
-	var item_instance:ITEM_CLASS = item_scene.instance()
-	ObjectRegistry.register_item(item_instance)
+	if item != null:
+		ObjectRegistry.unregister_item(item)
+	ObjectRegistry.register_item(new_item)
 	item = new_item
-	item_instance.set_icon(new_item.icon)
-	item_instance.global_position = item_position.global_position
-	item_ui = item_instance
-	
+	item.global_position = item_position.global_position
+	if item is Weapon:
+		AffixManager.get_affix(item.quality, item.affix_ist)
 	label.text = str(price)
 	label.visible = true
 	coin_sprite.visible = true
 	collider.disabled = false
 	player = null
 	particles.emitting = true
-	
-	description_panel.initialize(new_item)
 
 
 func _on_DetectionZone_body_entered(body):
 	player = body
 	description_panel.visible = true
+	description_panel.initialize(item)
+	description_panel.rect_global_position = global_position - Vector2(description_panel.rect_min_size.x / 2, description_panel.rect_min_size.y + 160) * description_panel.rect_scale
 
 
 func _on_DetectionZone_body_exited(body):

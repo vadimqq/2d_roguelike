@@ -80,13 +80,16 @@ speed_scale = 1.2
 explosiveness = 1.0
 process_material = SubResource( 3 )
 
-[node name="DescriptionPanel" parent="." instance=ExtResource( 5 )]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enable = true
+
+[node name="DescriptionPanel" parent="CanvasLayer" instance=ExtResource( 5 )]
 visible = false
-margin_left = -74.0
-margin_top = -290.0
-margin_right = 226.0
-margin_bottom = 110.0
-rect_scale = Vector2( 0.5, 0.5 )
+margin_left = -37.0
+margin_top = -145.0
+margin_right = 263.0
+margin_bottom = 255.0
+rect_scale = Vector2( 0.3, 0.3 )
 
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_DetectionZone_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="." method="_on_DetectionZone_body_exited"]

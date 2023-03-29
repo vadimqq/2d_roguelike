@@ -1,9 +1,11 @@
 extends Ability
 
 onready var animation = $Animation
+onready var hit_box = $HitBox
 onready var hit_box_collider = $HitBox/CollisionShape2D
 
 func _ready():
+	hit_box.collision_mask = collision_mask
 	animation.play("explosion")
 
 func _on_Animation_animation_finished(anim_name):

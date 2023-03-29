@@ -1,0 +1,27 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+uniform sampler2D tex;
+
+float sample(in vec2 st){
+	return texture(tex, st).a;
+}
+
+void fragment(){
+	vec2 px = vec2(1.0) / vec2(textureSize(tex, 0));
+	
+	float neighbor = 
+	sample(UV + px * vec2(1.0, 0.0)) +
+	sample(UV + px * vec2(0.0, 1.0)) +
+	sample(UV + px * vec2(-1.0, 0.0)) +
+	sample(UV + px * vec2(0.0, -1.0));
+	
+	float center = sample(UV) * 4.0;
+	
+	float edge = neighbor - center;
+	float lit = dot(UV, vec2(cos(TIME), sin(TIME))) - TIME;
+	lit = mod(lit, 1.0);
+	
+	COLOR = vec4(vec3(1.), edge);
+}"

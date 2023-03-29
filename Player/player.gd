@@ -58,14 +58,17 @@ func _physics_process(delta):
 			items_in_range.erase(pickup_item)
 			
 
-func take_item(item):
+func take_item(item: Node2D):
 	if item is Module:
 		module_inventory_arr.push_back(item)
+		ObjectRegistry.unregister_item(item)
 		return
 	elif item is Weapon:
+		ObjectRegistry.unregister_item(item)
 		weapon_inventory_arr.push_back(item)
 		return
 	elif item is Item:
+		ObjectRegistry.unregister_item(item)
 		item_inventory.add_child(item)
 		item.add_effect(self)
 		item.visible = false
@@ -110,3 +113,26 @@ func _test_restore():
 
 func end_game():
 	Events.go_to_end_game_screen()
+
+
+func set_new_weapon(new_weapon):
+	var player_weapon: Weapon = get_current_weapon()
+	weapon_raycast.remove_child(player_weapon)
+	weapon_inventory_arr.append(player_weapon)
+	reamove_weapon_stats(player_weapon)
+	
+	weapon_inventory_arr.erase(new_weapon)
+	weapon_raycast.add_child(new_weapon)
+	new_weapon.initialize(self)
+	add_weapon_stats(new_weapon)
+
+func add_weapon_stats(weapon: Weapon):
+	var affix_dict: Dictionary = weapon.affix_ist.get_affix_dict()
+	stats.modyfy_stats(affix_dict)
+
+func reamove_weapon_stats(weapon: Weapon):
+	var affix_dict: Dictionary = weapon.affix_ist.get_affix_dict()
+	for key in affix_dict.keys():
+		affix_dict[key] = -affix_dict.get(key)
+
+	stats.modyfy_stats(affix_dict)
