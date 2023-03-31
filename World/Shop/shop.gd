@@ -6,9 +6,6 @@ onready var reroll_price_label = $Shrine/Label
 const _BAY_SOUND = preload("res://World/Shop/bay_sound.wav")
 
 var player = null
-var item_list = [
-	LootManager.attack_speed,
-]
 
 var reroll_price = 5
 
@@ -27,7 +24,7 @@ func _input(event):
 func roll_items():
 	for post in post_list.get_children():
 		randomize()
-		var item  = item_list[randi()%item_list.size()].instance()
+		var item  = LootManager.get_random_module().instance()
 #		var item  = LootManager.get_random_reward_by_context(LootManager.module_rarity_weights).instance()
 		post.initialize(item)
 	

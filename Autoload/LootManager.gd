@@ -7,14 +7,15 @@ const coin = preload("res://Items/coin/coin.tscn")
 
 #----------GLOBAL------------
 const attack_speed = preload("res://Ability/Modules/AttackSpeed/AttackSpeed.tscn")
+const gigantic = preload("res://Ability/Modules/Gigantic/Gigantic.tscn")
+const increase_damage = preload("res://Ability/Modules/IncreaseDamage/IncreaseDamage.tscn")
+const speed = preload("res://Ability/Modules/Speed/Speed.tscn")
+const life_time = preload("res://Ability/Modules/LifeTime/LifeTime.tscn")
+
 #----------------------------
 
 #----------PROJECTILE--------
-
-#----------------------------
-
-#----------AREA--------------
-
+const direction_circular = preload("res://Ability/Projectile/Modules/CircularDirection/CircularDirection.tscn")
 #----------------------------
 
 #----------CHARGE------------
@@ -26,8 +27,8 @@ const attack_speed = preload("res://Ability/Modules/AttackSpeed/AttackSpeed.tscn
 #----------------------------
 
 
-var NORAMAL_MODULES_POOL = [attack_speed]
-var MAGIC_MODULES_POOL = [attack_speed]
+var NORAMAL_MODULES_POOL = [speed, gigantic, life_time]
+var MAGIC_MODULES_POOL = [attack_speed, increase_damage, direction_circular]
 var RARE_MODULES_POOL = [attack_speed]
 var LEGENDARY_MODULES_POOL = [attack_speed]
 var UNIC_MODULES_POOL = [attack_speed]
@@ -76,11 +77,14 @@ func modify_coins(amount):
 	coins_amount += amount
 	emit_signal("coins_amount_change", coins_amount)
 
-func get_random_reward():
-	if rand_range(0, 100) < 10:
-		return  get_random_reward_by_context(module_rarity_weights)
-	else:
-		return coin
+#func get_random_reward():
+#	if rand_range(0, 100) < 10:
+#		return  get_random_reward_by_context(module_rarity_weights)
+#	else:
+#		return coin
+
+func get_random_module():
+	return  get_random_reward_by_context(module_rarity_weights)
 
 func get_items_on_boss_kill():
 	var arr = []
@@ -92,7 +96,7 @@ func get_items_on_boss_kill():
 	return arr
 
 func _on_enemy_death(enemy):
-	var reward = get_random_reward().instance()
+	var reward = coin.instance()
 	reward.global_position = enemy.global_position
 	ObjectRegistry.register_item(reward)
 

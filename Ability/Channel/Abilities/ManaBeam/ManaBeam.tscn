@@ -52,8 +52,10 @@ color = Color( 0.0509804, 0.615686, 0.752941, 0.639216 )
 [node name="ManaBeam" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 title = "Mana Beam"
-cast_speed = 400.0
-max_length = 500.0
+mana_cost = 5
+damage = 3
+speed = 400.0
+max_length = 200.0
 growth_time = 0.1
 
 [node name="TickTimer" parent="." index="1"]

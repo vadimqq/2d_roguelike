@@ -39,6 +39,7 @@ func _physics_process(delta):
 		weapon_raycast.show_behind_parent = true
 	else:
 		weapon_raycast.show_behind_parent = false
+	weapon_raycast.look_at(player.global_position)
 
 func _on_self_damaged(target, damage, type):
 	if not target == self:

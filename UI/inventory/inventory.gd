@@ -9,9 +9,8 @@ var weapon_slot_node = preload("res://UI/inventory/weapon_slot/weapon_slot.tscn"
 onready var module_slots = $ScrollContainer/Modules
 onready var weapon_slots = $ScrollContainer2/Weapons
 onready var current_setup = $Current_setup/GridContainer
-onready var current_weapon_slot = $Current_setup/CurrentWeaponSlot
+onready var current_weapon_slot = $Current_setup/WeaponSlot
 onready var item_list = $Item_list
-onready var description_panel = $DescriptionPanel
 
 var holding_item: ITEM_CLASS = null
 var holding_node = null
@@ -22,15 +21,6 @@ func initialize(player_node: Player):
 	player = player_node
 	for slot in module_slots.get_children():
 		slot.connect('gui_input', self, 'module_slot_gui_input_setup', [slot])
-		slot.connect('mouse_entered', self, '_on_focus_slot', [slot.module])
-		slot.connect('mouse_exited', self, '_on_unfocus_slot')
-
-func _on_focus_slot(item):
-	description_panel.visible = true
-	description_panel.initialize(item)
-
-func _on_unfocus_slot():
-	description_panel.visible = false
 
 func update_inventory():
 	for slot in module_slots.get_children():
@@ -51,8 +41,6 @@ func update_inventory():
 		slot.connect('gui_input', self, 'weapon_slot_gui_input_setup', [slot])
 		slot.weapon = weapon
 		weapon_slots.add_child(slot)
-		slot.connect('mouse_entered', self, '_on_focus_slot', [slot.weapon])
-		slot.connect('mouse_exited', self, '_on_unfocus_slot')
 
 
 func update_setup():
@@ -75,8 +63,7 @@ func update_setup():
 
 func update_weapon():
 	var player_weapon: Weapon = player.get_current_weapon()
-	if current_weapon_slot.get_child_count() > 0:
-		current_weapon_slot.remove_child(current_weapon_slot.get_child(0))
+	
 	if player_weapon:
 		current_weapon_slot.initialize(player_weapon)
 
@@ -93,12 +80,12 @@ func update_itemlist():
 func _input(event):
 	if event.is_action_pressed("inventory"):
 		visible = !visible
-		_on_unfocus_slot()
 		get_tree().paused = visible
-		update_inventory()
-		update_setup()
-		update_weapon()
-		update_itemlist()
+		if visible:
+			update_inventory()
+			update_setup()
+			update_weapon()
+			update_itemlist()
 	if holding_item:
 		holding_item.global_position = get_global_mouse_position()
 #
@@ -128,18 +115,13 @@ func module_slot_gui_input_setup(event: InputEvent, slot):
 
 func weapon_slot_gui_input_setup(event: InputEvent, slot):
 	if event is InputEventMouseButton && !holding_item:
-		if event.button_index == BUTTON_LEFT && event.pressed:
+		if event.button_index == BUTTON_LEFT && event.is_action_released("l-click"):
 			if slot.weapon == null:
 				return
 			
-			var player_weapon: Weapon = player.get_current_weapon()
-#			if player_weapon == null:
-#				player.weapon_raycast.add_child(slot.weapon)
-			
-			
 			var temp_weapon = null
 			for weapon in player.weapon_inventory_arr:
-				if slot.weapon.title == weapon.title:
+				if slot.weapon.name == weapon.name:
 					temp_weapon = weapon
 					break
 			player.set_new_weapon(temp_weapon)
@@ -196,7 +178,7 @@ func slot_gui_input_setup(event: InputEvent, slot: SETUP_SLOT_CLASS):
 				if slot.type == Const.SlotType.WEAPON:
 					player.weapon_raycast.remove_child(player.get_current_weapon())
 					update_setup()
-	##			--------------------------------------------
+#				--------------------------------------------
 				slot.pickFromSlot()
 
 				holding_item.global_position = get_global_mouse_position()

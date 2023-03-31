@@ -15,10 +15,12 @@ func update(_delta):
 	if not direction:
 		emit_signal("finished", "idle")
 	
+	if owner.weapon_raycast.is_colliding() and !owner.weapon.get_is_cooldown():
+		emit_signal("finished", "attack")
+	
 	update_look_direction(direction)
 	move(direction, _delta)
 	owner.get_node("AnimationTree").set("parameters/Walk/blend_position", owner.player.global_position - owner.global_position)
-	
 
 func move(target, delta):
 	var direction = (target - owner.global_position).normalized() 

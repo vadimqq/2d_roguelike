@@ -33,16 +33,51 @@ var increase_hit_point_regen_tier: Dictionary = {
 	AFFIX_TIER.T4: {"id": increase_hit_point_regen_id, "title": increase_hit_point_regen_title, "tier": 4, "min": 30, "max": 40},
 }
 
-const increase_mana_point = "increase_mana_point"
-const increase_mana_point_regen = "increase_mana_point_regen"
-const increase_attack_speed = "increase_attack_speed"
+const increase_mana_point_id = "increase_mana_point"
+const increase_mana_point_title = "Mana"
+var increase_mana_point_tier: Dictionary = {
+	AFFIX_TIER.T1: {"id": increase_mana_point_id, "title": increase_mana_point_title, "tier": 1, "min": 1, "max": 10},
+	AFFIX_TIER.T2: {"id": increase_mana_point_id, "title": increase_mana_point_title, "tier": 2, "min": 10, "max": 20},
+	AFFIX_TIER.T3: {"id": increase_mana_point_id, "title": increase_mana_point_title, "tier": 3, "min": 20, "max": 30},
+	AFFIX_TIER.T4: {"id": increase_mana_point_id, "title": increase_mana_point_title, "tier": 4, "min": 30, "max": 40},
+}
+
+const increase_mana_point_regen_id = "increase_mana_point_regen"
+const increase_mana_point_regen_title = "Mana regen"
+var increase_mana_point_regen_tier: Dictionary = {
+	AFFIX_TIER.T1: {"id": increase_mana_point_regen_id, "title": increase_mana_point_regen_title, "tier": 1, "min": 1, "max": 10},
+	AFFIX_TIER.T2: {"id": increase_mana_point_regen_id, "title": increase_mana_point_regen_title, "tier": 2, "min": 10, "max": 20},
+	AFFIX_TIER.T3: {"id": increase_mana_point_regen_id, "title": increase_mana_point_regen_title, "tier": 3, "min": 20, "max": 30},
+	AFFIX_TIER.T4: {"id": increase_mana_point_regen_id, "title": increase_mana_point_regen_title, "tier": 4, "min": 30, "max": 40},
+}
+
 
 
 const SUFFIX = "_SUFFIX"
-var NORMAL_SUFFIX = [increase_hit_point_tier[AFFIX_TIER.T1], increase_hit_point_regen_tier[AFFIX_TIER.T1]]
-var MAGIC_SUFFIX = [increase_hit_point_tier[AFFIX_TIER.T2], increase_hit_point_regen_tier[AFFIX_TIER.T2]]
-var RARE_SUFFIX = [increase_hit_point_tier[AFFIX_TIER.T3], increase_hit_point_regen_tier[AFFIX_TIER.T3]]
-var LEGENDARY_SUFFIX = [increase_hit_point_tier[AFFIX_TIER.T4], increase_hit_point_regen_tier[AFFIX_TIER.T4]]
+var NORMAL_SUFFIX = [
+	increase_hit_point_tier[AFFIX_TIER.T1],
+	increase_hit_point_regen_tier[AFFIX_TIER.T1],
+	increase_mana_point_tier[AFFIX_TIER.T1],
+	increase_mana_point_regen_tier[AFFIX_TIER.T1]
+]
+var MAGIC_SUFFIX = [
+	increase_hit_point_tier[AFFIX_TIER.T2],
+	increase_hit_point_regen_tier[AFFIX_TIER.T2],
+	increase_mana_point_tier[AFFIX_TIER.T2],
+	increase_mana_point_regen_tier[AFFIX_TIER.T2]
+]
+var RARE_SUFFIX = [
+	increase_hit_point_tier[AFFIX_TIER.T3],
+	increase_hit_point_regen_tier[AFFIX_TIER.T3],
+	increase_mana_point_tier[AFFIX_TIER.T3],
+	increase_mana_point_regen_tier[AFFIX_TIER.T3]
+]
+var LEGENDARY_SUFFIX = [
+	increase_hit_point_tier[AFFIX_TIER.T4],
+	increase_hit_point_regen_tier[AFFIX_TIER.T4],
+	increase_mana_point_tier[AFFIX_TIER.T4],
+	increase_mana_point_regen_tier[AFFIX_TIER.T4]
+]
 # ------------------------------------------------------------------------------
 
 
@@ -66,6 +101,15 @@ var increase_fire_damage_tier: Dictionary = {
 	AFFIX_TIER.T4: {"id": increase_fire_damage_id, "title": increase_fire_damage_title, "tier": 4, "min": 30, "max": 40},
 }
 
+const increase_attack_speed_id = "increase_attack_speed"
+const increase_attack_speed_title = "Action speed"
+var increase_attack_speed_tier: Dictionary = {
+	AFFIX_TIER.T1: {"id": increase_attack_speed_id, "title": increase_attack_speed_title, "tier": 1, "min": 1, "max": 10},
+	AFFIX_TIER.T2: {"id": increase_attack_speed_id, "title": increase_attack_speed_title, "tier": 2, "min": 10, "max": 20},
+	AFFIX_TIER.T3: {"id": increase_attack_speed_id, "title": increase_attack_speed_title, "tier": 3, "min": 20, "max": 30},
+	AFFIX_TIER.T4: {"id": increase_attack_speed_id, "title": increase_attack_speed_title, "tier": 4, "min": 30, "max": 40},
+}
+
 const increase_poision_damage = "increase_poision_damage"
 const increase_holy_damage = "increase_holy_damage"
 const increase_shadow_damage = "increase_shadow_damage"
@@ -74,10 +118,26 @@ const increase_physic_damage = "increase_physic_damage"
 
 
 const PREFIX = "_PREFIX"
-var NORMAL_PREFIX = [increase_mana_damage_tier[AFFIX_TIER.T1], increase_fire_damage_tier[AFFIX_TIER.T1]]
-var MAGIC_PREFIX = [increase_mana_damage_tier[AFFIX_TIER.T2], increase_fire_damage_tier[AFFIX_TIER.T2]]
-var RARE_PREFIX = [increase_mana_damage_tier[AFFIX_TIER.T3], increase_fire_damage_tier[AFFIX_TIER.T3]]
-var LEGENDARY_PREFIX = [increase_mana_damage_tier[AFFIX_TIER.T4], increase_fire_damage_tier[AFFIX_TIER.T4]]
+var NORMAL_PREFIX = [
+	increase_mana_damage_tier[AFFIX_TIER.T1],
+	increase_fire_damage_tier[AFFIX_TIER.T1],
+	increase_attack_speed_tier[AFFIX_TIER.T1]
+]
+var MAGIC_PREFIX = [
+	increase_mana_damage_tier[AFFIX_TIER.T2],
+	increase_fire_damage_tier[AFFIX_TIER.T2],
+	increase_attack_speed_tier[AFFIX_TIER.T2]
+]
+var RARE_PREFIX = [
+	increase_mana_damage_tier[AFFIX_TIER.T3],
+	increase_fire_damage_tier[AFFIX_TIER.T3],
+	increase_attack_speed_tier[AFFIX_TIER.T3]
+]
+var LEGENDARY_PREFIX = [
+	increase_mana_damage_tier[AFFIX_TIER.T4],
+	increase_fire_damage_tier[AFFIX_TIER.T4],
+	increase_attack_speed_tier[AFFIX_TIER.T4]
+]
 # ------------------------------------------------------------------------------
 
 

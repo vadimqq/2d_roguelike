@@ -1,7 +1,7 @@
 extends Channel
 
-export var cast_speed := 400.0
-export var max_length := 500.0
+export var speed := 400.0
+export var max_length := 200.0
 export var growth_time := 0.1
 
 
@@ -14,10 +14,11 @@ onready var beam_particles := $BeamParticles
 
 onready var line_width: float = fill.width
 
-
+func _ready():
+	scale = Vector2(1, 1)
 func _physics_process(delta: float) -> void:
 	if is_casting:
-		beam.cast_to = (beam.cast_to + Vector2.RIGHT * cast_speed * delta).clamped(max_length)
+		beam.cast_to = (beam.cast_to + Vector2.RIGHT * speed * delta).limit_length(max_length)
 		cast_beam()
 
 
@@ -46,9 +47,9 @@ func appear() -> void:
 		tween.stop_all()
 	tween.interpolate_property(fill, "width", 0, line_width, growth_time * 2)
 	tween.start()
-	
 	casting_particles.emitting = true
 	beam_particles.emitting = true
+	is_casting = true
 
 
 func disappear() -> void:
@@ -62,4 +63,7 @@ func disappear() -> void:
 	casting_particles.emitting = false
 	beam_particles.emitting = false
 	collision_particles.emitting = false
-
+	is_casting = false
+	
+	yield(get_tree().create_timer(growth_time * 8), "timeout")
+	call_deferred('queue_free')

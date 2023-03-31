@@ -8,7 +8,7 @@
 script = ExtResource( 1 )
 execute_effect = null
 hit_effect = null
-speed = 100.0
+speed = 150.0
 pierce_count = 0
 rebound_count = 0
 movement_type = 0

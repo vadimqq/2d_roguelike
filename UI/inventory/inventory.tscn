@@ -1,14 +1,22 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://UI/inventory/panel.png" type="Texture" id=1]
 [ext_resource path="res://UI/inventory/inventory.gd" type="Script" id=2]
-[ext_resource path="res://UI/inventory/panel_2.png" type="Texture" id=3]
+[ext_resource path="res://UI/inventory/weapon_slot/weapon_slot.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Ability/Modules/AttackSpeed/AttackSpeed.tscn" type="PackedScene" id=4]
-[ext_resource path="res://UI/inventory/setup_slot/setup_slot.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Ability/Modules/Gigantic/icon.png" type="Texture" id=5]
 [ext_resource path="res://Fonts/dpcomic.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://Ability/Modules/AttackSpeed/icon.png" type="Texture" id=7]
 [ext_resource path="res://UI/inventory/slot/module_slot.tscn" type="PackedScene" id=8]
-[ext_resource path="res://UI/inventory/description_panel/DescriptionPanel.tscn" type="PackedScene" id=37]
+[ext_resource path="res://Ability/Modules/Gigantic/Gigantic.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Ability/Modules/IncreaseDamage/icon.png" type="Texture" id=10]
+[ext_resource path="res://Ability/Modules/IncreaseDamage/IncreaseDamage.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Ability/Modules/Speed/Speed.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Ability/Modules/Speed/icon.png" type="Texture" id=13]
+[ext_resource path="res://Ability/Projectile/Modules/CircularDirection/icon.png" type="Texture" id=14]
+[ext_resource path="res://Ability/Projectile/Modules/CircularDirection/CircularDirection.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Ability/Modules/LifeTime/icon.png" type="Texture" id=16]
+[ext_resource path="res://Ability/Modules/LifeTime/LifeTime.tscn" type="PackedScene" id=17]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -51,17 +59,59 @@ margin_right = 555.0
 margin_bottom = 678.0
 
 [node name="Modules" type="GridContainer" parent="ScrollContainer"]
-margin_right = 100.0
-margin_bottom = 100.0
+margin_right = 490.0
+margin_bottom = 230.0
 custom_constants/vseparation = 30
 custom_constants/hseparation = 30
 columns = 4
 
-[node name="ModuleSlot" parent="ScrollContainer/Modules" instance=ExtResource( 8 )]
+[node name="AttackSpeed" parent="ScrollContainer/Modules" instance=ExtResource( 8 )]
 module_node = ExtResource( 4 )
 
-[node name="TextureRect" parent="ScrollContainer/Modules/ModuleSlot" index="0"]
+[node name="TextureRect" parent="ScrollContainer/Modules/AttackSpeed" index="0"]
 texture = ExtResource( 7 )
+
+[node name="Gigantic" parent="ScrollContainer/Modules" instance=ExtResource( 8 )]
+margin_left = 130.0
+margin_right = 230.0
+module_node = ExtResource( 9 )
+
+[node name="TextureRect" parent="ScrollContainer/Modules/Gigantic" index="0"]
+texture = ExtResource( 5 )
+
+[node name="IncreaseDamage" parent="ScrollContainer/Modules" instance=ExtResource( 8 )]
+margin_left = 260.0
+margin_right = 360.0
+module_node = ExtResource( 11 )
+
+[node name="TextureRect" parent="ScrollContainer/Modules/IncreaseDamage" index="0"]
+texture = ExtResource( 10 )
+
+[node name="Speed" parent="ScrollContainer/Modules" instance=ExtResource( 8 )]
+margin_left = 390.0
+margin_right = 490.0
+module_node = ExtResource( 12 )
+
+[node name="TextureRect" parent="ScrollContainer/Modules/Speed" index="0"]
+texture = ExtResource( 13 )
+
+[node name="CircularDirection" parent="ScrollContainer/Modules" instance=ExtResource( 8 )]
+margin_top = 130.0
+margin_bottom = 230.0
+module_node = ExtResource( 15 )
+
+[node name="TextureRect" parent="ScrollContainer/Modules/CircularDirection" index="0"]
+texture = ExtResource( 14 )
+
+[node name="LifeTime" parent="ScrollContainer/Modules" instance=ExtResource( 8 )]
+margin_left = 130.0
+margin_top = 130.0
+margin_right = 230.0
+margin_bottom = 230.0
+module_node = ExtResource( 17 )
+
+[node name="TextureRect" parent="ScrollContainer/Modules/LifeTime" index="0"]
+texture = ExtResource( 16 )
 
 [node name="Label2" type="Label" parent="."]
 margin_left = 162.5
@@ -89,24 +139,6 @@ margin_right = 711.25
 margin_bottom = 872.5
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="Current_setup"]
-visible = false
-margin_left = -15.0
-margin_top = 1.25
-margin_right = 985.0
-margin_bottom = 151.25
-rect_min_size = Vector2( 1000, 150 )
-texture = ExtResource( 3 )
-expand = true
-
-[node name="CurrentWeaponSlot" parent="Current_setup" instance=ExtResource( 5 )]
-margin_left = 30.25
-margin_top = 18.75
-margin_right = 130.25
-margin_bottom = 118.75
-type = 1
-inventory_type = 1
-
 [node name="GridContainer" type="GridContainer" parent="Current_setup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -119,6 +151,13 @@ custom_constants/vseparation = 15
 custom_constants/hseparation = 15
 columns = 8
 
+[node name="WeaponSlot" parent="Current_setup" instance=ExtResource( 3 )]
+margin_left = 30.0
+margin_top = 16.0
+margin_right = 130.0
+margin_bottom = 116.0
+description_position = 0
+
 [node name="Item_list" type="GridContainer" parent="."]
 margin_left = 2142.5
 margin_top = -103.75
@@ -126,6 +165,9 @@ margin_right = 2346.5
 margin_bottom = 1452.25
 columns = 2
 
-[node name="DescriptionPanel" parent="." instance=ExtResource( 37 )]
-
-[editable path="ScrollContainer/Modules/ModuleSlot"]
+[editable path="ScrollContainer/Modules/AttackSpeed"]
+[editable path="ScrollContainer/Modules/Gigantic"]
+[editable path="ScrollContainer/Modules/IncreaseDamage"]
+[editable path="ScrollContainer/Modules/Speed"]
+[editable path="ScrollContainer/Modules/CircularDirection"]
+[editable path="ScrollContainer/Modules/LifeTime"]

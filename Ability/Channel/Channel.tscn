@@ -9,5 +9,6 @@ cooldown = 0.5
 mana_cost = 1
 life_time = 100.0
 type = 1
+damage = 1
 
 [node name="TickTimer" type="Timer" parent="." index="1"]

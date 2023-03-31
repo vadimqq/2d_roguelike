@@ -1,6 +1,8 @@
 extends Node2D
 class_name Module 
 
+onready var sprite = $Sprite
+
 export (StreamTexture) var icon
 
 export (float) var mana_multiplier = 1.1

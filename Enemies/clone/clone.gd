@@ -5,12 +5,7 @@ onready var animation_tree = $AnimationTree
 onready var weapon = weapon_raycast.get_child(0)
 
 func _ready():
-#	weapon.connect("cooldown_finish", self, "_on_cooldown_finish")
 	get_upgrade_by_stage(get_tree().current_scene.stage)
-
-
-#func _on_cooldown_finish():
-#	weapon_raycast.enabled = true
 
 func get_upgrade_by_stage(stage):
 	stats.modyfy_stats({

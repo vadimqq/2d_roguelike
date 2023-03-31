@@ -7,8 +7,11 @@ extents = Vector2( 16, 16 )
 
 [node name="Dummy" instance=ExtResource( 1 )]
 
-[node name="Sprite" parent="." index="3"]
-scale = Vector2( 0.5, 0.5 )
+[node name="Stats" parent="." index="0"]
+hit_point = 100000
 
 [node name="CollisionShape2D" parent="DetectionZone" index="0"]
 shape = SubResource( 1 )
+
+[node name="Sprite" parent="." index="4"]
+scale = Vector2( 0.5, 0.5 )

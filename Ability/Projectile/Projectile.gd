@@ -8,7 +8,7 @@ onready var sprite = $Sprite
 export var execute_effect: PackedScene
 export var hit_effect: PackedScene
 
-export (float) var speed := 100.0
+export (float) var speed := 200.0
 
 #UNIC MECHANICS
 export (int) var pierce_count = 0

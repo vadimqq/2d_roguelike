@@ -15,13 +15,6 @@ script = ExtResource( 1 )
 
 [node name="Stats" parent="." instance=ExtResource( 2 )]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
-
-[node name="WeaponRaycast" type="RayCast2D" parent="."]
-enabled = true
-cast_to = Vector2( 25, 0 )
-
 [node name="DetectionZone" type="Area2D" parent="."]
 visible = false
 collision_layer = 8
@@ -29,8 +22,16 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
+
+[node name="WeaponRaycast" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 25, 0 )
+collision_mask = 32
 
 [node name="EffectsManager" parent="." instance=ExtResource( 4 )]
 position = Vector2( -16, -40 )

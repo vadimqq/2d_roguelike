@@ -39,9 +39,9 @@ color_ramp = SubResource( 4 )
 [node name="ManaExplosion" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 title = "Mana explosion"
-cooldown = 3.0
+cooldown = 1.0
 mana_cost = 2
-damage = 10
+damage = 20
 max_speed = 500.0
 min_speed = 50.0
 
