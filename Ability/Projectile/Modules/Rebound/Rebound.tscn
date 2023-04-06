@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Ability/Modules/Module.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Ability/Projectile/Modules/Rebound/Rebound.gd" type="Script" id=2]
+[ext_resource path="res://Ability/Projectile/Modules/Rebound/icon.png" type="Texture" id=3]
+
+[node name="Rebound" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+icon = ExtResource( 3 )
+title = "Rebound"
+ability_tags = [ 0 ]
+module_tags = [ 0 ]
+rarity = 1
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 3 )

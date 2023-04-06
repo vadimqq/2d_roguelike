@@ -24,7 +24,7 @@ func dash_attack(target, delta):
 	velocity = move_and_slide(velocity)
 
 func _on_Hitbox_body_entered(body):
-	Events.emit_signal("damaged",body, dash_damage, Const.DamageType.PHYSIC)
+	Events.emit_signal("damaged",body, dash_damage, Const.DAMAGE_TAG.PHYSIC)
 
 
 func get_upgrade_by_stage(stage):
@@ -32,7 +32,7 @@ func get_upgrade_by_stage(stage):
 		'hit_point': int(float(stats.hit_point) * (float(stage) / 8)),
 		'mana_point': int(float(stats.mana_point) * (float(stage) / 8)),
 		'mana_point_regen': int(float(stats.mana_point_regen) * (float(stage) / 8)),
-		'max_move_speed': int(float(stats.max_move_speed) * (float(stage) / 20)),
+#		'max_move_speed': int(float(stats.max_move_speed) * (float(stage) / 20)),
 		'min_move_speed': int(float(stats.min_move_speed) * (float(stage) / 20)),
 		'increase_mana_point': int(float(stats.increase_mana_point) * (float(stage) / 8)),
 		'increase_mana_point_regen': int(float(stats.increase_mana_point_regen) * (float(stage) / 8)),

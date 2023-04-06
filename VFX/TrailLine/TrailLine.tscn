@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://VFX/TrailLine/TrailLine.gd" type="Script" id=1]
+
+[sub_resource type="Curve" id=3]
+resource_local_to_scene = true
+min_value = 0.5
+_data = [ Vector2( 0, 0.745454 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[node name="TrailLine" type="Line2D"]
+position = Vector2( 2, 3 )
+width_curve = SubResource( 3 )
+script = ExtResource( 1 )

@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Ability/Modules/Module.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Ability/Modules/AttackSpeed/AttackSpeed.gd" type="Script" id=2]
+[ext_resource path="res://Ability/Modules/AttackSpeed/icon.png" type="Texture" id=3]
+
+[node name="AttackSpeed" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+icon = ExtResource( 3 )
+title = "Attack Speed"
+ability_tags = [ 0, 1, 2 ]
+module_tags = [ 0 ]
+rarity = 1

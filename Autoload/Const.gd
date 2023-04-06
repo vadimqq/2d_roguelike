@@ -11,15 +11,18 @@ enum InventoryType {
 	SETUP
 }
 
-enum PortalDirection {
-	RIGHT,
-	LEFT,
-	TOP,
-	BOTTOM
+enum ABILITY_TYPE {
+	PROJECTILE,
+	CHANNEL,
+	CHARGE,
+}
+var ABILITY_TYPE_TITLES = {
+	ABILITY_TYPE.PROJECTILE: 'Projectile',
+	ABILITY_TYPE.CHANNEL: 'Chanel',
+	ABILITY_TYPE.CHARGE: 'Charge',
 }
 
-
-enum DamageType {
+enum DAMAGE_TAG {
 	MANA,
 	FIRE,
 	POISION,
@@ -27,38 +30,54 @@ enum DamageType {
 	SHADOW,
 	LIGTHNING,
 	HOLY,
+	NATURE
 }
 
-enum MovementType {
+enum PROJECTILE_TRAVEL_TYPE {
 	LINE,
 	CIRCULAR,
-	ZIGZAG
+	ZIGZAG,
 }
 
-enum ModuleTags {
+enum MODULE_TYPE {
 	GLOBAL,
-	SECOND_SPELL,
-	MANA,
-	MANA,
-	FIRE,
-	POISION,
-	PHYSIC,
-	SHADOW,
-	LIGTHNING,
-	HOLY,
+	SECOND_ABILITY,
+}
+var MODULE_TYPE_TITLES = {
+	MODULE_TYPE.GLOBAL: 'GLOBAL',
+	MODULE_TYPE.SECOND_ABILITY: 'Last ability',
 }
 
-var ModuleTitles = {
-	[ModuleTags.GLOBAL]: 'Global',
-	[ModuleTags.SECOND_SPELL]: 'Second spell',
-	[ModuleTags.MANA]: 'Mana damage' ,
-	[ModuleTags.FIRE]: 'Fire damage',
-	[ModuleTags.POISION]: 'Poision damage',
-	[ModuleTags.PHYSIC]: 'Physic damage',
-	[ModuleTags.SHADOW]: 'Shadow damage',
-	[ModuleTags.LIGTHNING]: 'Ligthning damage',
-	[ModuleTags.HOLY]: 'Holy damage',
+enum MODULE_TAG {
+	BUFF,
+	DIRECTION,
+	CREATOR
+}
+var MODULE_TAG_TITLES = {
+	MODULE_TAG.BUFF: 'Buff',
+	MODULE_TAG.DIRECTION: 'Change Direction',
+	MODULE_TAG.CREATOR: 'Create effect',
 }
 
-func get_tag_title_by_enum(tag):
-	return ModuleTitles[tag]
+
+enum RARITY {
+	COMMON,
+	MAGIC,
+	RARE,
+	UNIC,
+	LEGENDARY
+}
+
+
+enum WEAPON_QUALITY {
+	T1,
+	T2,
+	T3,
+	T4,
+	T5,
+	T6,
+	T7,
+	T8,
+	T9,
+	T10
+}

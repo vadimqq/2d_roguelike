@@ -1,15 +1,15 @@
 extends Node
 
-onready var _effects := $Effects
-onready var _projectiles := $Projectiles
+onready var _effects := $EffectsLayer/Effects
+onready var _abilities := $Abilities
 onready var _items := $items
 
 func register_effect(effect: Node) -> void:
 	_effects.add_child(effect)
 
 
-func register_projectile(projectile: Node) -> void:
-	_projectiles.add_child(projectile)
+func register_ability(ability: Ability) -> void:
+	_abilities.add_child(ability)
 
 
 func register_item(item: Node) -> void:

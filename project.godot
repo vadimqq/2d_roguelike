@@ -10,6 +10,21 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node2D",
+"class": "Ability",
+"language": "GDScript",
+"path": "res://Ability/Ability.gd"
+}, {
+"base": "Ability",
+"class": "Channel",
+"language": "GDScript",
+"path": "res://Ability/Channel/Channel.gd"
+}, {
+"base": "Ability",
+"class": "Charge",
+"language": "GDScript",
+"path": "res://Ability/Charge/Charge.gd"
+}, {
+"base": "Node2D",
 "class": "Effect",
 "language": "GDScript",
 "path": "res://Effects/effect.gd"
@@ -182,7 +197,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Module",
 "language": "GDScript",
-"path": "res://Weapons/Modules/module.gd"
+"path": "res://Ability/Modules/Module.gd"
 }, {
 "base": "State",
 "class": "Motion",
@@ -194,10 +209,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/player.gd"
 }, {
-"base": "Node2D",
+"base": "Ability",
 "class": "Projectile",
 "language": "GDScript",
-"path": "res://Weapons/Projectile/projectile.gd"
+"path": "res://Ability/Projectile/Projectile.gd"
 }, {
 "base": "Node2D",
 "class": "Room_node",
@@ -227,9 +242,12 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Weapon",
 "language": "GDScript",
-"path": "res://Weapons/weapon.gd"
+"path": "res://Weapon/Weapon.gd"
 } ]
 _global_script_class_icons={
+"Ability": "",
+"Channel": "",
+"Charge": "",
 "Effect": "",
 "Enemy": "",
 "Enemy_motion": "",
@@ -284,13 +302,15 @@ config/icon="res://icon.png"
 
 [autoload]
 
+Const="*res://Autoload/Const.gd"
 Events="*res://Autoload/Events.gd"
 ObjectRegistry="*res://Autoload/ObjectRegistry/ObjectRegistry.tscn"
-Const="*res://Autoload/Const.gd"
 LootManager="*res://Autoload/LootManager.gd"
 LocationManager="*res://Autoload/LocationManager.gd"
 AudioBus="*res://Autoload/AudioBus/AudioBus.tscn"
 SceneTranzition="*res://Autoload/SceneTranzition/SceneTranzition.tscn"
+WeaponManager="*res://Autoload/WeaponManager.gd"
+AffixManager="*res://Autoload/AffixManager/AffixManager.gd"
 
 [debug]
 
@@ -301,6 +321,7 @@ gdscript/warnings/return_value_discarded=false
 
 window/size/width=1900
 window/size/height=1080
+window/stretch/mode="viewport"
 
 [gui]
 
@@ -380,6 +401,11 @@ inventory={
 shift={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+l-click={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 

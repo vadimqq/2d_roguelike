@@ -49,7 +49,7 @@ func cast_beam() -> void:
 		collision_particles.process_material.direction = Vector3(
 			get_collision_normal().x, get_collision_normal().y, 0
 		)
-		Events.emit_signal("damaged",get_collider(), 1, Const.DamageType.FIRE)
+		Events.emit_signal("damaged",get_collider(), 1, Const.DAMAGE_TAG.FIRE)
 
 	collision_particles.emitting = is_colliding()
 

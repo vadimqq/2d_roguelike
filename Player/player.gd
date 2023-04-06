@@ -3,14 +3,12 @@ class_name Player
 
 const floating_indicator = preload("res://VFX/floating_text/floating_indicator.tscn")
 
-
 const _AUDIO_HIT_SAMPLES = [
 	preload("res://Sounds/hit_sound/Hit_Hurt.wav"),
 	preload("res://Sounds/hit_sound/Hit_Hurt2.wav"),
 	preload("res://Sounds/hit_sound/Hit_Hurt3.wav"),
 	preload("res://Sounds/hit_sound/Hit_Hurt4.wav"),
 ]
-
 
 onready var sprite = $Sprite
 onready var weapon_raycast = $WeaponRaycast
@@ -28,6 +26,7 @@ var module_inventory_arr := []
 var weapon_inventory_arr := []
 
 var attack_collision_mask = 64
+var attack_collision_layer = 32
 var look_direction = Vector2.RIGHT setget set_look_direction
 var items_in_range = {}
 export (int) var inventory_size = 100
@@ -36,7 +35,7 @@ func _ready():
 	Events.connect("damaged", self, "_on_self_damaged")
 	Events.connect("damaged_by_DOT", self, "_on_self_damaged")
 	Events.connect("boss_death", self, '_test_restore')
-
+	module_inventory_arr = LootManager.take_all_module_arr(7)
 
 func set_look_direction(value):
 	look_direction = value
@@ -58,16 +57,17 @@ func _physics_process(delta):
 			items_in_range.erase(pickup_item)
 			
 
-func take_item(item):
-	item.collision.disabled = true
-	ObjectRegistry.unregister_item(item)
+func take_item(item: Node2D):
 	if item is Module:
 		module_inventory_arr.push_back(item)
+		ObjectRegistry.unregister_item(item)
 		return
 	elif item is Weapon:
+		ObjectRegistry.unregister_item(item)
 		weapon_inventory_arr.push_back(item)
 		return
 	elif item is Item:
+		ObjectRegistry.unregister_item(item)
 		item_inventory.add_child(item)
 		item.add_effect(self)
 		item.visible = false
@@ -78,10 +78,10 @@ func take_item(item):
 func _on_self_damaged(target, damage, type):
 	if not target == self:
 		return
-	stats.modify_current_hit_point(-damage)
+	stats.modify_current_hit_point(-ceil(damage))
 	var damage_popup = floating_indicator.instance()
 	ObjectRegistry.register_effect(damage_popup)
-	damage_popup.execute(self, damage)
+	damage_popup.execute(self, ceil(damage))
 	animation.play("take_damage")
 	frameFreeze(0.05, 0.7)
 	AudioBus.play_game_sound(_AUDIO_HIT_SAMPLES[randi() % _AUDIO_HIT_SAMPLES.size()])
@@ -112,3 +112,27 @@ func _test_restore():
 
 func end_game():
 	Events.go_to_end_game_screen()
+
+
+func set_new_weapon(new_weapon):
+	var player_weapon: Weapon = get_current_weapon()
+	weapon_raycast.remove_child(player_weapon)
+	weapon_inventory_arr.append(player_weapon)
+	reamove_weapon_stats(player_weapon)
+	
+	weapon_inventory_arr.erase(new_weapon)
+	weapon_raycast.add_child(new_weapon)
+	new_weapon.initialize(self)
+	add_weapon_stats(new_weapon)
+
+func add_weapon_stats(weapon: Weapon):
+	var affix_dict: Dictionary = weapon.affix_ist.get_affix_dict()
+	stats.modyfy_stats(affix_dict)
+
+func reamove_weapon_stats(weapon: Weapon):
+	var affix_dict: Dictionary = weapon.affix_ist.get_affix_dict()
+	for key in affix_dict.keys():
+		affix_dict[key] = -affix_dict.get(key)
+
+	stats.modyfy_stats(affix_dict)
+

@@ -1,7 +1,7 @@
 extends Position2D
 
 
-export (Const.PortalDirection) var portal_direction =  Const.PortalDirection.TOP
+export (Const.PortalDirection) var portal_direction = Const.PortalDirection.TOP
 
 func _ready():
 	pass # Replace with function body.

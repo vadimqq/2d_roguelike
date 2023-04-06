@@ -17,4 +17,3 @@ var enemy_list = [
 func _ready():
 	HUD.initialize(player)
 	inventory.initialize(player)
-#	Events.connect("enemy_death", self, '_on_enemy_death')

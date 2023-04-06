@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://UI/inventory/item_slot/item_slot.gd" type="Script" id=1]
+[ext_resource path="res://UI/inventory/item_slot/item_slot.png" type="Texture" id=2]
+[ext_resource path="res://UI/inventory/description_panel/DescriptionPanel.tscn" type="PackedScene" id=3]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 64, 62 )
+
+[node name="ItemSlot" type="Panel"]
+pause_mode = 2
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+mouse_default_cursor_shape = 2
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 19.0
+margin_top = 21.0
+margin_right = 81.0
+margin_bottom = 79.0
+rect_min_size = Vector2( 62, 58 )
+expand = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DescriptionPanel" parent="CanvasLayer" instance=ExtResource( 3 )]
+visible = false
+
+[connection signal="mouse_entered" from="." to="." method="_on_ItemSlot_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_ItemSlot_mouse_exited"]

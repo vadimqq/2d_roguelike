@@ -6,24 +6,6 @@ onready var reroll_price_label = $Shrine/Label
 const _BAY_SOUND = preload("res://World/Shop/bay_sound.wav")
 
 var player = null
-var item_list = [
-	LootManager.dublicate,
-	LootManager.gigantic,
-	LootManager.hit_echo,
-	LootManager.projectile_speed,
-	LootManager.attack_speed,
-	LootManager.ball_lightning,
-	LootManager.increase_damage,
-	LootManager.fire_arrow,
-	LootManager.projectile_pierce,
-	LootManager.circular_direction,
-	LootManager.projectile_life_time,
-	LootManager.damage_by_speed,
-	LootManager.projectile_rebound,
-	LootManager.zigzag_direction,
-	LootManager.holy_beam,
-]
-
 var reroll_price = 5
 
 func _ready():
@@ -37,21 +19,35 @@ func _input(event):
 		reroll_price_label.text = str(reroll_price)
 		AudioBus.play_game_sound(_BAY_SOUND)
 
-
 func roll_items():
 	for post in post_list.get_children():
 		randomize()
-		var item  = item_list[randi()%item_list.size()].instance()
-#		var item  = LootManager.get_random_reward_by_context(LootManager.module_rarity_weights).instance()
+		var item  = LootManager.get_random_module().instance()
 		post.initialize(item)
 	
 #	100% дроп одного оружия в магазине
-	var weapon = LootManager.get_random_reward_by_context(LootManager.weapon_rarity_weights).instance()
+	var weapon: Weapon = WeaponManager.get_random_weapon()
+	if get_tree().current_scene.stage > 9:
+		weapon.quality = Const.WEAPON_QUALITY.T10
+	elif get_tree().current_scene.stage > 8:
+		weapon.quality = Const.WEAPON_QUALITY.T9
+	elif get_tree().current_scene.stage > 7:
+		weapon.quality = Const.WEAPON_QUALITY.T8
+	elif get_tree().current_scene.stage > 6:
+		weapon.quality = Const.WEAPON_QUALITY.T7
+	elif get_tree().current_scene.stage > 5:
+		weapon.quality = Const.WEAPON_QUALITY.T6
+	elif get_tree().current_scene.stage > 4:
+		weapon.quality = Const.WEAPON_QUALITY.T5
+	elif get_tree().current_scene.stage > 3:
+		weapon.quality = Const.WEAPON_QUALITY.T4
+	elif get_tree().current_scene.stage > 2:
+		weapon.quality = Const.WEAPON_QUALITY.T3
+	elif get_tree().current_scene.stage > 1:
+		weapon.quality = Const.WEAPON_QUALITY.T2
+	
 	weapon.global_rotation = -45
-	if get_tree().current_scene.stage < 3:
-		weapon.module_count = 5
-	else:
-		weapon.module_count = 2 * get_tree().current_scene.stage
+	weapon.module_count = 2 * get_tree().current_scene.stage
 	var random_post_num = int(rand_range(0, post_list.get_child_count()))
 	post_list.get_child(random_post_num).initialize(weapon)
 
