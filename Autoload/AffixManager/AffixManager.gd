@@ -261,6 +261,6 @@ var quality_weights := {
 		"NORMAL": 5,
 		"MAGIC": 25,
 		"RARE": 45,
-		"LEGENDARY": 25,
+		"LEGENDARY":25, 
 	},
 }

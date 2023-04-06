@@ -16,22 +16,31 @@ const life_time = preload("res://Ability/Modules/LifeTime/LifeTime.tscn")
 
 #----------PROJECTILE--------
 const direction_circular = preload("res://Ability/Projectile/Modules/CircularDirection/CircularDirection.tscn")
-#----------------------------
+const fire_arrow = preload("res://Ability/Projectile/Modules/FireArrow/FireArrow.tscn")
+const homing_detector = preload("res://Ability/Projectile/Modules/Homing/Homing.tscn")
+const rebound = preload("res://Ability/Projectile/Modules/Rebound/Rebound.tscn")
+const pierce = preload("res://Ability/Projectile/Modules/Pierce/Pierce.tscn")
+const damage_by_speed = preload("res://Ability/Projectile/Modules/DamageBySpeed/DamageBySpeed.tscn")
+const dublicator = preload("res://Ability/Modules/Dublicator/Dublicator.tscn")
+#---------------------------
 
 #----------CHARGE------------
 
 #----------------------------
 
 #----------CHANNEL-----------
-
+const improved_channel = preload("res://Ability/Channel/Modules/ImprovedChannel/ImprovedChannel.tscn")
+const orbital_shield = preload("res://Ability/Channel/Modules/OrbitalShield/OrbitalShield.tscn")
+const cumulative_explosion = preload("res://Ability/Channel/Modules/CumulativeExplosion/CumulativeExplosion.tscn")
+const lightning_whip = preload("res://Ability/Channel/Modules/LightningWhip/LightningWhip.tscn")
 #----------------------------
 
 
 var NORAMAL_MODULES_POOL = [speed, gigantic, life_time]
-var MAGIC_MODULES_POOL = [attack_speed, increase_damage, direction_circular]
-var RARE_MODULES_POOL = [attack_speed]
-var LEGENDARY_MODULES_POOL = [attack_speed]
-var UNIC_MODULES_POOL = [attack_speed]
+var MAGIC_MODULES_POOL = [attack_speed, increase_damage, rebound, pierce, damage_by_speed, improved_channel]
+var RARE_MODULES_POOL = [direction_circular, homing_detector, orbital_shield]
+var LEGENDARY_MODULES_POOL = [fire_arrow, dublicator]
+var UNIC_MODULES_POOL = [fire_arrow, lightning_whip]
 
 var module_rarity_weights := {
 	"NORAMAL_MODULES_POOL": 62,
@@ -66,7 +75,7 @@ var items_rarity_weights := {
 #-------------------------------------------------------------------------------------------
 
 
-var coins_amount = 1000
+var coins_amount = 50000
 var reward_choise_count = 3
 
 
@@ -76,12 +85,6 @@ func _ready():
 func modify_coins(amount):
 	coins_amount += amount
 	emit_signal("coins_amount_change", coins_amount)
-
-#func get_random_reward():
-#	if rand_range(0, 100) < 10:
-#		return  get_random_reward_by_context(module_rarity_weights)
-#	else:
-#		return coin
 
 func get_random_module():
 	return  get_random_reward_by_context(module_rarity_weights)
@@ -113,3 +116,27 @@ func get_random_reward_by_context(dict_weight):
 			rarity_roll -= dict_weight[rarity]
 	
 	return current_pool[randi() % current_pool.size()]
+
+
+func take_all_module_arr(count):
+	var module_arr: Array = [
+		speed.instance(),
+		gigantic.instance(),
+		life_time.instance(),
+		attack_speed.instance(),
+		increase_damage.instance(),
+		direction_circular.instance(),
+		fire_arrow.instance(),
+		homing_detector.instance(),
+		rebound.instance(),
+		pierce.instance(),
+		damage_by_speed.instance(),
+		dublicator.instance(),
+		improved_channel.instance(),
+		orbital_shield.instance(),
+		cumulative_explosion.instance(),
+		lightning_whip.instance()
+	]
+	for i in range(count):
+		module_arr.append_array(module_arr.duplicate())
+	return module_arr

@@ -1,15 +1,10 @@
 extends Node
 
-signal projectile_hit(projectile)
-signal projectile_die(projectile)
-signal projectile_cast(projectile)
-signal projectile_process(projectile, disatnce)
-
 signal player_cast_dash(player)
 signal player_end_dash(player)
 
 signal ability_execute(ability)
-signal ability_hit(ability)
+signal ability_hit(ability, target)
 signal ability_process(ability)
 signal ability_die(ability)
 

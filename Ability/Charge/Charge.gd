@@ -5,8 +5,8 @@ signal execute_charge
 signal charge_tick
 
 
-onready var charge_timer = $ChargeTimer
-onready var tween = $Tween
+onready var charge_timer := $ChargeTimer
+onready var tween := $Tween
 
 export (float) var max_charge_duration = 5.0
 var charge_duration = 0.1
@@ -18,16 +18,14 @@ var temp_life_time = 0
 func start_charge():
 	charge_timer.wait_time = charge_duration_tick
 	charge_timer.start()
-	tween.interpolate_property(self, "temp_life_time", 0, life_time, max_charge_duration)
 
 func execute_charge():
 	charge_timer.stop()
-	emit_signal("execute_charge")
-	timer.wait_time = temp_life_time
-	timer.start()
-	is_ready = true
 	if tween.is_active():
 		tween.stop_all()
+	emit_signal("execute_charge")
+	execute()
+	is_ready = true
 
 func _on_ChargeTimer_timeout():
 	charge_duration += charge_duration_tick

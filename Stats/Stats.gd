@@ -62,25 +62,25 @@ func get_min_move_speed():
 
 func get_modified_damage(damage, type):
 	match type:
-		Const.DamageType.MANA:
+		Const.DAMAGE_TAG.MANA:
 			return MathUtils.get_incremented_value(damage, increase_mana_damage, 0)
-		Const.DamageType.FIRE:
+		Const.DAMAGE_TAG.FIRE:
 			return MathUtils.get_incremented_value(damage, increase_fire_damage, 0)
-		Const.DamageType.POISION:
+		Const.DAMAGE_TAG.POISION:
 			return MathUtils.get_incremented_value(damage, increase_poision_damage, 0)
-		Const.DamageType.PHYSIC:
+		Const.DAMAGE_TAG.PHYSIC:
 			return MathUtils.get_incremented_value(damage, increase_physic_damage, 0)
-		Const.DamageType.LIGTHNING:
+		Const.DAMAGE_TAG.LIGTHNING:
 			return MathUtils.get_incremented_value(damage, increase_ligthning_damage, 0)
-		Const.DamageType.SHADOW:
+		Const.DAMAGE_TAG.SHADOW:
 			return MathUtils.get_incremented_value(damage, increase_shadow_damage, 0)
-		Const.DamageType.HOLY:
+		Const.DAMAGE_TAG.HOLY:
 			return MathUtils.get_incremented_value(damage, increase_holy_damage, 0)
 	return damage
 
 func get_cooldown_by_modifire(cooldown):
 	
-	return cooldown - cooldown * (float(increase_attack_speed) / 100)
+	return cooldown - cooldown * ((float(increase_attack_speed) if  increase_attack_speed < 90 else 90.0) / 100)
 
 func modify_current_hit_point(amount):
 	if current_hit_point + int(amount) > get_max_hit_point():
@@ -111,8 +111,6 @@ func modyfy_stats(dict: Dictionary):
 		self[i] += dict[i]
 
 	emit_signal('stat_changed', self)
-	if increase_attack_speed > 90:
-		increase_attack_speed = 90
 	
 
 func restore_all_stats():

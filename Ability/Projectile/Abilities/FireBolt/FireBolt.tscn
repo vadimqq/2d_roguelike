@@ -14,13 +14,16 @@ _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 [node name="FireBolt" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 title = "Fire bolt"
+damage_tag = 1
 damage = 5
 trail_length = 10
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
+rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="Sprite" parent="." index="2"]
+rotation = 0.0
 scale = Vector2( 0.9, 0.9 )
 texture = ExtResource( 1 )
 

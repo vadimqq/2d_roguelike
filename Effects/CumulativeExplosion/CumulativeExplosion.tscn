@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Effects/effect.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Effects/CumulativeExplosion/icon.png" type="Texture" id=2]
+[ext_resource path="res://Effects/CumulativeExplosion/CumulativeExplosion.gd" type="Script" id=3]
+
+[node name="CumulativeExplosion" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+icon = ExtResource( 2 )
+title = "Cumulative explosion"

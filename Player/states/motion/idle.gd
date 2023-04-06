@@ -15,4 +15,4 @@ func update(_delta):
 		emit_signal("finished", "move")
 	
 	if Input.is_action_pressed("attack") and owner.get_current_weapon():
-		owner.get_current_weapon().execute(owner.weapon_raycast.global_rotation ,1)
+		owner.get_current_weapon().execute(owner.weapon_raycast.global_rotation ,owner.attack_collision_mask)

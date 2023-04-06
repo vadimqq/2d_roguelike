@@ -1,6 +1,6 @@
 extends "res://Ability/Projectile/Projectile.gd"
 
-onready var trail = $Line2D
+onready var trail = $TrailLine
 
 
 const _AUDIO_SAMPLES = [
@@ -23,14 +23,7 @@ func _ready():
 	trail.width *= scale_modifier
 
 func _process(delta):
-	trail.global_position = Vector2.ZERO
-	trail.global_rotation = 0
-	point = global_position
-	trail.add_point(point)
-	
-	while trail.get_point_count() > trail_length:
-		trail.remove_point(0)
-
+	trail._add_point(global_position)
 
 
 func create_execute_effect():

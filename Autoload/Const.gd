@@ -11,55 +11,15 @@ enum InventoryType {
 	SETUP
 }
 
-enum DamageType {
-	MANA,
-	FIRE,
-	POISION,
-	PHYSIC,
-	SHADOW,
-	LIGTHNING,
-	HOLY,
-}
-
-enum MovementType {
-	LINE,
-	CIRCULAR,
-	ZIGZAG
-}
-
-enum ModuleTags {
-	GLOBAL,
-	SECOND_SPELL,
-	MANA,
-	MANA,
-	FIRE,
-	POISION,
-	PHYSIC,
-	SHADOW,
-	LIGTHNING,
-	HOLY,
-}
-
-var ModuleTitles = {
-	[ModuleTags.GLOBAL]: 'Global',
-	[ModuleTags.SECOND_SPELL]: 'Second spell',
-	[ModuleTags.MANA]: 'Mana damage' ,
-	[ModuleTags.FIRE]: 'Fire damage',
-	[ModuleTags.POISION]: 'Poision damage',
-	[ModuleTags.PHYSIC]: 'Physic damage',
-	[ModuleTags.SHADOW]: 'Shadow damage',
-	[ModuleTags.LIGTHNING]: 'Ligthning damage',
-	[ModuleTags.HOLY]: 'Holy damage',
-}
-
-func get_tag_title_by_enum(tag):
-	return ModuleTitles[tag]
-#======================================
-
 enum ABILITY_TYPE {
 	PROJECTILE,
 	CHANNEL,
 	CHARGE,
+}
+var ABILITY_TYPE_TITLES = {
+	ABILITY_TYPE.PROJECTILE: 'Projectile',
+	ABILITY_TYPE.CHANNEL: 'Chanel',
+	ABILITY_TYPE.CHARGE: 'Charge',
 }
 
 enum DAMAGE_TAG {
@@ -70,17 +30,22 @@ enum DAMAGE_TAG {
 	SHADOW,
 	LIGTHNING,
 	HOLY,
+	NATURE
 }
 
 enum PROJECTILE_TRAVEL_TYPE {
 	LINE,
 	CIRCULAR,
-	ZIGZAG
+	ZIGZAG,
 }
 
 enum MODULE_TYPE {
 	GLOBAL,
 	SECOND_ABILITY,
+}
+var MODULE_TYPE_TITLES = {
+	MODULE_TYPE.GLOBAL: 'GLOBAL',
+	MODULE_TYPE.SECOND_ABILITY: 'Last ability',
 }
 
 enum MODULE_TAG {
@@ -88,6 +53,12 @@ enum MODULE_TAG {
 	DIRECTION,
 	CREATOR
 }
+var MODULE_TAG_TITLES = {
+	MODULE_TAG.BUFF: 'Buff',
+	MODULE_TAG.DIRECTION: 'Change Direction',
+	MODULE_TAG.CREATOR: 'Create effect',
+}
+
 
 enum RARITY {
 	COMMON,

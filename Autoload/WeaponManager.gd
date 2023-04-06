@@ -2,9 +2,25 @@ extends Node
 
 #--------------------------------WEAPONS----------------------------------------------------
 const mana_staff = preload("res://Weapon/ManaStaff/ManaStaff.tscn")
+const mana_beam_staff = preload("res://Weapon/ManaBeamStaff/ManaBeamStaff.tscn")
+const mana_explosion_staff = preload("res://Weapon/ManaExplosionStaff/ManaExplosionStaff.tscn")
 
-var NORAMAL_WEAPONS_POOL = [mana_staff]
-var MAGIC_WEAPONS_POOL = [mana_staff, mana_staff]
+
+const fire_staff = preload("res://Weapon/FireStaff/FireStaff.tscn")
+const fire_splash_staff = preload("res://Weapon/FireSplashStaff/FireSplashStaff.tscn")
+
+
+const bee_staff = preload("res://Weapon/BeeStaff/BeeStaff.tscn")
+
+
+const poison_staff = preload("res://Weapon/PoisionBottleStaff/PoisionBottleStaff.tscn")
+
+
+
+
+
+var NORAMAL_WEAPONS_POOL = [mana_staff,mana_beam_staff, mana_explosion_staff, fire_staff, fire_splash_staff]
+var MAGIC_WEAPONS_POOL = [mana_staff, bee_staff, poison_staff]
 var LEGENDARY_WEAPONS_POOL = [mana_staff]
 
 var weapon_rarity_weights := {
@@ -12,31 +28,6 @@ var weapon_rarity_weights := {
 	"MAGIC_WEAPONS_POOL": 30,
 	"LEGENDARY_WEAPONS_POOL": 8,
 }
-#-------------------------------------------------------------------------------------------
-
-#--------------------------------WEAPONS----------------------------------------------------
-#---------CHANNEL------------
-const mana_beam = preload("res://Ability/Channel/Abilities/ManaBeam/ManaBeam.tscn")
-#----------------------------
-
-#---------PROJECTILE---------
-const mana_bolt = preload("res://Ability/Projectile/Abilities/ManaBolt/ManaBolt.tscn")
-#----------------------------
-
-#---------CHARGE-------------
-const mana_explosion = preload("res://Ability/Charge/Abilities/ManaExplosion/ManaExplosion.tscn")
-#----------------------------
-
-var NORAMAL_ABILITY_POOL = [mana_bolt]
-var MAGIC_ABILITY_POOL = [mana_beam]
-var LEGENDARY_ABILITY_POOL = [mana_explosion]
-
-var ability_rarity_weights := {
-	"NORAMAL_ABILITY_POOL": 62,
-	"MAGIC_ABILITY_POOL": 30,
-	"LEGENDARY_ABILITY_POOL": 8,
-}
-
 #-------------------------------------------------------------------------------------------
 
 func get_random_weapon():
@@ -51,19 +42,5 @@ func get_random_weapon():
 			rarity_roll -= weapon_rarity_weights[rarity]
 	var random_weapon_scene = current_pool[randi() % current_pool.size()]
 	var random_weapon: Weapon = random_weapon_scene.instance()
-	random_weapon.ability_scene = get_random_ability()
 	return random_weapon
 
-
-func get_random_ability():
-	var current_pool
-	randomize()
-	var rarity_roll = randi()% 100 + 1
-	for rarity in ability_rarity_weights.keys():
-		if rarity_roll <= ability_rarity_weights[rarity]:
-			current_pool = self[rarity]
-			break
-		else:
-			rarity_roll -= ability_rarity_weights[rarity]
-	var ability = current_pool[randi() % current_pool.size()]
-	return ability

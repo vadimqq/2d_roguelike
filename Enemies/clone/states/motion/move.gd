@@ -20,7 +20,7 @@ func update(_delta):
 	
 	update_look_direction(direction)
 	move(direction, _delta)
-	owner.get_node("AnimationTree").set("parameters/Walk/blend_position", owner.player.global_position - owner.global_position)
+	owner.get_node("AnimationTree").set("parameters/Walk/blend_position", direction)
 
 func move(target, delta):
 	var direction = (target - owner.global_position).normalized() 

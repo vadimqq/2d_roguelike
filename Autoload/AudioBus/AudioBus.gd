@@ -27,9 +27,9 @@ func _ready():
 		var audio_stream: AudioStreamPlayer = stream.duplicate()
 		menu_sound.add_child(audio_stream)
 	
-	set_game_volume(-10)
-	set_music_volume(-20)
-	set_menu_volume(-20)
+	set_game_volume(-50)
+	set_music_volume(-50)
+	set_menu_volume(-50)
 
 func play_game_sound(sound):
 	for sound_stream in game_sound.get_children():

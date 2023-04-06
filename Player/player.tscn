@@ -4,7 +4,7 @@
 [ext_resource path="res://Player/Girl-Sheet (5).png" type="Texture" id=2]
 [ext_resource path="res://Player/player.gd" type="Script" id=3]
 [ext_resource path="res://Player/states/Dash.gd" type="Script" id=4]
-[ext_resource path="res://Weapon/ManaStaff/ManaStaff.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Weapon/WindChargeStaff/WindChargeStaff.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Player/states/Death.gd" type="Script" id=6]
 [ext_resource path="res://Player/states/motion/idle.gd" type="Script" id=7]
 [ext_resource path="res://Player/states/motion/move.gd" type="Script" id=8]
@@ -334,6 +334,8 @@ collision_mask = 8
 script = ExtResource( 3 )
 
 [node name="Stats" parent="." instance=ExtResource( 10 )]
+mana_point = 100000000
+mana_point_regen = 10000000
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 54 )
@@ -342,7 +344,6 @@ texture = ExtResource( 2 )
 hframes = 44
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, -6 )
 shape = SubResource( 28 )
 
@@ -397,8 +398,7 @@ material = SubResource( 55 )
 position = Vector2( 0, -2 )
 cast_to = Vector2( 50, 0 )
 
-[node name="ManaStaff" parent="WeaponRaycast" instance=ExtResource( 5 )]
-position = Vector2( 0, 2 )
+[node name="WindChargeStaff" parent="WeaponRaycast" instance=ExtResource( 5 )]
 
 [node name="Camera2D" parent="." instance=ExtResource( 11 )]
 zoom = Vector2( 0.3, 0.3 )

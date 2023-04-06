@@ -3,35 +3,41 @@ extends Channel
 export var speed := 400.0
 export var max_length := 200.0
 export var growth_time := 0.1
-
+export var rebound := 0
 
 onready var beam: RayCast2D = $Beam
 onready var fill := $Beam/Line2D
 onready var tween := $Beam/Tween
-onready var casting_particles := $CastingParticles
-onready var collision_particles := $CollisionParticles
-onready var beam_particles := $BeamParticles
+onready var casting_particles := $Beam/CastingParticles
+onready var collision_particles := $Beam/CollisionParticles
+onready var beam_particles := $Beam/BeamParticles
 
 onready var line_width: float = fill.width
 
 func _ready():
 	scale = Vector2(1, 1)
+	max_length *= scale_modifier
 func _physics_process(delta: float) -> void:
 	if is_casting:
-		beam.cast_to = (beam.cast_to + Vector2.RIGHT * speed * delta).limit_length(max_length)
-		cast_beam()
+		cast_beam(delta)
 
 
-func cast_beam() -> void:
+func cast_beam(delta) -> void:
+	beam.cast_to = (beam.cast_to + Vector2.RIGHT * speed * delta).limit_length(max_length)
 	var cast_point = beam.cast_to
 	beam.force_raycast_update()
 	if beam.is_colliding():
 		cast_point = to_local(beam.get_collision_point())
 		if tick_timer.is_stopped():
-			Events.emit_signal("damaged", beam.get_collider(), damage, Const.DamageType.MANA)
+			emit_signal("damage_tick")
+			Events.emit_signal("damaged", beam.get_collider(), damage, Const.DAMAGE_TAG.MANA)
 			tick_timer.wait_time = cooldown
 			tick_timer.start()
+			if not enemy_in_collider.has(beam.get_collider()):
+				enemy_in_collider.push_back(beam.get_collider())
 		collision_particles.process_material.direction = Vector3(beam.get_collision_normal().x, beam.get_collision_normal().y, 0)
+	else:
+		enemy_in_collider = []
 	collision_particles.emitting = beam.is_colliding()
 	fill.points[1] = cast_point
 	collision_particles.position = cast_point

@@ -29,7 +29,7 @@ func update_inventory():
 			if slot.module.title == module.title:
 				count += 1
 		slot.module_count = count
-		if slot.module_count > 0:
+		if slot.module_count > 0 and check_module_compatibility(slot.module):
 			slot.enabled()
 		else:
 			slot.disabled()
@@ -91,7 +91,7 @@ func _input(event):
 #
 func module_slot_gui_input_setup(event: InputEvent, slot):
 	if event is InputEventMouseButton && !holding_item:
-		if event.button_index == BUTTON_LEFT && event.pressed and slot.module_count > 0:
+		if event.button_index == BUTTON_LEFT && event.pressed and slot.module_count > 0 and check_module_compatibility(slot.module):
 			var player_weapon: Weapon = player.get_current_weapon()
 			var is_have_null_slot = player_weapon.module_dict.values().has(null)
 			
@@ -182,3 +182,11 @@ func slot_gui_input_setup(event: InputEvent, slot: SETUP_SLOT_CLASS):
 				slot.pickFromSlot()
 
 				holding_item.global_position = get_global_mouse_position()
+
+func check_module_compatibility(module: Module) -> bool:
+	var player_weapon: Weapon = player.get_current_weapon()
+	var weapon_ability: Ability = player_weapon.ability_instance
+	for tag in module.ability_tags:
+		if weapon_ability.type == tag:
+			return true
+	return false

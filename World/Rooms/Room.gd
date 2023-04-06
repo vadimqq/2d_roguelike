@@ -5,15 +5,20 @@ const spawn_effect = preload("res://VFX/enemy_spawn_effect/enemy_spawn_effect.ts
 const portal = preload("res://World/Portal/portal.tscn")
 
 const evil_eye = preload("res://Enemies/EvilEye/EvilEye.tscn")
-const clone = preload("res://Enemies/clone/clone.tscn")
+const kamikaze = preload("res://Enemies/Kamikaze/Kamikaze.tscn")
+const alchemist =  preload("res://Enemies/Alchemist/Alchemist.tscn")
+
 const first_boss = preload("res://Enemies/Bosses/FirstBoss/FirstBoss.tscn")
 
 onready var spawn_duration = $SpawnDuration
 onready var spawn_delay_timer = $SpawnDelay
 
+var stage = 1
+
 var enemy_list = [
 	evil_eye,
-	clone,
+	kamikaze,
+	alchemist
 ]
 
 var boss_list = [
@@ -30,7 +35,8 @@ func spawn_enemies():
 	spawn_effect_instance.spawned_node = random_enemy
 	ObjectRegistry.register_effect(spawn_effect_instance)
 	spawn_effect_instance.global_position = spawn_position
-	spawn_delay_timer.wait_time = rand_range(1, 3)
+	var spawn_time =  rand_range(5, 8)
+	spawn_delay_timer.wait_time = (spawn_time - (spawn_time * (float(stage) / 10.0)))
 	spawn_delay_timer.start()
 
 func spawn_boss():

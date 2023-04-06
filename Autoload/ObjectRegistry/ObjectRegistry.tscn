@@ -12,7 +12,6 @@ follow_viewport_enable = true
 z_index = 1
 
 [node name="Abilities" type="YSort" parent="."]
-z_index = 1
 
 [node name="items" type="YSort" parent="."]
 z_index = 1

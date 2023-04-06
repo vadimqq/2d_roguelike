@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://Enemies/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemies/clone/clone.gd" type="Script" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://Enemies/clone/states/motion/move.gd" type="Script" id=7]
 [ext_resource path="res://Enemies/clone/states/Death.gd" type="Script" id=8]
 [ext_resource path="res://Enemies/clone/states/combat/attack.gd" type="Script" id=9]
-[ext_resource path="res://Ability/Projectile/Abilities/FireBolt/FireBolt.tscn" type="PackedScene" id=10]
 
 [sub_resource type="CircleShape2D" id=52]
 radius = 262.048
@@ -387,8 +386,13 @@ hframes = 44
 position = Vector2( 0, 6 )
 
 [node name="FireStaff" parent="WeaponRaycast" index="0" instance=ExtResource( 4 )]
-ability_scene = ExtResource( 10 )
 quality = 0
 
 [node name="EffectsManager" parent="." index="8"]
-position = Vector2( -14, -12 )
+position = Vector2( -11, -17 )
+
+[node name="EnemyHUD" parent="." index="9"]
+margin_left = -11.0
+margin_top = -9.0
+margin_right = -11.0
+margin_bottom = -9.0

@@ -14,7 +14,7 @@ const _GAME_SAMPLES = [
 ]
 
 
-var stage = 0
+var stage = 1
 var current_location = null
 
 func _ready():
@@ -24,41 +24,38 @@ func _ready():
 	load_shop_location()
 	remove_child(player)
 	current_location.add_child(player)
-	Events.connect("enemy_death", self, "_on_enemy_death")
 	AudioBus.play_music_sound(_GAME_SAMPLES[randi() % _GAME_SAMPLES.size()])
 
 func load_new_location():
 	var new_location = LocationManager.get_random_location_instance()
-	if current_location is Shop_room and new_location is Shop_room:
-		return load_new_location()
-	
 	if !(current_location is Shop_room) and stage != 0 and stage%2 == 0:
 		load_shop_location()
 		return
-	add_child(new_location)
-	current_location.remove_child(player)
-	new_location.add_child(player)
-	remove_child(current_location)
-	current_location = new_location
-	
-	player.global_position = Vector2.ZERO
-	
-	if !(new_location is Shop_room):
-		stage += 1
+	stage += 1
+	new_location.stage = stage
+	load_location(new_location)
+
 	clue.visible = false
 
 func load_shop_location():
-	var shop = LocationManager.shop_location.instance()
-	add_child(shop)
-	if current_location != null:
+	var shop = LocationManager.get_shop_location_instance()
+	load_location(shop)
+
+func load_location(location):
+	add_child(location)
+	if current_location:
+		current_location.remove_child(player)
 		remove_child(current_location)
-	current_location = shop
+	location.add_child(player)
+#	for weapon in player.weapon_inventory_arr:
+#		weapon.add_module_by_count(2)
+#	var current_weapon: Weapon = player.get_current_weapon()
+#	if current_weapon:
+#		current_weapon.add_module_by_count(2)
+	current_location = location
 	
 	player.global_position = Vector2.ZERO
 
-
-func _on_enemy_death(enemy):
-	enemy.call_deferred('queue_free')
 
 func _exit_tree():
 	AudioBus.stop_music_sound()

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Ability/Modules/Module.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Ability/Channel/Modules/LightningWhip/LightningWhip.gd" type="Script" id=2]
+[ext_resource path="res://Ability/Channel/Modules/LightningWhip/icon.png" type="Texture" id=3]
+
+[node name="LightningWhip" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+icon = ExtResource( 3 )
+title = "Lightning whip"
+ability_tags = [ 1 ]
+type = 1
+module_tags = [ 2 ]
+rarity = 4
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 3 )

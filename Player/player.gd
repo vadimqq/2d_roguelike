@@ -3,14 +3,12 @@ class_name Player
 
 const floating_indicator = preload("res://VFX/floating_text/floating_indicator.tscn")
 
-
 const _AUDIO_HIT_SAMPLES = [
 	preload("res://Sounds/hit_sound/Hit_Hurt.wav"),
 	preload("res://Sounds/hit_sound/Hit_Hurt2.wav"),
 	preload("res://Sounds/hit_sound/Hit_Hurt3.wav"),
 	preload("res://Sounds/hit_sound/Hit_Hurt4.wav"),
 ]
-
 
 onready var sprite = $Sprite
 onready var weapon_raycast = $WeaponRaycast
@@ -28,6 +26,7 @@ var module_inventory_arr := []
 var weapon_inventory_arr := []
 
 var attack_collision_mask = 64
+var attack_collision_layer = 32
 var look_direction = Vector2.RIGHT setget set_look_direction
 var items_in_range = {}
 export (int) var inventory_size = 100
@@ -36,7 +35,7 @@ func _ready():
 	Events.connect("damaged", self, "_on_self_damaged")
 	Events.connect("damaged_by_DOT", self, "_on_self_damaged")
 	Events.connect("boss_death", self, '_test_restore')
-
+	module_inventory_arr = LootManager.take_all_module_arr(7)
 
 func set_look_direction(value):
 	look_direction = value
@@ -136,3 +135,4 @@ func reamove_weapon_stats(weapon: Weapon):
 		affix_dict[key] = -affix_dict.get(key)
 
 	stats.modyfy_stats(affix_dict)
+

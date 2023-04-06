@@ -368,11 +368,11 @@ script = ExtResource( 2 )
 wait_time = 1.6
 one_shot = true
 
-[node name="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" parent="." index="3"]
 position = Vector2( 0, 4 )
 shape = SubResource( 60 )
 
-[node name="Sprite" parent="." index="5"]
+[node name="Sprite" parent="." index="4"]
 position = Vector2( 0, -24 )
 texture = ExtResource( 8 )
 hframes = 17
@@ -414,6 +414,16 @@ one_shot = true
 [node name="Attack_3" type="Timer" parent="." index="10"]
 wait_time = 15.0
 one_shot = true
+
+[node name="EffectsManager" parent="." index="11"]
+position = Vector2( -21, -33 )
+
+[node name="EnemyHUD" parent="." index="12"]
+margin_left = -22.0
+margin_top = -19.0
+margin_right = -22.0
+margin_bottom = -19.0
+rect_scale = Vector2( 0.1, 0.1 )
 
 [connection signal="timeout" from="StateMachine/Attack_1/Timer" to="StateMachine/Attack_1" method="_on_Timer_timeout"]
 [connection signal="timeout" from="StateMachine/Attack_2/Timer" to="StateMachine/Attack_2" method="_on_Timer_timeout"]

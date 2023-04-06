@@ -25,6 +25,7 @@ margin_right = 81.0
 margin_bottom = 79.0
 rect_min_size = Vector2( 62, 58 )
 expand = true
+stretch_mode = 6
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

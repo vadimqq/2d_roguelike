@@ -26,8 +26,7 @@ func _ready():
 
 
 func _on_ManaExplosion_execute_charge():
-	rotation_degrees += 90
-	direction = -MathUtils.angle_to_vector2(global_rotation)
+	direction = Vector2(1, 0).rotated(rotation)
 	hit_box_collider.set_deferred('disabled', false)
 
 
@@ -39,7 +38,8 @@ func _physics_process(delta):
 func _on_Hitbox_body_entered(body):
 	Events.emit_signal("ability_hit", self)
 	is_ready = false
-	var explosion = explosion_scene.instance()
+	var explosion: Ability = explosion_scene.instance()
+	explosion.collision_mask = collision_mask
 	explosion.global_position = global_position
 	explosion.scale *= power_percent / 100
 	explosion.scale_modifier = scale_modifier

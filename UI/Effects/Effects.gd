@@ -10,7 +10,6 @@ func _on_add_effect(effect):
 		effect_panel.inc()
 	else:
 		var panel = effect_panel_node.instance()
-		print(effect.name)
 		panel.icon = effect.icon
 		panel.title = effect.title
 		add_child(panel)

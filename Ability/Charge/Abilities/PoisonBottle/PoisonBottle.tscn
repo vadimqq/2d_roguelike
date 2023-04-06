@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Ability/Charge/Charge.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Ability/Charge/Abilities/PoisonBottle/PoisonBottle.gd" type="Script" id=2]
+[ext_resource path="res://Ability/Charge/Abilities/PoisonBottle/icon.png" type="Texture" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 6.0
+height = 10.0
+
+[node name="PoisonBottle" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+title = "Poison bottle"
+cooldown = 2.0
+life_time = 4.0
+damage_tag = 2
+damage = 5
+max_speed = 500.0
+min_speed = 50.0
+
+[node name="Hitbox" type="Area2D" parent="." index="3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="." index="4"]
+rotation = 1.5708
+texture = ExtResource( 3 )
+
+[connection signal="execute_charge" from="." to="." method="_on_PoisonBottle_execute_charge"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

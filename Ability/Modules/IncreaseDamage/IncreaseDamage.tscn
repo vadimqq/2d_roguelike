@@ -10,6 +10,7 @@ icon = ExtResource( 2 )
 title = "Inc damage"
 ability_tags = [ 0, 1, 2 ]
 module_tags = [ 0 ]
+rarity = 1
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
