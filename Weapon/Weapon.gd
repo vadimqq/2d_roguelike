@@ -7,6 +7,7 @@ onready var spawn_position = $SpawnPosition
 onready var cooldown_timer = $CooldownTimer
 onready var sprite = $Sprite
 onready var affix_ist: AFFIX_LIST_CLASS = $AffixList
+onready var animation := $Animation
 
 export (StreamTexture) var icon
 export (String) var title = 'Test weapon'
@@ -28,8 +29,7 @@ enum COMBAT_STATE {
 
 var combat_state = COMBAT_STATE.IDLE
 
-var charging_ability_list: Array = []
-var channel_pool: Array = []
+var ability_pool := []
 
 func initialize(player):
 	executor = player
@@ -50,143 +50,46 @@ func _process(delta):
 	if executor:
 		global_position = executor.weapon_raycast.global_position
 		global_rotation = executor.weapon_raycast.global_rotation
-	
-	var counter = 1
-	
-	if charging_ability_list.size() > 0:
-		if charging_ability_list.size() == 1:
-			charging_ability_list[0].global_position = spawn_position.global_position
-			charging_ability_list[0].global_rotation = spawn_position.global_rotation
-		else:
-			for charge in charging_ability_list:
-				charge.global_position = spawn_position.global_position
-				charge.global_rotation = spawn_position.global_rotation + 0.09 * counter if counter%2 else spawn_position.global_rotation  - 0.09 * counter
-				counter += 1
-
-	if channel_pool.size() > 0:
-		if channel_pool.size() == 1:
-			if !channel_pool[0].is_not_spectate:
-				channel_pool[0].global_position = spawn_position.global_position
-				channel_pool[0].global_rotation = spawn_position.global_rotation
-		else:
-			for channel in channel_pool:
-				if !channel.is_not_spectate:
-					channel.global_position = spawn_position.global_position
-					channel.global_rotation = spawn_position.global_rotation + 0.09 * counter if counter%2 else spawn_position.global_rotation  - 0.09 * counter
-					counter += 1
 
 
-func execute(raycast_rotation, ability_mask: int) -> void:
+func execute(raycast_rotation) -> void:
 	if not ability_instance or not executor:
 		return
-#	var current_mana_cost = get_current_mana_cost()
-#	if executor.stats.current_mana_point < current_mana_cost:
-#		cancel()
-#		return
-	ability_instance.collision_mask = ability_mask
-	match ability_instance.type:
-		Const.ABILITY_TYPE.PROJECTILE:
-			if !get_is_cooldown():
-				cast_projectile_ability(ability_instance)
-		Const.ABILITY_TYPE.CHANNEL:
-			cast_channel_ability(ability_instance)
-		Const.ABILITY_TYPE.CHARGE:
-			if !get_is_cooldown() and !charging_ability_list.size() > 0:
-				cast_charge_ability(ability_instance)
-
-func cancel() -> void:
-	combat_state = COMBAT_STATE.IDLE
-	match ability_instance.type:
-		Const.ABILITY_TYPE.PROJECTILE:
-			pass
-		Const.ABILITY_TYPE.CHANNEL:
-			if channel_pool.size() > 0:
-				for channel in channel_pool:
-					channel.start_disappear()
-				channel_pool = []
-		Const.ABILITY_TYPE.CHARGE:
-			if charging_ability_list.size() > 0:
-				for charge in charging_ability_list:
-					charge.execute_charge()
-
-func cast_projectile_ability(projectile_ability: Projectile):
-	var projectile: Projectile = projectile_ability.duplicate()
-	projectile.global_position = spawn_position.global_position
-	projectile.cooldown = executor.stats.get_cooldown_by_modifire(projectile.cooldown)
-	var projectile_pool := [projectile]
-
-	for i in module_dict.keys():
-		if module_dict.get(i) != null:
-			projectile_pool = module_dict.get(i).execute(projectile_pool, executor.stats)
-	
-	if executor.stats.current_mana_point < projectile_pool[0].mana_cost:
-		cancel()
-		return
-	var counter = 1
-	for upgraded_projectile in projectile_pool:
-		upgraded_projectile.executor = executor
-		upgraded_projectile.damage = executor.stats.get_modified_damage(upgraded_projectile.damage, upgraded_projectile.damage_tag)
-		if projectile_pool.size() == 1:
-			upgraded_projectile.global_rotation = spawn_position.global_rotation
-		else:
-			upgraded_projectile.global_rotation = spawn_position.global_rotation + 0.03 * counter if counter%2 else spawn_position.global_rotation  - 0.03 * counter
-		ObjectRegistry.register_ability(upgraded_projectile)
-		upgraded_projectile.execute()
-		counter += 1
-
-	cooldown_timer.wait_time = projectile_pool[0].cooldown
-	cooldown_timer.start()
-	executor.stats.modify_current_mana_point(-projectile_pool[0].mana_cost)
-
-func cast_channel_ability(channel_ability: Channel):
-	if channel_pool.size() == 0 and !get_is_cooldown():
-		var channel: Channel = channel_ability.duplicate()
-		channel.cooldown = executor.stats.get_cooldown_by_modifire(channel.cooldown)
-		channel_pool = [channel]
-		
-		for i in module_dict.keys():
-			if module_dict.get(i) != null:
-				channel_pool = module_dict.get(i).execute(channel_pool, executor.stats)
-		
-		if executor.stats.current_mana_point < channel_pool[0].mana_cost:
-			cancel()
-			return
-			
-		for channel_upgrade in channel_pool:
-			channel_upgrade.executor = executor
-			channel_upgrade.global_position = spawn_position.global_position
-			channel_upgrade.damage = executor.stats.get_modified_damage(channel_upgrade.damage, channel_upgrade.damage_tag)
-			ObjectRegistry.register_ability(channel_upgrade)
-			channel_upgrade.start_appear()
 	if !get_is_cooldown():
-		executor.stats.modify_current_mana_point(-channel_pool[0].mana_cost)
-		cooldown_timer.wait_time = channel_pool[0].cooldown
-		cooldown_timer.start()
+		upgrade_ability()
 
-func cast_charge_ability(charge_ability):
-	var charge: Charge = charge_ability.duplicate()
-	charge.connect("execute_charge", self, "_on_charge_execute")
-	charge.max_charge_duration = executor.stats.get_cooldown_by_modifire(charge.max_charge_duration)
-	charging_ability_list = [charge]
+func upgrade_ability():
+	var ability: Ability = ability_instance.duplicate()
+	ability_pool = [ability]
 
 	for i in module_dict.keys():
 		if module_dict.get(i) != null:
-			charging_ability_list = module_dict.get(i).execute(charging_ability_list, executor.stats)
+			ability_pool = module_dict.get(i).execute(ability_instance, ability_pool, executor.stats)
 	
-	if executor.stats.current_mana_point < charging_ability_list[0].mana_cost:
-		_on_charge_execute()
-		return
-	
-	charge.connect("charge_tick", self, "_on_charge_tick", [charging_ability_list[0].mana_cost])
-	
-	for upgraded_charge in charging_ability_list:
-		upgraded_charge.executor = executor
-		upgraded_charge.damage = executor.stats.get_modified_damage(upgraded_charge.damage, upgraded_charge.damage_tag)
-		ObjectRegistry.register_ability(upgraded_charge)
-		upgraded_charge.start_charge()
-	
-	cooldown_timer.wait_time = charging_ability_list[0].cooldown
+	var current_cooldown = get_current_cooldown()
+	cooldown_timer.wait_time = current_cooldown
 	cooldown_timer.start()
+	executor.stats.modify_current_mana_point(-ability_pool[0].mana_cost)
+	if animation.has_animation('cast'):
+		animation.playback_speed =  1 / current_cooldown
+		animation.play('cast')
+	else:
+		cast_ability()
+
+func cast_ability():
+	var counter = 1
+	for upgraded_ability in ability_pool:
+		if upgraded_ability.trigger_type == Const.TRIGGER_TYPE.DEFAULT:
+			upgraded_ability.global_position = spawn_position.global_position
+			upgraded_ability.executor = executor
+			upgraded_ability.damage = executor.stats.get_modified_damage(upgraded_ability.damage, upgraded_ability.damage_tag)
+			if ability_pool.size() == 1:
+				upgraded_ability.global_rotation = spawn_position.global_rotation
+			else:
+				upgraded_ability.global_rotation = spawn_position.global_rotation + 0.03 * counter if counter%2 else spawn_position.global_rotation  - 0.03 * counter
+			ObjectRegistry.register_ability(upgraded_ability)
+			counter += 1
+	ability_pool.clear()
 
 func get_is_cooldown():
 	return !cooldown_timer.is_stopped()
@@ -198,15 +101,7 @@ func delete_module(key):
 	module_dict.erase(key)
 
 func get_current_cooldown():
-	return 
-
-
-func _on_charge_execute():
-	charging_ability_list = []
-
-func _on_charge_tick(power_percent, mana_cost):
-	if executor.stats.current_mana_point < mana_cost:
-		cancel()
-		return
-	executor.stats.modify_current_mana_point(-mana_cost)
-
+	var result = 0
+	for ability in ability_pool:
+		result += ability.cooldown
+	return executor.stats.get_cooldown_by_modifire(result)

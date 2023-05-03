@@ -8,7 +8,7 @@
 script = ExtResource( 3 )
 icon = ExtResource( 2 )
 title = "Life time"
-ability_tags = [ 0, 2 ]
+ability_tags = [ 2 ]
 module_tags = [ 0 ]
 
 [node name="Sprite" parent="." index="0"]

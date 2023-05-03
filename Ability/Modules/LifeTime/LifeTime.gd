@@ -1,5 +1,4 @@
 extends Module
 
-func global_upgrade(ability_pool: Array, stats):
-	for ability in ability_pool:
-		ability.life_time *= 1.15
+func get_upgrade(ability_pool: Array, root_ability: Ability, current_ability: Ability, stats):
+	current_ability.life_time *= 1.5

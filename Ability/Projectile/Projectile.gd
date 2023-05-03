@@ -29,7 +29,6 @@ var is_homing = false
 func _ready():
 	hit_box.collision_mask = collision_mask
 	direction = Vector2(1, 0).rotated(rotation)
-	execute()
 
 func _physics_process(delta: float) -> void:
 	match movement_type:
@@ -61,6 +60,7 @@ func _on_HitBox_body_entered(body):
 	Events.emit_signal("ability_hit", self, body)
 	Events.emit_signal("damaged",body, damage, damage_tag)
 	call_deferred('create_hit_effect')
+	spawn_ability_on_hit(on_hit_ability_list)
 	if pierce_count > 0:
 		pierce_count -= 1
 		return
@@ -79,3 +79,4 @@ func _on_HitBox_body_entered(body):
 		rebound_count -= 1
 		return
 	die()
+

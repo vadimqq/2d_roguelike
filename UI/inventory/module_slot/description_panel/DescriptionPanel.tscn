@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://UI/inventory/module_slot/description_panel/DescriptionPanel.gd" type="Script" id=1]
-[ext_resource path="res://UI/inventory/module_slot/description_panel/ModuleChip/ModuleChip.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/inventory/description_panel/bg.png" type="Texture" id=3]
 [ext_resource path="res://Fonts/dpcomic.ttf" type="DynamicFontData" id=4]
 
@@ -72,19 +71,14 @@ custom_fonts/font = SubResource( 4 )
 text = "description"
 uppercase = true
 
-[node name="ModuleChip" parent="ModuleContainer" instance=ExtResource( 2 )]
+[node name="ModuleTags" type="GridContainer" parent="ModuleContainer"]
 margin_top = 161.0
 margin_right = 250.0
-margin_bottom = 189.0
-
-[node name="ModuleTags" type="GridContainer" parent="ModuleContainer"]
-margin_top = 193.0
-margin_right = 250.0
-margin_bottom = 193.0
+margin_bottom = 161.0
 columns = 4
 
 [node name="AbilityTags" type="GridContainer" parent="ModuleContainer"]
-margin_top = 197.0
+margin_top = 165.0
 margin_right = 250.0
-margin_bottom = 197.0
+margin_bottom = 165.0
 columns = 4

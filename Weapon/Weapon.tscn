@@ -15,3 +15,5 @@ quality = 9
 one_shot = true
 
 [node name="AffixList" parent="." instance=ExtResource( 2 )]
+
+[node name="Animation" type="AnimationPlayer" parent="."]

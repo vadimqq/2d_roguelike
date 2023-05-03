@@ -8,9 +8,8 @@
 script = ExtResource( 3 )
 icon = ExtResource( 2 )
 title = "Fire arrow"
-ability_tags = [ 0 ]
-type = 1
-module_tags = [ 2 ]
+ability_tags = [ 2 ]
+module_tags = [ 1 ]
 rarity = 4
 
 [node name="Sprite" parent="." index="0"]

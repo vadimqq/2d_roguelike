@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Weapon/Weapon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Weapon/ManaShardsStaff/ManaShard/ManaShard.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Weapon/ManaShardsStaff/38.png" type="Texture" id=3]
+
+[node name="ManaShardsStaff" instance=ExtResource( 1 )]
+icon = ExtResource( 3 )
+title = "ManaShard staff"
+ability_scene = ExtResource( 2 )
+
+[node name="SpawnPosition" parent="." index="0"]
+position = Vector2( 23, 0 )
+
+[node name="Sprite" parent="." index="1"]
+position = Vector2( 10, 0 )
+rotation = 1.5708
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )

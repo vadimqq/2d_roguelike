@@ -1,0 +1,43 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Ability/Projectile/Projectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Weapon/ManaStaff/ManaBolt/hitEffect/hitEffect.tscn" type="PackedScene" id=2]
+[ext_resource path="res://VFX/TrailLine/TrailLine.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Weapon/ManaStaff/ManaBolt/castEffect/castEffect.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Weapon/ManaStaff/ManaBolt/ManaBolt.gd" type="Script" id=5]
+[ext_resource path="res://Weapon/ManaStaff/ManaBolt/skin.png" type="Texture" id=6]
+
+[sub_resource type="Curve" id=3]
+resource_local_to_scene = true
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 4.0
+height = 4.0
+
+[node name="ManaBolt" instance=ExtResource( 1 )]
+script = ExtResource( 5 )
+title = "Mana bolt"
+tags = [ 0 ]
+damage = 5
+execute_effect = ExtResource( 4 )
+hit_effect = ExtResource( 2 )
+trail_length = 15
+
+[node name="TrailLine" parent="." index="0" instance=ExtResource( 3 )]
+width = 8.0
+width_curve = SubResource( 3 )
+default_color = Color( 0.0509804, 0.615686, 0.752941, 0.752941 )
+trail_length = 10
+
+[node name="LifeTimer" parent="." index="1"]
+one_shot = false
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="Sprite" parent="." index="3"]
+rotation = 0.0
+scale = Vector2( 0.9, 0.9 )
+texture = ExtResource( 6 )

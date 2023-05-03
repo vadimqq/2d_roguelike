@@ -1,5 +1,5 @@
 extends Module
 
-func second_ability_upgrade(ability_pool, ability: Ability, stats):
-	var new_ability:Ability = ability.duplicate()
+func get_upgrade(ability_pool: Array, root_ability: Ability, current_ability: Ability, stats):
+	var new_ability:Ability = root_ability.duplicate()
 	ability_pool.push_back(new_ability)

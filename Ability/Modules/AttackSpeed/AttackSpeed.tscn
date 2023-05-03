@@ -8,6 +8,6 @@
 script = ExtResource( 2 )
 icon = ExtResource( 3 )
 title = "Attack Speed"
-ability_tags = [ 0, 1, 2 ]
+ability_tags = [ 2 ]
 module_tags = [ 0 ]
 rarity = 1

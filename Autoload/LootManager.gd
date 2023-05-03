@@ -15,32 +15,22 @@ const life_time = preload("res://Ability/Modules/LifeTime/LifeTime.tscn")
 #----------------------------
 
 #----------PROJECTILE--------
-const direction_circular = preload("res://Ability/Projectile/Modules/CircularDirection/CircularDirection.tscn")
+const direction_circular = preload("res://Ability/Modules/CircularDirection/CircularDirection.tscn")
 const fire_arrow = preload("res://Ability/Projectile/Modules/FireArrow/FireArrow.tscn")
-const homing_detector = preload("res://Ability/Projectile/Modules/Homing/Homing.tscn")
-const rebound = preload("res://Ability/Projectile/Modules/Rebound/Rebound.tscn")
-const pierce = preload("res://Ability/Projectile/Modules/Pierce/Pierce.tscn")
-const damage_by_speed = preload("res://Ability/Projectile/Modules/DamageBySpeed/DamageBySpeed.tscn")
+const homing_detector = preload("res://Ability/Modules/Homing/Homing.tscn")
+const rebound = preload("res://Ability/Modules/Rebound/Rebound.tscn")
+const pierce = preload("res://Ability/Modules/Pierce/Pierce.tscn")
+const damage_by_speed = preload("res://Ability/Modules/DamageBySpeed/DamageBySpeed.tscn")
 const dublicator = preload("res://Ability/Modules/Dublicator/Dublicator.tscn")
 #---------------------------
 
-#----------CHARGE------------
-
-#----------------------------
-
-#----------CHANNEL-----------
-const improved_channel = preload("res://Ability/Channel/Modules/ImprovedChannel/ImprovedChannel.tscn")
-const orbital_shield = preload("res://Ability/Channel/Modules/OrbitalShield/OrbitalShield.tscn")
-const cumulative_explosion = preload("res://Ability/Channel/Modules/CumulativeExplosion/CumulativeExplosion.tscn")
-const lightning_whip = preload("res://Ability/Channel/Modules/LightningWhip/LightningWhip.tscn")
-#----------------------------
 
 
 var NORAMAL_MODULES_POOL = [speed, gigantic, life_time]
-var MAGIC_MODULES_POOL = [attack_speed, increase_damage, rebound, pierce, damage_by_speed, improved_channel]
-var RARE_MODULES_POOL = [direction_circular, homing_detector, orbital_shield]
+var MAGIC_MODULES_POOL = [attack_speed, increase_damage, rebound, pierce, damage_by_speed]
+var RARE_MODULES_POOL = [direction_circular, homing_detector]
 var LEGENDARY_MODULES_POOL = [fire_arrow, dublicator]
-var UNIC_MODULES_POOL = [fire_arrow, lightning_whip]
+var UNIC_MODULES_POOL = [fire_arrow]
 
 var module_rarity_weights := {
 	"NORAMAL_MODULES_POOL": 62,
@@ -132,10 +122,6 @@ func take_all_module_arr(count):
 		pierce.instance(),
 		damage_by_speed.instance(),
 		dublicator.instance(),
-		improved_channel.instance(),
-		orbital_shield.instance(),
-		cumulative_explosion.instance(),
-		lightning_whip.instance()
 	]
 	for i in range(count):
 		module_arr.append_array(module_arr.duplicate())

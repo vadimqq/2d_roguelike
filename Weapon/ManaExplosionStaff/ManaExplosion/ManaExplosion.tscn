@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Ability/Projectile/Projectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Weapon/ManaExplosionStaff/ManaExplosion/ManaExplosion.gd" type="Script" id=2]
+[ext_resource path="res://Weapon/ManaExplosionStaff/ManaExplosion/14-1.png.png" type="Texture" id=3]
+[ext_resource path="res://VFX/TrailLine/TrailLine.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Curve" id=2]
+resource_local_to_scene = true
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 4.0
+height = 8.0
+
+[node name="ManaExplosion" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+title = "ManaExplosion"
+cooldown = 2.0
+tags = [ 0 ]
+damage = 20
+speed = 320.0
+
+[node name="TrailLine" parent="." index="0" instance=ExtResource( 4 )]
+position = Vector2( 2, 6 )
+width_curve = SubResource( 2 )
+default_color = Color( 0.4, 0.501961, 1, 0.568627 )
+trail_length = 8
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="Sprite" parent="." index="3"]
+position = Vector2( 0, 0.5 )
+rotation = 0.0
+scale = Vector2( 0.9, 0.9 )
+texture = ExtResource( 3 )
