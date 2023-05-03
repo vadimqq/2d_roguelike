@@ -2,25 +2,25 @@ extends Node
 
 #--------------------------------WEAPONS----------------------------------------------------
 const mana_staff = preload("res://Weapon/ManaStaff/ManaStaff.tscn")
-const mana_beam_staff = preload("res://Weapon/ManaBeamStaff/ManaBeamStaff.tscn")
-const mana_explosion_staff = preload("res://Weapon/ManaExplosionStaff/ManaExplosionStaff.tscn")
+#const mana_beam_staff = preload("res://Weapon/ManaBeamStaff/ManaBeamStaff.tscn")
+#const mana_explosion_staff = preload("res://Weapon/ManaExplosionStaff/ManaExplosionStaff.tscn")
 
 
 const fire_staff = preload("res://Weapon/FireStaff/FireStaff.tscn")
-const fire_splash_staff = preload("res://Weapon/FireSplashStaff/FireSplashStaff.tscn")
+#const fire_splash_staff = preload("res://Weapon/FireSplashStaff/FireSplashStaff.tscn")
 
 
 const bee_staff = preload("res://Weapon/BeeStaff/BeeStaff.tscn")
 
 
-const poison_staff = preload("res://Weapon/PoisionBottleStaff/PoisionBottleStaff.tscn")
+#const poison_staff = preload("res://Weapon/PoisionBottleStaff/PoisionBottleStaff.tscn")
 
 
 
 
 
-var NORAMAL_WEAPONS_POOL = [mana_staff,mana_beam_staff, mana_explosion_staff, fire_staff, fire_splash_staff]
-var MAGIC_WEAPONS_POOL = [mana_staff, bee_staff, poison_staff]
+var NORAMAL_WEAPONS_POOL = [mana_staff, fire_staff]
+var MAGIC_WEAPONS_POOL = [mana_staff, bee_staff]
 var LEGENDARY_WEAPONS_POOL = [mana_staff]
 
 var weapon_rarity_weights := {

@@ -9,7 +9,7 @@ func register_effect(effect: Node) -> void:
 
 
 func register_ability(ability: Ability) -> void:
-	_abilities.add_child(ability)
+	_abilities.call_deferred('add_child', ability)
 
 
 func register_item(item: Node) -> void:

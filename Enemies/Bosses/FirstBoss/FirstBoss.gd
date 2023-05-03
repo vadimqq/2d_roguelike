@@ -1,6 +1,6 @@
 extends "res://Enemies/Enemy.gd"
 
-const fire_ball = preload("res://Ability/Projectile/Abilities/FireBolt/FireBolt.tscn")
+#const fire_ball = preload("res://Ability/Projectile/Abilities/FireBolt/FireBolt.tscn")
 const evil_eye = preload("res://Enemies/EvilEye/EvilEye.tscn")
 const spawn_effect = preload("res://VFX/enemy_spawn_effect/enemy_spawn_effect.tscn")
 
@@ -26,13 +26,14 @@ func cast_attack_1():
 	tween.start()
 
 func cast_attack_2():
-	var deg = 360 / projectile_count
-	for i in range(projectile_count):
-		var projectile: Projectile = fire_ball.instance()
-		projectile.global_position = attack_spawn_position.global_position
-		projectile.collision_mask  = attack_collision_mask
-		projectile.rotation_degrees = i * deg
-		ObjectRegistry.register_ability(projectile)
+	pass
+#	var deg = 360 / projectile_count
+#	for i in range(projectile_count):
+#		var projectile: Projectile = fire_ball.instance()
+#		projectile.global_position = attack_spawn_position.global_position
+#		projectile.collision_mask  = attack_collision_mask
+#		projectile.rotation_degrees = i * deg
+#		ObjectRegistry.register_ability(projectile)
 
 func cast_attack_3():
 

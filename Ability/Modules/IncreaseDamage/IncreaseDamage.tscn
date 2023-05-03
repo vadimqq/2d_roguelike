@@ -8,7 +8,7 @@
 script = ExtResource( 3 )
 icon = ExtResource( 2 )
 title = "Inc damage"
-ability_tags = [ 0, 1, 2 ]
+ability_tags = [ 2 ]
 module_tags = [ 0 ]
 rarity = 1
 
